@@ -158,19 +158,29 @@
         </view>
 
         <view class="action-grid">
-          <view class="action-item" @click="openWechat">
-            <view class="action-icon wechat">📱</view>
-            <text class="action-text">关注公众号</text>
-          </view>
-
-          <view class="action-item" @click="checkProhibited">
-            <view class="action-icon prohibited">🚫</view>
-            <text class="action-text">禁运清单</text>
-          </view>
-
           <view class="action-item" @click="calculatePrice">
-            <view class="action-icon calculator">💰</view>
+            <view class="action-icon calculator">�</view>
             <text class="action-text">运费计算</text>
+          </view>
+
+          <view class="action-item" @click="viewFlow">
+            <view class="action-icon flow">�</view>
+            <text class="action-text">发货流程</text>
+          </view>
+
+          <view class="action-item" @click="viewCustoms">
+            <view class="action-icon customs">🆔</view>
+            <text class="action-text">个人通关号</text>
+          </view>
+
+          <view class="action-item" @click="viewShipping">
+            <view class="action-icon shipping">📦</view>
+            <text class="action-text">发货需知</text>
+          </view>
+
+          <view class="action-item" @click="viewFAQ">
+            <view class="action-icon faq">❓</view>
+            <text class="action-text">常见问题</text>
           </view>
 
           <view class="action-item" @click="contactService">
@@ -217,6 +227,30 @@ const calculatePrice = () => {
 const contactService = () => {
   uni.makePhoneCall({
     phoneNumber: '0631-5230850'
+  })
+}
+
+const viewFlow = () => {
+  uni.navigateTo({
+    url: '/pages/flow/flow'
+  })
+}
+
+const viewCustoms = () => {
+  uni.navigateTo({
+    url: '/pages/customs/customs'
+  })
+}
+
+const viewShipping = () => {
+  uni.navigateTo({
+    url: '/pages/shipping/shipping'
+  })
+}
+
+const viewFAQ = () => {
+  uni.navigateTo({
+    url: '/pages/faq/faq'
   })
 }
 </script>
@@ -583,6 +617,22 @@ const contactService = () => {
 
 .action-icon.calculator {
   background: linear-gradient(135deg, #ffe66d, #ffbe0b);
+}
+
+.action-icon.flow {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+
+.action-icon.customs {
+  background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+}
+
+.action-icon.shipping {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+}
+
+.action-icon.faq {
+  background: linear-gradient(135deg, #ffb3d6, #ff9a9e);
 }
 
 .action-icon.service {

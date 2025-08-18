@@ -47,44 +47,44 @@
           <text class="item-desc">详细使用说明</text>
         </view>
         
-        <view class="grid-item" @click="navigateTo('tracking')">
-          <view class="icon-container tracking">
-            <text class="icon">📦</text>
-          </view>
-          <text class="item-title">包裹追踪</text>
-          <text class="item-desc">实时物流信息</text>
-        </view>
-        
         <view class="grid-item" @click="navigateTo('calculator')">
           <view class="icon-container calculator">
-            <text class="icon">💰</text>
+            <text class="icon">�</text>
           </view>
           <text class="item-title">运费计算</text>
           <text class="item-desc">智能费用估算</text>
         </view>
         
-        <view class="grid-item" @click="navigateTo('warehouse')">
-          <view class="icon-container warehouse">
-            <text class="icon">🏢</text>
+        <view class="grid-item" @click="navigateTo('flow')">
+          <view class="icon-container flow">
+            <text class="icon">�</text>
           </view>
-          <text class="item-title">仓库服务</text>
-          <text class="item-desc">安全仓储管理</text>
+          <text class="item-title">发货流程</text>
+          <text class="item-desc">图示操作步骤</text>
+        </view>
+        
+        <view class="grid-item" @click="navigateTo('customs')">
+          <view class="icon-container customs">
+            <text class="icon">�</text>
+          </view>
+          <text class="item-title">个人通关号</text>
+          <text class="item-desc">通关身份码申请</text>
+        </view>
+        
+        <view class="grid-item" @click="navigateTo('shipping')">
+          <view class="icon-container shipping">
+            <text class="icon">📦</text>
+          </view>
+          <text class="item-title">发货需知</text>
+          <text class="item-desc">包装要求说明</text>
         </view>
         
         <view class="grid-item" @click="navigateTo('faq')">
           <view class="icon-container faq">
-            <text class="icon">🤔</text>
+            <text class="icon">❓</text>
           </view>
           <text class="item-title">常见问题</text>
           <text class="item-desc">快速问题解答</text>
-        </view>
-        
-        <view class="grid-item" @click="navigateTo('prohibited')">
-          <view class="icon-container prohibited">
-            <text class="icon">⚠️</text>
-          </view>
-          <text class="item-title">禁运清单</text>
-          <text class="item-desc">违禁物品说明</text>
         </view>
       </view>
     </view>
@@ -194,6 +194,22 @@ const navigateTo = (page: string) => {
   } else if (page === 'calculator') {
     uni.navigateTo({
       url: '/pages/calculator/calculator'
+    })
+  } else if (page === 'flow') {
+    uni.navigateTo({
+      url: '/pages/flow/flow'
+    })
+  } else if (page === 'customs') {
+    uni.navigateTo({
+      url: '/pages/customs/customs'
+    })
+  } else if (page === 'shipping') {
+    uni.navigateTo({
+      url: '/pages/shipping/shipping'
+    })
+  } else if (page === 'faq') {
+    uni.navigateTo({
+      url: '/pages/faq/faq'
     })
   } else {
     uni.showToast({
@@ -445,24 +461,24 @@ const switchTab = (tab: string) => {
   background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
 }
 
-.icon-container.tracking {
-  background: linear-gradient(135deg, #4ecdc4, #44a08d);
-}
-
 .icon-container.calculator {
   background: linear-gradient(135deg, #ffe66d, #ffbe0b);
 }
 
-.icon-container.warehouse {
+.icon-container.flow {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+
+.icon-container.customs {
   background: linear-gradient(135deg, #a8e6cf, #88d8a3);
+}
+
+.icon-container.shipping {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
 }
 
 .icon-container.faq {
   background: linear-gradient(135deg, #ffb3d6, #ff9a9e);
-}
-
-.icon-container.prohibited {
-  background: linear-gradient(135deg, #ffa726, #fb8c00);
 }
 
 .icon-container .icon {

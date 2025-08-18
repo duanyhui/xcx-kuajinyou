@@ -20,6 +20,34 @@
 				"navigationBarTitleText": "运费计算",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/flow/flow",
+			"style": {
+				"navigationBarTitleText": "发货流程",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/customs/customs",
+			"style": {
+				"navigationBarTitleText": "个人通关号",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/shipping/shipping",
+			"style": {
+				"navigationBarTitleText": "发货需知",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/faq/faq",
+			"style": {
+				"navigationBarTitleText": "常见问题",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
