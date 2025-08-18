@@ -12,6 +12,18 @@
 			"group": "build",
 			"isBackground": true,
 			"problemMatcher": []
+		},
+		{
+			"label": "开发微信小程序",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"dev:mp-weixin"
+			],
+			"group": "build",
+			"isBackground": true,
+			"problemMatcher": []
 		}
 	]
 }

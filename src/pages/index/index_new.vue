@@ -225,15 +225,11 @@ const switchTab = (tab: string) => {
 </script>
 
 <style scoped>
-/* 页面样式 */
+/* 全局样式 */
 .page {
   min-height: 100vh;
-  width: 100vw;
-  max-width: 100vw;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding-bottom: 160rpx;
-  overflow-x: hidden;
-  box-sizing: border-box;
 }
 
 /* 头部区域 */
@@ -241,15 +237,11 @@ const switchTab = (tab: string) => {
   position: relative;
   padding: 80rpx 0 60rpx;
   overflow: hidden;
-  width: 100%;
 }
 
 .header-bg {
   position: relative;
-  padding: 0 30rpx;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+  padding: 0 40rpx;
 }
 
 /* 装饰圆形 */
@@ -377,9 +369,6 @@ const switchTab = (tab: string) => {
   margin-top: -40rpx;
   position: relative;
   z-index: 3;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .section-title {
@@ -402,15 +391,13 @@ const switchTab = (tab: string) => {
 }
 
 .function-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20rpx;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24rpx;
   margin-bottom: 40rpx;
 }
 
 .grid-item {
-  width: calc(50% - 10rpx);
   background: white;
   border-radius: 32rpx;
   padding: 40rpx 24rpx;
@@ -418,7 +405,6 @@ const switchTab = (tab: string) => {
   box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10rpx);
-  box-sizing: border-box;
 }
 
 .grid-item:active {
@@ -485,9 +471,6 @@ const switchTab = (tab: string) => {
 .contact-section {
   padding: 0 30rpx;
   margin-bottom: 40rpx;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .contact-card {
@@ -495,9 +478,6 @@ const switchTab = (tab: string) => {
   border-radius: 32rpx;
   padding: 40rpx;
   box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .contact-header {
@@ -544,8 +524,6 @@ const switchTab = (tab: string) => {
   display: flex;
   gap: 20rpx;
   margin-bottom: 24rpx;
-  width: 100%;
-  max-width: 100%;
 }
 
 .contact-btn {
@@ -556,8 +534,6 @@ const switchTab = (tab: string) => {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  box-sizing: border-box;
-  min-width: 0;
 }
 
 .contact-btn.primary {
@@ -602,9 +578,6 @@ const switchTab = (tab: string) => {
 .pricing-section {
   padding: 0 30rpx;
   margin-bottom: 40rpx;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .pricing-card {
@@ -612,9 +585,6 @@ const switchTab = (tab: string) => {
   border-radius: 32rpx;
   padding: 40rpx;
   box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .pricing-header {
@@ -640,8 +610,6 @@ const switchTab = (tab: string) => {
   display: flex;
   flex-direction: column;
   gap: 24rpx;
-  width: 100%;
-  max-width: 100%;
 }
 
 .price-item {
@@ -651,9 +619,6 @@ const switchTab = (tab: string) => {
   background: rgba(102, 126, 234, 0.05);
   border-radius: 20rpx;
   border-left: 6rpx solid #667eea;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
 }
 
 .price-icon {
@@ -673,8 +638,6 @@ const switchTab = (tab: string) => {
   font-size: 24rpx;
   color: #7f8c8d;
   flex: 1;
-  min-width: 0;
-  word-wrap: break-word;
 }
 
 /* 底部导航 */
@@ -683,8 +646,6 @@ const switchTab = (tab: string) => {
   bottom: 0;
   left: 0;
   right: 0;
-  width: 100vw;
-  max-width: 100vw;
   height: 140rpx;
   background: white;
   border-top: 1rpx solid rgba(0, 0, 0, 0.05);
@@ -693,7 +654,6 @@ const switchTab = (tab: string) => {
   padding: 0 20rpx;
   box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20rpx);
-  box-sizing: border-box;
 }
 
 .nav-item {
@@ -764,14 +724,10 @@ const switchTab = (tab: string) => {
   height: env(safe-area-inset-bottom);
 }
 
-/* 响应式优化和小程序兼容性修复 */
+/* 响应式优化 */
 @media (max-width: 400px) {
   .function-grid {
-    flex-direction: column;
-  }
-  
-  .grid-item {
-    width: 100%;
+    grid-template-columns: 1fr;
   }
   
   .contact-actions {
@@ -781,25 +737,5 @@ const switchTab = (tab: string) => {
   .main-title {
     font-size: 48rpx;
   }
-  
-  .header-bg {
-    padding: 0 20rpx;
-  }
-  
-  .function-section,
-  .contact-section,
-  .pricing-section {
-    padding: 0 20rpx;
-  }
-}
-
-/* 文本不换行处理 */
-.contact-btn .btn-text,
-.item-title,
-.item-desc,
-.price-detail {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 </style>

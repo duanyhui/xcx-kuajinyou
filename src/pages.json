@@ -6,6 +6,13 @@
 				"navigationBarTitleText": "中韩跨境邮",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/guide/guide",
+			"style": {
+				"navigationBarTitleText": "操作指南",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
