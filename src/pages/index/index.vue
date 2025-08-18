@@ -191,6 +191,10 @@ const navigateTo = (page: string) => {
     uni.navigateTo({
       url: '/pages/guide/guide'
     })
+  } else if (page === 'calculator') {
+    uni.navigateTo({
+      url: '/pages/calculator/calculator'
+    })
   } else {
     uni.showToast({
       title: `导航到${page}页面`,

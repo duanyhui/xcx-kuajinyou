@@ -13,6 +13,13 @@
 				"navigationBarTitleText": "操作指南",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/calculator/calculator",
+			"style": {
+				"navigationBarTitleText": "运费计算",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

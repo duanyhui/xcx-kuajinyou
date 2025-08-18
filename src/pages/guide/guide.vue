@@ -209,9 +209,8 @@ const checkProhibited = () => {
 }
 
 const calculatePrice = () => {
-  uni.showToast({
-    title: '跳转到运费计算器',
-    icon: 'none'
+  uni.navigateTo({
+    url: '/pages/calculator/calculator'
   })
 }
 
