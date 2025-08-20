@@ -297,9 +297,8 @@ export default {
 
     // 订单功能导航
     const navigateToOrder = (type) => {
-      uni.showToast({
-        title: `${type}功能开发中`,
-        icon: 'none'
+      uni.navigateTo({
+        url: `/pages/orders/orders?status=${type}`
       })
     }
 
@@ -312,9 +311,8 @@ export default {
 
     // 查看全部订单
     const viewAllOrders = () => {
-      uni.showToast({
-        title: '查看全部订单',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/orders/orders?status=all'
       })
     }
 

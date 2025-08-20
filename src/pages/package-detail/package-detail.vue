@@ -502,7 +502,8 @@ export default {
       
       const route = routes[page]
       if (route) {
-        uni.switchTab({
+        // 使用 navigateTo 而不是 switchTab，因为这些页面不在 tabBar 配置中
+        uni.navigateTo({
           url: route
         })
       }

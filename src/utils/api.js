@@ -134,7 +134,7 @@ export const API = {
     })
   },
   
-  // 订单预报
+  // 订单管理
   orders: {
     // 提交包裹预报
     reportPackage: (data) => request({
@@ -148,6 +148,40 @@ export const API = {
       url: `/orders/user/${userId}`,
       method: 'GET',
       data: params
+    }),
+    
+    // 确认货齐
+    confirmShipping: (data) => request({
+      url: '/orders/confirm-shipping',
+      method: 'POST',
+      data
+    }),
+    
+    // 确认打包
+    confirmPacking: (data) => request({
+      url: '/orders/confirm-packing',
+      method: 'POST',
+      data
+    }),
+    
+    // 立即支付
+    makePayment: (data) => request({
+      url: '/orders/payment',
+      method: 'POST',
+      data
+    }),
+    
+    // 确认发货
+    confirmDelivery: (data) => request({
+      url: '/orders/confirm-delivery',
+      method: 'POST',
+      data
+    }),
+    
+    // 获取订单详情
+    getOrderDetail: (orderId) => request({
+      url: `/orders/detail/${orderId}`,
+      method: 'GET'
     })
   },
   

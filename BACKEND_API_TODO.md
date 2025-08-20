@@ -381,6 +381,186 @@ POST /api/shipping-orders/confirm
 }
 ```
 
+## 📋 订单管理接口
+
+### 9. 获取用户订单列表
+**接口位置**: `src/pages/orders/orders.vue` - `loadOrders()`
+```javascript
+// TODO: 替换为真实API调用
+GET /api/orders/user/{userId}
+```
+
+**请求参数**:
+```json
+// URL路径参数
+{
+  "userId": "string" // 用户ID
+}
+
+// 查询参数
+{
+  "status": "string", // 可选：订单状态过滤
+  "page": "number",   // 可选：页码
+  "pageSize": "number" // 可选：每页数量
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": [
+    {
+      "id": "string",
+      "orderNumber": "string",
+      "status": "string", // shipping/packing/payment/delivery
+      "packageCount": "number",
+      "totalWeight": "number",
+      "shippingFee": "number",
+      "createTime": "string",
+      "items": ["string"],
+      "address": {
+        "name": "string",
+        "phone": "string",
+        "detail": "string"
+      }
+    }
+  ]
+}
+```
+
+### 10. 确认货齐接口
+**接口位置**: `src/pages/orders/orders.vue` - `confirmShipping()`
+```javascript
+// TODO: 替换为真实API调用
+POST /api/orders/confirm-shipping
+```
+
+**请求参数**:
+```json
+{
+  "orderId": "string",
+  "userId": "string",
+  "confirmTime": "string"
+}
+```
+
+### 11. 确认打包接口
+**接口位置**: `src/pages/orders/orders.vue` - `confirmPacking()`
+```javascript
+// TODO: 替换为真实API调用
+POST /api/orders/confirm-packing
+```
+
+**请求参数**:
+```json
+{
+  "orderId": "string",
+  "userId": "string",
+  "packingInfo": {
+    "weight": "number",
+    "dimensions": "string",
+    "packingTime": "string"
+  }
+}
+```
+
+### 12. 立即支付接口
+**接口位置**: `src/pages/orders/orders.vue` - `makePayment()`
+```javascript
+// TODO: 替换为真实支付逻辑
+POST /api/orders/payment
+```
+
+**请求参数**:
+```json
+{
+  "orderId": "string",
+  "userId": "string",
+  "paymentMethod": "string", // wechat/alipay
+  "amount": "number"
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "支付成功",
+  "data": {
+    "orderId": "string",
+    "paymentId": "string",
+    "newStatus": "delivery"
+  }
+}
+```
+
+### 13. 确认发货接口
+**接口位置**: `src/pages/orders/orders.vue` - `confirmDelivery()`
+```javascript
+// TODO: 替换为真实API调用
+POST /api/orders/confirm-delivery
+```
+
+**请求参数**:
+```json
+{
+  "orderId": "string",
+  "userId": "string",
+  "deliveryInfo": {
+    "trackingNumber": "string",
+    "carrier": "string",
+    "deliveryTime": "string"
+  }
+}
+```
+
+### 14. 获取订单详情
+**接口位置**: `src/pages/order-detail/order-detail.vue` - `loadOrderDetail()`
+```javascript
+// TODO: 替换为真实API调用
+GET /api/orders/detail/{orderId}
+```
+
+**请求参数**:
+```json
+// URL路径参数
+{
+  "orderId": "string" // 订单ID
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "id": "string",
+    "orderNumber": "string",
+    "status": "string",
+    "packageCount": "number",
+    "totalWeight": "number",
+    "shippingFee": "number",
+    "createTime": "string",
+    "items": ["string"],
+    "address": {
+      "name": "string",
+      "phone": "string",
+      "detail": "string"
+    },
+    "timeline": [
+      {
+        "status": "string",
+        "time": "string",
+        "description": "string"
+      }
+    ]
+  }
+}
+```
+
 ## 🔧 通用配置接口
 
 ### 12. 获取应用配置接口
