@@ -44,11 +44,12 @@
         <!-- 用户信息卡片 -->
         <view class="user-info-card">
           <view class="user-avatar">
-            <text class="avatar-icon">👤</text>
+            <image v-if="userInfo.avatar" class="avatar-image" :src="userInfo.avatar" mode="aspectFill"></image>
+            <text v-else class="avatar-icon">👤</text>
           </view>
           <view class="user-details">
-            <text class="user-name">{{ userInfo.nickname || '微信用户' }}</text>
-            <text class="user-id">序号:{{ userInfo.userId || '100017' }}</text>
+            <text class="user-name">{{ userInfo.nickname || '跨境寄件吉祥物' + userInfo.randomSuffix }}</text>
+            <text class="user-id">NO.{{ userInfo.userId || '100017' }}</text>
           </view>
         </view>
 
@@ -218,8 +219,14 @@ export default {
     const userInfo = ref({
       userId: '',
       nickname: '',
-      avatar: ''
+      avatar: '',
+      randomSuffix: ''
     })
+
+    // 生成随机数字后缀
+    const generateRandomSuffix = () => {
+      return Math.floor(Math.random() * 10000).toString().padStart(4, '0')
+    }
 
     // 微信登录
     const handleWechatLogin = () => {
@@ -227,20 +234,50 @@ export default {
         title: '登录中...'
       })
       
-      setTimeout(() => {
-        uni.hideLoading()
-        isLoggedIn.value = true
-        userInfo.value = {
-          userId: '100017',
-          nickname: '微信用户',
-          avatar: ''
+      // 获取微信用户信息
+      uni.getUserInfo({
+        provider: 'weixin',
+        success: (userResult) => {
+          setTimeout(() => {
+            uni.hideLoading()
+            isLoggedIn.value = true
+            const randomSuffix = generateRandomSuffix()
+            userInfo.value = {
+              userId: '100017',
+              nickname: `跨境寄件吉祥物`,
+              avatar: userResult.userInfo.avatarUrl || '',
+              randomSuffix: randomSuffix
+            }
+            
+            // 保存到本地存储
+            uni.setStorageSync('userInfo', userInfo.value)
+            
+            uni.showToast({
+              title: '登录成功',
+              icon: 'success'
+            })
+          }, 1500)
+        },
+        fail: () => {
+          // 如果获取用户信息失败，使用默认信息
+          setTimeout(() => {
+            uni.hideLoading()
+            isLoggedIn.value = true
+            const randomSuffix = generateRandomSuffix()
+            userInfo.value = {
+              userId: '100017',
+              nickname: `跨境寄件吉祥物`,
+              avatar: '',
+              randomSuffix: randomSuffix
+            }
+            
+            uni.showToast({
+              title: '登录成功',
+              icon: 'success'
+            })
+          }, 1500)
         }
-        
-        uni.showToast({
-          title: '登录成功',
-          icon: 'success'
-        })
-      }, 1500)
+      })
     }
 
     // 推广功能导航
@@ -306,11 +343,15 @@ export default {
         content: '确定要退出登录吗？',
         success: (res) => {
           if (res.confirm) {
+            // 清除本地存储
+            uni.removeStorageSync('userInfo')
+            
             isLoggedIn.value = false
             userInfo.value = {
               userId: '',
               nickname: '',
-              avatar: ''
+              avatar: '',
+              randomSuffix: ''
             }
             uni.showToast({
               title: '已退出登录',
@@ -340,6 +381,15 @@ export default {
         return
       }
     }
+
+    // 页面加载时检查登录状态
+    onMounted(() => {
+      const savedUserInfo = uni.getStorageSync('userInfo')
+      if (savedUserInfo && savedUserInfo.nickname) {
+        isLoggedIn.value = true
+        userInfo.value = savedUserInfo
+      }
+    })
 
     return {
       isLoggedIn,
@@ -529,6 +579,15 @@ export default {
   align-items: center;
   justify-content: center;
   margin-right: 32rpx;
+  overflow: hidden;
+  border: 4rpx solid #ffffff;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 56rpx;
 }
 
 .avatar-icon {
@@ -546,11 +605,17 @@ export default {
   color: #1f2937;
   display: block;
   margin-bottom: 8rpx;
+  max-width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .user-id {
   font-size: 28rpx;
   color: #6b7280;
+  font-weight: 500;
+  letter-spacing: 1rpx;
 }
 
 /* 区域标题 */
