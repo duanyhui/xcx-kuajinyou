@@ -48,6 +48,13 @@
 				"navigationBarTitleText": "常见问题",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "包裹预报",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

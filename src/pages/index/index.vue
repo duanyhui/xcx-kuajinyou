@@ -160,7 +160,7 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">订单</text>
+        <text class="nav-text">预报</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
@@ -236,11 +236,25 @@ const callService = () => {
 
 const switchTab = (tab: string) => {
   console.log('切换标签:', tab)
-  uni.showToast({
-    title: `切换到${tab}`,
-    icon: 'none',
-    duration: 1000
-  })
+  
+  if (tab === 'order') {
+    uni.navigateTo({
+      url: '/pages/order/order'
+    })
+  } else if (tab === 'home') {
+    // 当前页面，无需跳转
+    return
+  } else if (tab === 'shipping') {
+    uni.navigateTo({
+      url: '/pages/shipping/shipping'
+    })
+  } else {
+    uni.showToast({
+      title: `${tab}功能开发中`,
+      icon: 'none',
+      duration: 1000
+    })
+  }
 }
 </script>
 
