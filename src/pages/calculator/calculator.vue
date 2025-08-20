@@ -18,7 +18,8 @@
         <view class="form-section">
           <view class="section-header">
             <text class="required-star">*</text>
-            <text class="section-title">运输</text>
+            <text class="section-title">运输
+</text>
           </view>
           <view class="radio-group">
             <view 
@@ -29,7 +30,8 @@
               <view class="radio-check">
                 <text v-if="formData.transport === 'sea'" class="check-icon">✓</text>
               </view>
-              <text class="radio-label">海运</text>
+              <text class="radio-label">海运（走得慢，省得多，值！）
+</text>
             </view>
             <view 
               class="radio-item" 
@@ -39,7 +41,7 @@
               <view class="radio-check">
                 <text v-if="formData.transport === 'air'" class="check-icon">✓</text>
               </view>
-              <text class="radio-label">空运</text>
+              <text class="radio-label">空运（飞一般的寄件速度～）</text>
             </view>
           </view>
           <text v-if="errors.transport" class="error-text">{{ errors.transport }}</text>

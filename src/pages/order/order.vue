@@ -400,6 +400,10 @@ const switchTab = (tab: string) => {
     uni.navigateTo({
       url: '/pages/shipping-orders/shipping-orders'
     })
+  } else if (tab === 'profile') {
+    uni.navigateTo({
+      url: '/pages/profile/profile'
+    })
   } else {
     uni.showToast({
       title: `${tab}功能开发中`,

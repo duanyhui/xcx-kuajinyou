@@ -369,6 +369,10 @@ const switchTab = (tab: string) => {
   } else if (tab === 'shipping') {
     // 当前页面，无需跳转
     return
+  } else if (tab === 'profile') {
+    uni.navigateTo({
+      url: '/pages/profile/profile'
+    })
   } else {
     uni.showToast({
       title: `${tab}功能开发中`,
