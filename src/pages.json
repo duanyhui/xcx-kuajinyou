@@ -55,6 +55,14 @@
 				"navigationBarTitleText": "包裹预报",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/shipping-orders/shipping-orders",
+			"style": {
+				"navigationBarTitleText": "订单发货",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {

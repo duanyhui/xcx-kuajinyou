@@ -246,7 +246,7 @@ const switchTab = (tab: string) => {
     return
   } else if (tab === 'shipping') {
     uni.navigateTo({
-      url: '/pages/shipping/shipping'
+      url: '/pages/shipping-orders/shipping-orders'
     })
   } else {
     uni.showToast({
