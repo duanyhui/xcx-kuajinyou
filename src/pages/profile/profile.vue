@@ -225,7 +225,7 @@ export default {
 
     // 生成随机数字后缀
     const generateRandomSuffix = () => {
-      return Math.floor(Math.random() * 10000).toString().padStart(4, '0')
+      return None
     }
 
     // 微信登录
@@ -282,10 +282,33 @@ export default {
 
     // 推广功能导航
     const navigateToPromotion = (type) => {
-      uni.showToast({
-        title: `${type}功能开发中`,
-        icon: 'none'
-      })
+      switch (type) {
+        case 'qrcode':
+          uni.navigateTo({
+            url: '/pages/promotion-code/promotion-code'
+          })
+          break
+        case 'team':
+          uni.navigateTo({
+            url: '/pages/team-members/team-members'
+          })
+          break
+        case 'orders':
+          uni.navigateTo({
+            url: '/pages/team-orders/team-orders'
+          })
+          break
+        case 'wallet':
+          uni.navigateTo({
+            url: '/pages/commission/commission'
+          })
+          break
+        default:
+          uni.showToast({
+            title: `${type}功能开发中`,
+            icon: 'none'
+          })
+      }
     }
 
     // 包裹功能导航

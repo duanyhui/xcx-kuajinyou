@@ -290,3 +290,294 @@ export const MOCK_DATA = {
 }
 
 export default API
+
+// ================================
+// 推广相关接口
+// ================================
+
+// 获取推广码信息
+export const getPromotionCode = async (userId) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/promotion/code',
+    //   method: 'GET',
+    //   data: { userId }
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        qrCodeUrl: 'https://via.placeholder.com/400x400/87ceeb/ffffff?text=QR+Code',
+        code: 'TG100017',
+        link: 'https://app.kuajinyou.com/register?code=TG100017'
+      }
+    }
+  } catch (error) {
+    console.error('获取推广码失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取推广码失败'
+    }
+  }
+}
+
+// 获取推广统计
+export const getPromotionStats = async (userId) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/promotion/stats',
+    //   method: 'GET',
+    //   data: { userId }
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        totalInvites: 15,
+        activeMembers: 12,
+        totalEarnings: '1,250.00',
+        monthEarnings: '148.85'
+      }
+    }
+  } catch (error) {
+    console.error('获取推广统计失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取推广统计失败'
+    }
+  }
+}
+
+// 获取团成员列表
+export const getTeamMembers = async (userId, params = {}) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/team/members',
+    //   method: 'GET',
+    //   data: { userId, ...params }
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        stats: {
+          totalMembers: 15,
+          activeMembers: 12,
+          newMembers: 3
+        },
+        members: [
+          {
+            id: 'M001',
+            nickname: '小王',
+            avatar: '',
+            level: 'L2',
+            joinTime: '2024-11-15',
+            lastActiveTime: '2024-12-01',
+            totalOrders: 8,
+            totalAmount: '1,580.00',
+            status: 'active'
+          },
+          {
+            id: 'M002',
+            nickname: '李小姐',
+            avatar: '',
+            level: 'L1',
+            joinTime: '2024-11-20',
+            lastActiveTime: '2024-12-01',
+            totalOrders: 3,
+            totalAmount: '450.00',
+            status: 'active'
+          },
+          {
+            id: 'M003',
+            nickname: '张先生',
+            avatar: '',
+            level: 'L1',
+            joinTime: '2024-11-10',
+            lastActiveTime: '2024-11-25',
+            totalOrders: 12,
+            totalAmount: '2,100.00',
+            status: 'inactive'
+          }
+        ]
+      }
+    }
+  } catch (error) {
+    console.error('获取团成员失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取团成员失败'
+    }
+  }
+}
+
+// 获取团队订单
+export const getTeamOrders = async (userId, params = {}) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/team/orders',
+    //   method: 'GET',
+    //   data: { userId, ...params }
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        stats: {
+          totalOrders: 12,
+          totalAmount: '2,580.00',
+          commission: '258.00',
+          all: 12,
+          pending: 3,
+          completed: 9
+        },
+        orders: [
+          {
+            id: '1',
+            orderNumber: 'TK202412010001',
+            createTime: '2024-12-01 10:30:00',
+            status: 'completed',
+            amount: '299.00',
+            expectedCommission: '29.90',
+            itemsDesc: '化妆品 × 2，保健品 × 1',
+            member: {
+              id: 'M001',
+              nickname: '小王',
+              avatar: '',
+              level: 'L2'
+            }
+          },
+          {
+            id: '2',
+            orderNumber: 'TK202412010002',
+            createTime: '2024-12-01 14:20:00',
+            status: 'processing',
+            amount: '189.50',
+            expectedCommission: '18.95',
+            itemsDesc: '零食 × 3',
+            member: {
+              id: 'M002',
+              nickname: '李小姐',
+              avatar: '',
+              level: 'L1'
+            }
+          }
+        ]
+      }
+    }
+  } catch (error) {
+    console.error('获取团队订单失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取团队订单失败'
+    }
+  }
+}
+
+// 获取佣金记录
+export const getCommissionRecords = async (userId, params = {}) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/commission/records',
+    //   method: 'GET',
+    //   data: { userId, ...params }
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        balance: '258.85',
+        records: [
+          {
+            id: '1',
+            title: '推广佣金',
+            orderNumber: 'TK202412010001',
+            memberName: '小王',
+            amount: '29.90',
+            type: 'income',
+            status: 'settled',
+            createTime: '2024-12-01 15:30:00',
+            description: '成员小王订单完成，获得佣金'
+          },
+          {
+            id: '2',
+            title: '推广佣金',
+            orderNumber: 'TK202412010002',
+            memberName: '李小姐',
+            amount: '18.95',
+            type: 'income',
+            status: 'pending',
+            createTime: '2024-12-01 18:20:00',
+            description: '成员李小姐订单已完成，佣金结算中'
+          },
+          {
+            id: '3',
+            title: '佣金提现',
+            orderNumber: 'WD202411301001',
+            memberName: '',
+            amount: '200.00',
+            type: 'withdraw',
+            status: 'settled',
+            createTime: '2024-11-30 10:15:00',
+            description: '提现到微信钱包'
+          }
+        ]
+      }
+    }
+  } catch (error) {
+    console.error('获取佣金记录失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取佣金记录失败'
+    }
+  }
+}
+
+// 获取佣金统计
+export const getCommissionStats = async (userId) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/commission/stats',
+    //   method: 'GET',
+    //   data: { userId }
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        monthly: {
+          earnings: '148.85',
+          orders: 5
+        },
+        yearly: {
+          earnings: '1,250.00',
+          orders: 42
+        }
+      }
+    }
+  } catch (error) {
+    console.error('获取佣金统计失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取佣金统计失败'
+    }
+  }
+}

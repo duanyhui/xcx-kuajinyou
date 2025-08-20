@@ -241,3 +241,288 @@ const handleOrderOperation = async (operation, order, newStatus) => {
   }
 }
 ```
+
+## 🎯 推广功能接口对接示例
+
+### 1. 推广码页面接口替换
+```javascript
+// 当前模拟实现（需要替换）
+const loadPromotionData = async () => {
+  // 模拟数据
+  qrCodeUrl.value = 'https://via.placeholder.com/400x400/87ceeb/ffffff?text=QR+Code'
+  promotionCode.value = 'TG100017'
+  // ...
+}
+
+// 替换为真实接口
+import { getPromotionCode, getPromotionStats } from '@/utils/api'
+
+const loadPromotionData = async () => {
+  try {
+    // 获取推广码信息（包含后端生成的二维码）
+    const codeResult = await getPromotionCode(getUserId())
+    if (codeResult.success) {
+      qrCodeUrl.value = codeResult.data.qrCodeUrl // 后端生成的二维码URL
+      promotionCode.value = codeResult.data.code
+      promotionLink.value = codeResult.data.link
+    }
+
+    // 获取推广统计
+    const statsResult = await getPromotionStats(getUserId())
+    if (statsResult.success) {
+      stats.value = statsResult.data
+    }
+  } catch (error) {
+    handleApiError(error)
+  }
+}
+```
+
+### 2. 团成员列表接口替换
+```javascript
+// 当前模拟实现（需要替换）
+const loadTeamMembers = async () => {
+  // 模拟数据
+  members.value = [...]
+}
+
+// 替换为真实接口
+import { getTeamMembers } from '@/utils/api'
+
+const loadTeamMembers = async () => {
+  try {
+    const result = await getTeamMembers(getUserId(), {
+      page: currentPage.value,
+      pageSize: 20,
+      filter: activeFilter.value
+    })
+    
+    if (result.success) {
+      if (currentPage.value === 1) {
+        members.value = result.data.members
+      } else {
+        members.value.push(...result.data.members)
+      }
+      teamStats.value = result.data.stats
+      hasMore.value = result.data.pagination.page < result.data.pagination.totalPages
+    }
+  } catch (error) {
+    handleApiError(error)
+  }
+}
+```
+
+### 3. 团队订单接口替换
+```javascript
+// 当前模拟实现（需要替换）
+const loadTeamOrders = async () => {
+  // 模拟数据
+  orders.value = [...]
+}
+
+// 替换为真实接口
+import { getTeamOrders } from '@/utils/api'
+
+const loadTeamOrders = async () => {
+  try {
+    const result = await getTeamOrders(getUserId(), {
+      page: currentPage.value,
+      pageSize: 20,
+      status: activeFilter.value
+    })
+    
+    if (result.success) {
+      if (currentPage.value === 1) {
+        orders.value = result.data.orders
+      } else {
+        orders.value.push(...result.data.orders)
+      }
+      orderStats.value = result.data.stats
+      hasMore.value = result.data.pagination.page < result.data.pagination.totalPages
+    }
+  } catch (error) {
+    handleApiError(error)
+  }
+}
+```
+
+### 4. 佣金页面接口替换
+```javascript
+// 当前模拟实现（需要替换）
+const loadCommissionData = async () => {
+  // 模拟数据
+  records.value = [...]
+  totalBalance.value = '258.85'
+}
+
+// 替换为真实接口
+import { getCommissionRecords, getCommissionStats } from '@/utils/api'
+
+const loadCommissionData = async () => {
+  try {
+    // 获取佣金记录
+    const recordsResult = await getCommissionRecords(getUserId(), {
+      page: currentPage.value,
+      pageSize: 20,
+      status: activeFilter.value
+    })
+    
+    if (recordsResult.success) {
+      if (currentPage.value === 1) {
+        records.value = recordsResult.data.records
+      } else {
+        records.value.push(...recordsResult.data.records)
+      }
+      totalBalance.value = recordsResult.data.balance
+      hasMore.value = recordsResult.data.pagination.page < recordsResult.data.pagination.totalPages
+    }
+
+    // 获取佣金统计
+    const statsResult = await getCommissionStats(getUserId())
+    if (statsResult.success) {
+      monthlyStats.value = statsResult.data.monthly
+      yearlyStats.value = statsResult.data.yearly
+    }
+  } catch (error) {
+    handleApiError(error)
+  }
+}
+
+// 佣金提现接口
+const withdraw = async () => {
+  try {
+    const result = await API.commission.withdraw({
+      userId: getUserId(),
+      amount: totalBalance.value,
+      withdrawType: 'wechat',
+      account: {
+        // 微信提现账户信息
+      }
+    })
+    
+    if (result.success) {
+      uni.showToast({ title: '提现申请成功', icon: 'success' })
+      // 刷新余额
+      await loadCommissionData()
+    }
+  } catch (error) {
+    handleApiError(error)
+  }
+}
+```
+
+### 5. 推广功能数据缓存策略
+```javascript
+// 推广数据缓存（减少频繁请求）
+const cacheKey = `promotion_data_${getUserId()}`
+const cacheTime = 5 * 60 * 1000 // 5分钟缓存
+
+const getPromotionDataWithCache = async () => {
+  try {
+    // 检查缓存
+    const cached = uni.getStorageSync(cacheKey)
+    if (cached && (Date.now() - cached.timestamp) < cacheTime) {
+      return cached.data
+    }
+
+    // 获取新数据
+    const result = await getPromotionCode(getUserId())
+    if (result.success) {
+      // 缓存数据
+      uni.setStorageSync(cacheKey, {
+        data: result.data,
+        timestamp: Date.now()
+      })
+      return result.data
+    }
+  } catch (error) {
+    // 缓存失效时，尝试使用缓存数据
+    const cached = uni.getStorageSync(cacheKey)
+    if (cached) {
+      console.warn('使用缓存数据，网络请求失败:', error)
+      return cached.data
+    }
+    throw error
+  }
+}
+```
+
+## 📱 推广功能特殊处理
+
+### 1. 二维码图片加载失败处理
+```javascript
+const handleQrCodeError = () => {
+  // 显示默认二维码或重新生成
+  qrCodeUrl.value = '/static/default-qrcode.png'
+  uni.showToast({
+    title: '二维码加载失败，请刷新重试',
+    icon: 'none'
+  })
+}
+
+// 在image组件中使用
+<image 
+  :src="qrCodeUrl" 
+  @error="handleQrCodeError"
+  mode="aspectFit"
+></image>
+```
+
+### 2. 推广分享功能
+```javascript
+const sharePromotion = () => {
+  // 检查分享能力
+  uni.getSystemInfo({
+    success: (info) => {
+      if (info.platform === 'devtools') {
+        // 开发工具中使用复制功能
+        copyPromotionLink()
+        return
+      }
+      
+      // 实际设备中使用分享功能
+      uni.share({
+        provider: 'weixin',
+        scene: 'WXSceneSession',
+        type: 0,
+        href: promotionLink.value,
+        title: '中韩跨境邮推广',
+        summary: `我的推广码: ${promotionCode.value}`,
+        imageUrl: qrCodeUrl.value,
+        success: () => {
+          uni.showToast({ title: '分享成功', icon: 'success' })
+        },
+        fail: () => {
+          // 分享失败，降级为复制功能
+          copyPromotionLink()
+        }
+      })
+    }
+  })
+}
+```
+
+### 3. 推广数据实时更新
+```javascript
+// 推广数据变化监听
+const setupPromotionDataListener = () => {
+  // 定期更新推广统计（可选）
+  setInterval(() => {
+    if (!loading.value) {
+      refreshPromotionStats()
+    }
+  }, 30000) // 每30秒更新一次
+}
+
+const refreshPromotionStats = async () => {
+  try {
+    const result = await getPromotionStats(getUserId())
+    if (result.success) {
+      stats.value = result.data
+    }
+  } catch (error) {
+    // 静默失败，不影响用户体验
+    console.warn('推广统计更新失败:', error)
+  }
+}
+```

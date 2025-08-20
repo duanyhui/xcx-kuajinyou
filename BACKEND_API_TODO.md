@@ -677,6 +677,8 @@ try {
 - [ ] 配置API基础URL
 - [ ] 实现用户认证接口
 - [ ] 实现包裹管理相关接口
+- [ ] 实现订单管理相关接口
+- [ ] 实现推广相关接口
 - [ ] 实现订单预报接口
 - [ ] 实现发货订单接口
 - [ ] 配置请求拦截器（添加token等）
@@ -687,3 +689,285 @@ try {
 
 ## 📞 联系方式
 如有接口相关问题，请联系后端开发团队进行对接。
+
+## 🎯 推广赚钱相关接口
+
+### 17. 获取推广码信息
+**接口位置**: `src/pages/promotion-code/promotion-code.vue` - `loadPromotionData()`
+```javascript
+GET /api/promotion/code
+```
+
+**请求参数**:
+```json
+{
+  "userId": "string" // 用户ID
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "qrCodeUrl": "string", // 二维码图片URL（重要：需要后端生成）
+    "code": "string", // 推广码，如：TG100017
+    "link": "string" // 推广链接
+  }
+}
+```
+
+### 18. 获取推广统计
+**接口位置**: `src/pages/promotion-code/promotion-code.vue` - `loadPromotionData()`
+```javascript
+GET /api/promotion/stats
+```
+
+**请求参数**:
+```json
+{
+  "userId": "string" // 用户ID
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "totalInvites": "number", // 累计邀请人数
+    "activeMembers": "number", // 活跃成员数
+    "totalEarnings": "string", // 累计收益，如："1,250.00"
+    "monthEarnings": "string" // 本月收益，如："148.85"
+  }
+}
+```
+
+### 19. 获取团成员列表
+**接口位置**: `src/pages/team-members/team-members.vue` - `loadTeamMembers()`
+```javascript
+GET /api/team/members
+```
+
+**请求参数**:
+```json
+{
+  "userId": "string", // 用户ID
+  "page": "number", // 页码，默认1
+  "pageSize": "number", // 每页数量，默认20
+  "filter": "string" // 筛选条件："all"/"active"/"inactive"
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "stats": {
+      "totalMembers": "number", // 团队总成员数
+      "activeMembers": "number", // 活跃成员数
+      "newMembers": "number" // 本月新增成员数
+    },
+    "members": [
+      {
+        "id": "string", // 成员ID
+        "nickname": "string", // 昵称
+        "avatar": "string", // 头像URL
+        "level": "string", // 等级，如："L1"/"L2"/"L3"
+        "joinTime": "string", // 加入时间，格式："YYYY-MM-DD"
+        "lastActiveTime": "string", // 最后活跃时间
+        "totalOrders": "number", // 总订单数
+        "totalAmount": "string", // 总金额
+        "status": "string" // 状态："active"/"inactive"
+      }
+    ],
+    "pagination": {
+      "page": "number",
+      "pageSize": "number",
+      "total": "number",
+      "totalPages": "number"
+    }
+  }
+}
+```
+
+### 20. 获取团队订单
+**接口位置**: `src/pages/team-orders/team-orders.vue` - `loadTeamOrders()`
+```javascript
+GET /api/team/orders
+```
+
+**请求参数**:
+```json
+{
+  "userId": "string", // 用户ID
+  "page": "number", // 页码，默认1
+  "pageSize": "number", // 每页数量，默认20
+  "status": "string" // 状态筛选："all"/"pending"/"completed"
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "stats": {
+      "totalOrders": "number", // 总订单数
+      "totalAmount": "string", // 总订单金额
+      "commission": "string", // 预计佣金
+      "all": "number", // 全部订单数
+      "pending": "number", // 进行中订单数
+      "completed": "number" // 已完成订单数
+    },
+    "orders": [
+      {
+        "id": "string", // 订单ID
+        "orderNumber": "string", // 订单号
+        "createTime": "string", // 创建时间
+        "status": "string", // 状态："pending"/"processing"/"shipping"/"completed"/"cancelled"
+        "amount": "string", // 订单金额
+        "expectedCommission": "string", // 预计佣金
+        "itemsDesc": "string", // 商品描述
+        "member": {
+          "id": "string", // 成员ID
+          "nickname": "string", // 成员昵称
+          "avatar": "string", // 成员头像
+          "level": "string" // 成员等级
+        }
+      }
+    ],
+    "pagination": {
+      "page": "number",
+      "pageSize": "number", 
+      "total": "number",
+      "totalPages": "number"
+    }
+  }
+}
+```
+
+### 21. 获取佣金记录
+**接口位置**: `src/pages/commission/commission.vue` - `loadCommissionData()`
+```javascript
+GET /api/commission/records
+```
+
+**请求参数**:
+```json
+{
+  "userId": "string", // 用户ID
+  "page": "number", // 页码，默认1
+  "pageSize": "number", // 每页数量，默认20
+  "status": "string" // 状态筛选："all"/"pending"/"settled"
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "balance": "string", // 当前余额
+    "records": [
+      {
+        "id": "string", // 记录ID
+        "title": "string", // 记录标题，如："推广佣金"/"佣金提现"
+        "orderNumber": "string", // 关联订单号
+        "memberName": "string", // 成员姓名（提现时为空）
+        "amount": "string", // 金额
+        "type": "string", // 类型："income"/"withdraw"
+        "status": "string", // 状态："pending"/"settled"/"failed"
+        "createTime": "string", // 创建时间
+        "description": "string" // 描述信息
+      }
+    ],
+    "pagination": {
+      "page": "number",
+      "pageSize": "number",
+      "total": "number", 
+      "totalPages": "number"
+    }
+  }
+}
+```
+
+### 22. 获取佣金统计
+**接口位置**: `src/pages/commission/commission.vue` - `loadCommissionData()`
+```javascript
+GET /api/commission/stats
+```
+
+**请求参数**:
+```json
+{
+  "userId": "string" // 用户ID
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "monthly": {
+      "earnings": "string", // 本月收益
+      "orders": "number" // 本月订单数
+    },
+    "yearly": {
+      "earnings": "string", // 年度收益
+      "orders": "number" // 年度订单数
+    }
+  }
+}
+```
+
+### 23. 佣金提现
+**接口位置**: `src/pages/commission/commission.vue` - `withdraw()`
+```javascript
+POST /api/commission/withdraw
+```
+
+**请求参数**:
+```json
+{
+  "userId": "string", // 用户ID
+  "amount": "string", // 提现金额
+  "withdrawType": "string", // 提现方式："wechat"/"alipay"/"bank"
+  "account": "object" // 提现账户信息
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "提现申请成功",
+  "data": {
+    "withdrawId": "string", // 提现记录ID
+    "status": "string", // 状态："pending"/"processing"/"success"/"failed"
+    "estimatedTime": "string" // 预计到账时间
+  }
+}
+```
+
+## 🎯 重要说明
+
+### 推广功能关键点：
+1. **推广码二维码**：需要后端生成包含推广码的二维码图片，返回图片URL
+2. **推广链接**：需要包含推广码参数的注册链接
+3. **佣金计算**：需要根据订单金额和推广层级计算佣金
+4. **数据统计**：需要实时统计推广数据和佣金信息
+5. **提现功能**：需要对接微信支付或其他支付平台的提现接口
+
+### 数据关联：
+- 推广关系：用户 → 推广码 → 团成员
+- 订单关联：团成员订单 → 推广佣金
+- 佣金流水：订单佣金 → 佣金记录 → 提现记录

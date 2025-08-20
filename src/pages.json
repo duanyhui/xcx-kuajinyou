@@ -93,6 +93,37 @@
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/promotion-code/promotion-code",
+			"style": {
+				"navigationBarTitleText": "推广码",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/team-members/team-members",
+			"style": {
+				"navigationBarTitleText": "团成员",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/team-orders/team-orders",
+			"style": {
+				"navigationBarTitleText": "团订单",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/commission/commission",
+			"style": {
+				"navigationBarTitleText": "佣金",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
 		}
 	],
 	"globalStyle": {
