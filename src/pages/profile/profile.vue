@@ -48,7 +48,7 @@
             <text v-else class="avatar-icon">👤</text>
           </view>
           <view class="user-details">
-            <text class="user-name">{{ userInfo.nickname || '跨境寄件吉祥物' + userInfo.randomSuffix }}</text>
+            <text class="user-name">{{ userInfo.nickname || '跨境寄件吉祥物' }}</text>
             <text class="user-id">NO.{{ userInfo.userId || '100017' }}</text>
           </view>
         </view>
@@ -219,14 +219,8 @@ export default {
     const userInfo = ref({
       userId: '',
       nickname: '',
-      avatar: '',
-      randomSuffix: ''
+      avatar: ''
     })
-
-    // 生成随机数字后缀
-    const generateRandomSuffix = () => {
-      return None
-    }
 
     // 微信登录
     const handleWechatLogin = () => {
@@ -241,12 +235,10 @@ export default {
           setTimeout(() => {
             uni.hideLoading()
             isLoggedIn.value = true
-            const randomSuffix = generateRandomSuffix()
             userInfo.value = {
               userId: '100017',
               nickname: `跨境寄件吉祥物`,
-              avatar: userResult.userInfo.avatarUrl || '',
-              randomSuffix: randomSuffix
+              avatar: userResult.userInfo.avatarUrl || ''
             }
             
             // 保存到本地存储
@@ -263,12 +255,10 @@ export default {
           setTimeout(() => {
             uni.hideLoading()
             isLoggedIn.value = true
-            const randomSuffix = generateRandomSuffix()
             userInfo.value = {
               userId: '100017',
               nickname: `跨境寄件吉祥物`,
-              avatar: '',
-              randomSuffix: randomSuffix
+              avatar: ''
             }
             
             uni.showToast({
@@ -369,8 +359,7 @@ export default {
             userInfo.value = {
               userId: '',
               nickname: '',
-              avatar: '',
-              randomSuffix: ''
+              avatar: ''
             }
             uni.showToast({
               title: '已退出登录',

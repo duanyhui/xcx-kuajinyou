@@ -103,17 +103,34 @@
         </view>
         
         <view class="contact-actions">
-          <view class="contact-btn primary" @click="contactService">
-            <text class="btn-text">在线客服</text>
+          <view class="qr-item">
+            <view class="image">
+              <image 
+                src="/static/wechat-qr.jpg" 
+                class="qr-image" 
+                mode="aspectFit"
+                @error="onImageError"
+              />
+            </view>
+            <text class="qr-title">关注公众号</text>
+            <text class="qr-desc">获取最新优惠</text>
           </view>
-          <view class="contact-btn secondary" @click="callService">
-            <text class="btn-text">电话咨询</text>
+          <view class="qr-item">
+            <view class="image">
+              <image 
+                src="/static/service-qr.jpg" 
+                class="qr-image" 
+                mode="aspectFit"
+                @error="onImageError"
+              />
+            </view>
+            <text class="qr-title">联系客服</text>
+            <text class="qr-desc">专业服务支持</text>
           </view>
         </view>
         
         <view class="service-time">
           <text class="time-text">服务时间：工作日 8:30-17:30</text>
-          <text class="phone-text">客服电话：0631-5230850</text>
         </view>
       </view>
     </view>
@@ -184,6 +201,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const onImageError = (e: any) => {
+  console.log('二维码图片加载失败:', e)
+  uni.showToast({
+    title: '图片加载失败',
+    icon: 'none',
+    duration: 1000
+  })
+}
+
 const navigateTo = (page: string) => {
   console.log('导航到:', page)
   
@@ -218,20 +244,6 @@ const navigateTo = (page: string) => {
       duration: 1500
     })
   }
-}
-
-const contactService = () => {
-  uni.showToast({
-    title: '正在连接客服...',
-    icon: 'loading',
-    duration: 1500
-  })
-}
-
-const callService = () => {
-  uni.makePhoneCall({
-    phoneNumber: '0631-5230850'
-  })
 }
 
 const switchTab = (tab: string) => {
@@ -586,41 +598,77 @@ const switchTab = (tab: string) => {
   max-width: 100%;
 }
 
-.contact-btn {
+.qr-item {
   flex: 1;
-  height: 80rpx;
-  border-radius: 24rpx;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
+  padding: 24rpx;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 20rpx;
+  border: 2rpx solid rgba(102, 126, 234, 0.1);
   box-sizing: border-box;
   min-width: 0;
 }
 
-.contact-btn.primary {
+.qr-item .image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+  background: #f8f9fa;
+  border: 1rpx solid #e9ecef;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.qr-code {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
+  background: #f8f9fa;
+  border: 1rpx solid #e9ecef;
+}
+
+.qr-placeholder {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  margin-bottom: 16rpx;
   background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 16rpx rgba(102, 126, 234, 0.3);
 }
 
-.contact-btn.secondary {
-  background: rgba(102, 126, 234, 0.1);
-  border: 2rpx solid rgba(102, 126, 234, 0.3);
+.qr-icon {
+  font-size: 60rpx;
+  filter: grayscale(100%) brightness(0) invert(1);
 }
 
-.contact-btn:active {
-  transform: scale(0.96);
+.qr-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8rpx;
+  text-align: center;
 }
 
-.contact-btn.primary .btn-text {
-  color: white;
-  font-size: 28rpx;
-  font-weight: 500;
-}
-
-.contact-btn.secondary .btn-text {
-  color: #667eea;
-  font-size: 28rpx;
-  font-weight: 500;
+.qr-desc {
+  font-size: 22rpx;
+  color: #7f8c8d;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .service-time {
