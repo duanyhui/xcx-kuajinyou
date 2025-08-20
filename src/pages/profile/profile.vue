@@ -290,9 +290,8 @@ export default {
 
     // 包裹功能导航
     const navigateToPackage = (type) => {
-      uni.showToast({
-        title: `${type}功能开发中`,
-        icon: 'none'
+      uni.navigateTo({
+        url: `/pages/packages/packages?status=${type}`
       })
     }
 
@@ -306,9 +305,8 @@ export default {
 
     // 查看全部包裹
     const viewAllPackages = () => {
-      uni.showToast({
-        title: '查看全部包裹',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/packages/packages?status=all'
       })
     }
 

@@ -70,6 +70,21 @@
 				"navigationBarTitleText": "我的",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/packages/packages",
+			"style": {
+				"navigationBarTitleText": "包裹管理",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/package-detail/package-detail",
+			"style": {
+				"navigationBarTitleText": "包裹详情",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
