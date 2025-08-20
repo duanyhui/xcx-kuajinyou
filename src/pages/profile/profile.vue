@@ -331,9 +331,8 @@ export default {
 
     // 仓库地址
     const navigateToWarehouse = () => {
-      uni.showToast({
-        title: '仓库地址功能开发中',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/warehouse-address/warehouse-address'
       })
     }
 

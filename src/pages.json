@@ -124,6 +124,13 @@
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": true
 			}
+		},
+		{
+			"path": "pages/warehouse-address/warehouse-address",
+			"style": {
+				"navigationBarTitleText": "仓库地址",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

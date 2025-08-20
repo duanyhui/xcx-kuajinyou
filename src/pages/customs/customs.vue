@@ -15,7 +15,7 @@
       <view class="welcome-card">
         <view class="welcome-icon">🆔</view>
         <text class="welcome-title">个人通关号申请攻略！</text>
-        <text class="welcome-desc">姐妹们，轻松搞定韩国个人通关号～</text>
+        <text class="welcome-desc">轻松搞定韩国个人通关号～</text>
       </view>
 
       <!-- 重要说明 -->
@@ -127,32 +127,7 @@
       </view>
 
       <!-- 网站截图展示 -->
-      <view class="screenshot-section">
-        <view class="screenshot-header">
-          <text class="screenshot-title">📱 网站界面预览</text>
-        </view>
-        <view class="screenshot-card">
-          <view class="screenshot-placeholder">
-            <text class="placeholder-icon">🖥️</text>
-            <text class="placeholder-text">韩国海关网站界面</text>
-            <text class="placeholder-desc">支持中文和韩文界面</text>
-          </view>
-          <view class="screenshot-features">
-            <view class="feature-item">
-              <text class="feature-icon">🔍</text>
-              <text class="feature-text">조회 - 查询现有通关号</text>
-            </view>
-            <view class="feature-item">
-              <text class="feature-icon">🆕</text>
-              <text class="feature-text">신규발급 - 申请新通关号</text>
-            </view>
-            <view class="feature-item">
-              <text class="feature-icon">📞</text>
-              <text class="feature-text">고객센터 - 客服中心</text>
-            </view>
-          </view>
-        </view>
-      </view>
+
 
       <!-- 常见问题 -->
       <view class="faq-section">
