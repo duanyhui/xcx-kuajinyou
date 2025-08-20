@@ -958,6 +958,202 @@ POST /api/commission/withdraw
 }
 ```
 
+## 📮 地址管理接口
+
+### 24. 获取用户地址列表
+**接口位置**: `src/pages/my-address/my-address.vue` - `getAddressList()`
+```javascript
+GET /api/user/address/list
+```
+
+**请求参数**:
+```json
+// 请求头中包含Authorization: Bearer <token>
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": [
+    {
+      "id": "string", // 地址ID
+      "customsCode": "string", // 通关号码
+      "recipientName": "string", // 收件人姓名
+      "phone": "string", // 联系电话
+      "koreanAddress": "string", // 韩国地址
+      "koreanPostalCode": "string", // 韩国邮编
+      "fullAddress": "string", // 完整地址（显示用）
+      "isDefault": "boolean", // 是否默认地址
+      "createTime": "string", // 创建时间
+      "updateTime": "string" // 更新时间
+    }
+  ]
+}
+```
+
+### 25. 获取地址详情
+**接口位置**: `src/pages/address-form/address-form.vue` - `getAddressDetail()`
+```javascript
+GET /api/user/address/{addressId}
+```
+
+**请求参数**:
+```json
+// URL路径参数
+{
+  "addressId": "string" // 地址ID
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "获取成功",
+  "data": {
+    "id": "string",
+    "customsCode": "string",
+    "recipientName": "string", 
+    "phone": "string",
+    "koreanAddress": "string",
+    "koreanPostalCode": "string",
+    "isDefault": "boolean",
+    "createTime": "string",
+    "updateTime": "string"
+  }
+}
+```
+
+### 26. 新增收货地址
+**接口位置**: `src/pages/address-form/address-form.vue` - `submitForm()`
+```javascript
+POST /api/user/address
+```
+
+**请求参数**:
+```json
+{
+  "customsCode": "string", // 通关号码，必填
+  "recipientName": "string", // 收件人姓名，必填
+  "phone": "string", // 联系电话，必填，12-13位数字
+  "koreanAddress": "string", // 韩国地址，必填
+  "koreanPostalCode": "string", // 韩国邮编，必填
+  "isDefault": "boolean" // 是否设为默认地址
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "地址添加成功",
+  "data": {
+    "id": "string", // 新创建的地址ID
+    "customsCode": "string",
+    "recipientName": "string",
+    "phone": "string", 
+    "koreanAddress": "string",
+    "koreanPostalCode": "string",
+    "fullAddress": "string", // 服务端生成的完整地址
+    "isDefault": "boolean",
+    "createTime": "string",
+    "updateTime": "string"
+  }
+}
+```
+
+### 27. 更新收货地址
+**接口位置**: `src/pages/address-form/address-form.vue` - `submitForm()`
+```javascript
+PUT /api/user/address/{addressId}
+```
+
+**请求参数**:
+```json
+// URL路径参数
+{
+  "addressId": "string" // 地址ID
+}
+
+// 请求体
+{
+  "customsCode": "string",
+  "recipientName": "string",
+  "phone": "string",
+  "koreanAddress": "string", 
+  "koreanPostalCode": "string",
+  "isDefault": "boolean"
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "地址更新成功",
+  "data": {
+    "id": "string",
+    "customsCode": "string",
+    "recipientName": "string",
+    "phone": "string",
+    "koreanAddress": "string",
+    "koreanPostalCode": "string",
+    "fullAddress": "string",
+    "isDefault": "boolean",
+    "createTime": "string",
+    "updateTime": "string"
+  }
+}
+```
+
+### 28. 删除收货地址
+**接口位置**: `src/pages/my-address/my-address.vue` - `deleteAddress()`
+```javascript
+DELETE /api/user/address/{addressId}
+```
+
+**请求参数**:
+```json
+// URL路径参数
+{
+  "addressId": "string" // 地址ID
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "地址删除成功",
+  "data": null
+}
+```
+
+### 29. 设置默认地址
+**接口位置**: `src/utils/api.js` - `setDefaultAddress()`
+```javascript
+PUT /api/user/address/{addressId}/default
+```
+
+**请求参数**:
+```json
+// URL路径参数
+{
+  "addressId": "string" // 地址ID
+}
+```
+
+**响应格式**:
+```json
+{
+  "code": 200,
+  "message": "设置默认地址成功",
+  "data": null
+}
+```
+
 ## 🎯 重要说明
 
 ### 推广功能关键点：
@@ -967,7 +1163,15 @@ POST /api/commission/withdraw
 4. **数据统计**：需要实时统计推广数据和佣金信息
 5. **提现功能**：需要对接微信支付或其他支付平台的提现接口
 
+### 地址管理关键点：
+1. **地址验证**：建议对韩国地址格式进行验证
+2. **默认地址唯一性**：设置新默认地址时，需要取消其他地址的默认状态
+3. **地址完整性**：服务端需要生成用于显示的完整地址字符串
+4. **权限控制**：确保用户只能操作自己的地址
+5. **数据清理**：删除用户时需要级联删除相关地址数据
+
 ### 数据关联：
 - 推广关系：用户 → 推广码 → 团成员
 - 订单关联：团成员订单 → 推广佣金
 - 佣金流水：订单佣金 → 佣金记录 → 提现记录
+- 地址关联：用户 → 多个收货地址 → 订单使用地址

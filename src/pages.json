@@ -131,6 +131,20 @@
 				"navigationBarTitleText": "仓库地址",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/my-address/my-address",
+			"style": {
+				"navigationBarTitleText": "我的地址",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/address-form/address-form",
+			"style": {
+				"navigationBarTitleText": "地址管理",
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

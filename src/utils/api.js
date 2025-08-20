@@ -581,3 +581,185 @@ export const getCommissionStats = async (userId) => {
     }
   }
 }
+
+// ============= 地址管理相关接口 =============
+
+// 获取用户地址列表
+export const getUserAddressList = async () => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/user/address/list',
+    //   method: 'GET'
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: [
+        {
+          id: '1',
+          customsCode: 'P12345678',
+          recipientName: '颜',
+          phone: '18679982792',
+          koreanAddress: '서울특별시 강남구 테헤란로 123',
+          koreanPostalCode: '06142',
+          fullAddress: '서울특별시 강남구 테헤란로 123',
+          isDefault: false,
+          createTime: '2023-12-01 10:00:00',
+          updateTime: '2023-12-01 10:00:00'
+        }
+      ]
+    }
+  } catch (error) {
+    console.error('获取地址列表失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取地址列表失败'
+    }
+  }
+}
+
+// 获取地址详情
+export const getAddressDetail = async (addressId) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: `/user/address/${addressId}`,
+    //   method: 'GET'
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        id: addressId,
+        customsCode: 'P12345678',
+        recipientName: '颜',
+        phone: '18679982792',
+        koreanAddress: '서울특별시 강남구 테헤란로 123',
+        koreanPostalCode: '06142',
+        isDefault: false,
+        createTime: '2023-12-01 10:00:00',
+        updateTime: '2023-12-01 10:00:00'
+      }
+    }
+  } catch (error) {
+    console.error('获取地址详情失败:', error)
+    return {
+      success: false,
+      message: error.message || '获取地址详情失败'
+    }
+  }
+}
+
+// 新增收货地址
+export const addUserAddress = async (addressData) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: '/user/address',
+    //   method: 'POST',
+    //   data: addressData
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        id: Date.now().toString(),
+        ...addressData,
+        createTime: new Date().toISOString(),
+        updateTime: new Date().toISOString()
+      },
+      message: '地址添加成功'
+    }
+  } catch (error) {
+    console.error('新增地址失败:', error)
+    return {
+      success: false,
+      message: error.message || '新增地址失败'
+    }
+  }
+}
+
+// 更新收货地址
+export const updateUserAddress = async (addressId, addressData) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: `/user/address/${addressId}`,
+    //   method: 'PUT',
+    //   data: addressData
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      data: {
+        id: addressId,
+        ...addressData,
+        updateTime: new Date().toISOString()
+      },
+      message: '地址更新成功'
+    }
+  } catch (error) {
+    console.error('更新地址失败:', error)
+    return {
+      success: false,
+      message: error.message || '更新地址失败'
+    }
+  }
+}
+
+// 删除收货地址
+export const deleteUserAddress = async (addressId) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: `/user/address/${addressId}`,
+    //   method: 'DELETE'
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      message: '地址删除成功'
+    }
+  } catch (error) {
+    console.error('删除地址失败:', error)
+    return {
+      success: false,
+      message: error.message || '删除地址失败'
+    }
+  }
+}
+
+// 设置默认地址
+export const setDefaultAddress = async (addressId) => {
+  try {
+    // TODO: 替换为实际API调用
+    // const result = await request({
+    //   url: `/user/address/${addressId}/default`,
+    //   method: 'PUT'
+    // })
+    // return result
+
+    // 模拟数据
+    return {
+      success: true,
+      message: '设置默认地址成功'
+    }
+  } catch (error) {
+    console.error('设置默认地址失败:', error)
+    return {
+      success: false,
+      message: error.message || '设置默认地址失败'
+    }
+  }
+}

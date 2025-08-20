@@ -338,9 +338,8 @@ export default {
 
     // 我的地址
     const navigateToMyAddress = () => {
-      uni.showToast({
-        title: '我的地址功能开发中',
-        icon: 'none'
+      uni.navigateTo({
+        url: '/pages/my-address/my-address'
       })
     }
 
