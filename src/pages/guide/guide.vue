@@ -29,16 +29,16 @@
         <view class="step-card">
           <view class="step-header">
             <view class="step-number">1</view>
-            <text class="step-title">获取专属地址</text>
-            <view class="step-tag hot">超重要</view>
+            <text class="step-title">{{ t('guide.step1Title') }}</text>
+            <view class="step-tag hot">{{ t('guide.step1Tag') }}</view>
           </view>
           <view class="step-content">
-            <text class="step-desc">👉 进入【我的】→【仓库地址】</text>
-            <text class="step-desc">👉 复制你的专属地址和收件人信息</text>
-            <text class="step-desc">👉 用这个地址向仓库邮寄包裹</text>
+            <text class="step-desc">{{ t('guide.step1Desc1') }}</text>
+            <text class="step-desc">{{ t('guide.step1Desc2') }}</text>
+            <text class="step-desc">{{ t('guide.step1Desc3') }}</text>
             <view class="step-tip">
               <text class="tip-icon">💡</text>
-              <text class="tip-text">记得告诉仓库小哥哥你的地址哦～</text>
+              <text class="tip-text">{{ t('guide.step1Tip') }}</text>
             </view>
           </view>
         </view>
@@ -47,16 +47,16 @@
         <view class="step-card">
           <view class="step-header">
             <view class="step-number">2</view>
-            <text class="step-title">包裹预报</text>
-            <view class="step-tag">必做</view>
+            <text class="step-title">{{ t('guide.step2Title') }}</text>
+            <view class="step-tag">{{ t('guide.step2Tag') }}</view>
           </view>
           <view class="step-content">
-            <text class="step-desc">📦 包裹寄出后立即预报</text>
-            <text class="step-desc">📱 微信关注【中韩跨境邮】</text>
-            <text class="step-desc">🔍 点击【集运服务】→【包裹预报】</text>
+            <text class="step-desc">{{ t('guide.step2Desc1') }}</text>
+            <text class="step-desc">{{ t('guide.step2Desc2') }}</text>
+            <text class="step-desc">{{ t('guide.step2Desc3') }}</text>
             <view class="step-warning">
               <text class="warning-icon">⚠️</text>
-              <text class="warning-text">不支持一个快递拆分多个订单给不同收件人</text>
+              <text class="warning-text">{{ t('guide.step2Warning') }}</text>
             </view>
           </view>
         </view>
@@ -65,23 +65,23 @@
         <view class="step-card">
           <view class="step-header">
             <view class="step-number">3</view>
-            <text class="step-title">填写信息</text>
-            <view class="step-tag">仔细</view>
+            <text class="step-title">{{ t('guide.step3Title') }}</text>
+            <view class="step-tag">{{ t('guide.step3Tag') }}</view>
           </view>
           <view class="step-content">
-            <text class="step-subtitle">📋 预报时需要填写：</text>
+            <text class="step-subtitle">{{ t('guide.step3Subtitle') }}</text>
             <view class="info-list">
               <view class="info-item">
                 <text class="info-dot">•</text>
-                <text class="info-text">快递单号（要准确哦）</text>
+                <text class="info-text">{{ t('guide.step3Item1') }}</text>
               </view>
               <view class="info-item">
                 <text class="info-dot">•</text>
-                <text class="info-text">商品详细信息</text>
+                <text class="info-text">{{ t('guide.step3Item2') }}</text>
               </view>
               <view class="info-item">
                 <text class="info-dot">•</text>
-                <text class="info-text">价格用人民币（如实填写）</text>
+                <text class="info-text">{{ t('guide.step3Item3') }}</text>
               </view>
             </view>
           </view>
@@ -91,15 +91,15 @@
         <view class="step-card">
           <view class="step-header">
             <view class="step-number">4</view>
-            <text class="step-title">入库确认</text>
-            <view class="step-tag success">自动</view>
+            <text class="step-title">{{ t('guide.step4Title') }}</text>
+            <view class="step-tag success">{{ t('guide.step4Tag') }}</view>
           </view>
           <view class="step-content">
-            <text class="step-desc">📸 仓库会拍照验货</text>
-            <text class="step-desc">📨 微信公众号推送入库消息</text>
-            <text class="step-desc">👀 点击查看入库详情</text>
+            <text class="step-desc">{{ t('guide.step4Desc1') }}</text>
+            <text class="step-desc">{{ t('guide.step4Desc2') }}</text>
+            <text class="step-desc">{{ t('guide.step4Desc3') }}</text>
             <view class="step-note">
-              <text class="note-text">如果选择了拆包检查服务，会有详细拆包照片</text>
+              <text class="note-text">{{ t('guide.step4Note') }}</text>
             </view>
           </view>
         </view>
@@ -108,14 +108,14 @@
         <view class="step-card">
           <view class="step-header">
             <view class="step-number">5</view>
-            <text class="step-title">发货出库</text>
-            <view class="step-tag final">最后</view>
+            <text class="step-title">{{ t('guide.step5Title') }}</text>
+            <view class="step-tag final">{{ t('guide.step5Tag') }}</view>
           </view>
           <view class="step-content">
-            <text class="step-desc">🚚 仓库按要求收货打包</text>
-            <text class="step-desc">📤 点击【集运发货】→【下单发运】</text>
-            <text class="step-desc">🎯 指定包裹和收货地址</text>
-            <text class="step-desc">🛫 次日即可到达韩国清关</text>
+            <text class="step-desc">{{ t('guide.step5Desc1') }}</text>
+            <text class="step-desc">{{ t('guide.step5Desc2') }}</text>
+            <text class="step-desc">{{ t('guide.step5Desc3') }}</text>
+            <text class="step-desc">{{ t('guide.step5Desc4') }}</text>
           </view>
         </view>
       </view>
@@ -124,28 +124,28 @@
       <view class="tips-section">
         <view class="section-title">
           <text class="title-emoji">⚠️</text>
-          <text class="title-text">注意事项</text>
+          <text class="title-text">{{ t('guide.notesTitle') }}</text>
         </view>
 
         <view class="tips-grid">
           <view class="tip-card">
-            <text class="tip-title">💰 价格填写</text>
-            <text class="tip-content">必须如实填写，虚报会导致扣货或罚款</text>
+            <text class="tip-title">{{ t('guide.note1Title') }}</text>
+            <text class="tip-content">{{ t('guide.note1Content') }}</text>
           </view>
 
           <view class="tip-card">
-            <text class="tip-title">📦 拆包服务</text>
-            <text class="tip-content">收费增值服务，可选择是否开通</text>
+            <text class="tip-title">{{ t('guide.note2Title') }}</text>
+            <text class="tip-content">{{ t('guide.note2Content') }}</text>
           </view>
 
           <view class="tip-card">
-            <text class="tip-title">📋 商品分类</text>
-            <text class="tip-content">多种商品要分别录入，不能混合申报</text>
+            <text class="tip-title">{{ t('guide.note3Title') }}</text>
+            <text class="tip-content">{{ t('guide.note3Content') }}</text>
           </view>
 
           <view class="tip-card">
-            <text class="tip-title">🚫 禁运物品</text>
-            <text class="tip-content">查看禁运清单，避免违禁物品</text>
+            <text class="tip-title">{{ t('guide.note4Title') }}</text>
+            <text class="tip-content">{{ t('guide.note4Content') }}</text>
           </view>
         </view>
       </view>
@@ -154,38 +154,38 @@
       <view class="quick-actions">
         <view class="section-title">
           <text class="title-emoji">🚀</text>
-          <text class="title-text">快捷操作</text>
+          <text class="title-text">{{ t('guide.quickActionsTitle') }}</text>
         </view>
 
         <view class="action-grid">
           <view class="action-item" @click="calculatePrice">
-            <view class="action-icon calculator">�</view>
-            <text class="action-text">运费计算</text>
+            <view class="action-icon calculator">💰</view>
+            <text class="action-text">{{ t('guide.actionCalculator') }}</text>
           </view>
 
           <view class="action-item" @click="viewFlow">
-            <view class="action-icon flow">�</view>
-            <text class="action-text">发货流程</text>
+            <view class="action-icon flow">🔄</view>
+            <text class="action-text">{{ t('guide.actionFlow') }}</text>
           </view>
 
           <view class="action-item" @click="viewCustoms">
             <view class="action-icon customs">🆔</view>
-            <text class="action-text">个人通关号</text>
+            <text class="action-text">{{ t('guide.actionCustoms') }}</text>
           </view>
 
           <view class="action-item" @click="viewShipping">
             <view class="action-icon shipping">📦</view>
-            <text class="action-text">发货需知</text>
+            <text class="action-text">{{ t('guide.actionShipping') }}</text>
           </view>
 
           <view class="action-item" @click="viewFAQ">
             <view class="action-icon faq">❓</view>
-            <text class="action-text">常见问题</text>
+            <text class="action-text">{{ t('guide.actionFAQ') }}</text>
           </view>
 
           <view class="action-item" @click="contactService">
             <view class="action-icon service">💬</view>
-            <text class="action-text">联系客服</text>
+            <text class="action-text">{{ t('guide.actionService') }}</text>
           </view>
         </view>
       </view>

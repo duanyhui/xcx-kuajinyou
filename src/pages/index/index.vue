@@ -13,10 +13,7 @@
           <view class="header-top">
             <text class="greeting">{{ t('home.greeting') }}</text>
             <view class="header-menu">
-              <view class="language-switch" @click="switchLanguage">
-                <text class="lang-text">{{ getLocaleName(locale) }}</text>
-                <text class="switch-icon">🌐</text>
-              </view>
+              <!-- 语言切换已移至页面中央 -->
             </view>
           </view>
           
@@ -37,6 +34,29 @@
       <view class="section-title">
         <text class="title-text">{{ t('home.sectionTitle') }}</text>
         <text class="title-desc">{{ t('home.sectionDesc') }}</text>
+      </view>
+      
+      <!-- 语言切换区域 - 居中显示 -->
+      <view class="language-switch-section">
+        <view class="language-switch-container">
+          <text class="switch-label">{{ t('home.chooseLanguage') || '选择语言' }}</text>
+          <view class="language-options">
+            <view 
+              class="language-option" 
+              :class="{ active: locale === 'zh' }"
+              @click="switchToLanguage('zh')"
+            >
+              <text class="lang-text">中文</text>
+            </view>
+            <view 
+              class="language-option" 
+              :class="{ active: locale === 'ko' }"
+              @click="switchToLanguage('ko')"
+            >
+              <text class="lang-text">한국어</text>
+            </view>
+          </view>
+        </view>
       </view>
       
       <view class="function-grid">
@@ -233,6 +253,30 @@ const switchLanguage = () => {
     icon: 'none',
     duration: 1000
   })
+}
+
+// 设置特定语言
+const setLanguage = (lang: 'zh' | 'ko') => {
+  if (locale.value !== lang) {
+    toggleLocale()
+    uni.showToast({
+      title: `已切换为${getLocaleName(locale.value)}`,
+      icon: 'none',
+      duration: 1000
+    })
+  }
+}
+
+// 切换到指定语言
+const switchToLanguage = (lang: 'zh' | 'ko') => {
+  if (locale.value !== lang) {
+    toggleLocale()
+    uni.showToast({
+      title: `已切换为${getLocaleName(locale.value)}`,
+      icon: 'none',
+      duration: 1000
+    })
+  }
 }
 
 const navigateTo = (page: string) => {
@@ -499,6 +543,70 @@ const switchTab = (tab: string) => {
   font-size: 24rpx;
   color: rgba(255, 255, 255, 0.8);
   display: block;
+}
+
+/* 语言切换区域 */
+.language-switch-section {
+  margin: 30rpx 0 40rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.language-switch-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20rpx;
+  padding: 24rpx 32rpx;
+  backdrop-filter: blur(10rpx);
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.switch-label {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.language-options {
+  display: flex;
+  gap: 16rpx;
+  justify-content: center;
+}
+
+.language-option {
+  padding: 12rpx 24rpx;
+  border-radius: 12rpx;
+  background: #f5f5f5;
+  border: 2rpx solid transparent;
+  transition: all 0.3s ease;
+  min-width: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.language-option.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.language-option:not(.active):active {
+  transform: scale(0.95);
+  background: #e5e5e5;
+}
+
+.language-option .lang-text {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.language-option.active .lang-text {
+  color: white;
 }
 
 .function-grid {

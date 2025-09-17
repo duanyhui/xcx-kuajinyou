@@ -30,31 +30,31 @@
       <!-- 搜索结果为空时的提示 -->
       <view v-if="searchText && searchResults.length === 0" class="no-results">
         <text class="no-results-icon">😅</text>
-        <text class="no-results-text">没有找到相关问题</text>
-        <text class="no-results-desc">试试其他关键词吧～</text>
+        <text class="no-results-text">{{ t('faq.noResults') }}</text>
+        <text class="no-results-desc">{{ t('faq.noResultsDesc') }}</text>
       </view>
 
       <!-- 热门问题 -->
       <view v-if="!searchText" class="section-card hot-card">
         <view class="section-header">
           <text class="section-icon">🔥</text>
-          <text class="section-title">热门问题</text>
+          <text class="section-title">{{ t('faq.hotQuestions') }}</text>
         </view>
         <view class="hot-questions">
           <view class="hot-item" @tap="scrollToQuestion('shipping-time')">
-            <text class="hot-text">多长时间能到韩国？</text>
+            <text class="hot-text">{{ t('faq.hotQ1') }}</text>
             <text class="hot-arrow">→</text>
           </view>
           <view class="hot-item" @tap="scrollToQuestion('fee-calculation')">
-            <text class="hot-text">运费怎么计算？</text>
+            <text class="hot-text">{{ t('faq.hotQ2') }}</text>
             <text class="hot-arrow">→</text>
           </view>
           <view class="hot-item" @tap="scrollToQuestion('prohibited-items')">
-            <text class="hot-text">什么东西不能邮寄？</text>
+            <text class="hot-text">{{ t('faq.hotQ3') }}</text>
             <text class="hot-arrow">→</text>
           </view>
           <view class="hot-item" @tap="scrollToQuestion('customs-code')">
-            <text class="hot-text">什么是个人通关号？</text>
+            <text class="hot-text">{{ t('faq.hotQ4') }}</text>
             <text class="hot-arrow">→</text>
           </view>
         </view>
@@ -64,7 +64,7 @@
       <view v-if="categorizedQuestions.shipping.length > 0" class="section-card">
         <view class="section-header">
           <text class="section-icon">📦</text>
-          <text class="section-title">发货相关</text>
+          <text class="section-title">{{ t('faq.shippingSection') }}</text>
         </view>
         <view class="qa-list">
           <view 
@@ -88,7 +88,7 @@
       <view v-if="categorizedQuestions.fee.length > 0" class="section-card">
         <view class="section-header">
           <text class="section-icon">💰</text>
-          <text class="section-title">费用相关</text>
+          <text class="section-title">{{ t('faq.feeSection') }}</text>
         </view>
         <view class="qa-list">
           <view 
@@ -112,7 +112,7 @@
       <view v-if="categorizedQuestions.prohibited.length > 0" class="section-card">
         <view class="section-header">
           <text class="section-icon">🚫</text>
-          <text class="section-title">禁寄物品</text>
+          <text class="section-title">{{ t('faq.prohibitedSection') }}</text>
         </view>
         <view class="qa-list">
           <view 
@@ -136,7 +136,7 @@
       <view v-if="categorizedQuestions.customs.length > 0" class="section-card">
         <view class="section-header">
           <text class="section-icon">📋</text>
-          <text class="section-title">通关相关</text>
+          <text class="section-title">{{ t('faq.customsSection') }}</text>
         </view>
         <view class="qa-list">
           <view 
@@ -160,18 +160,18 @@
       <view class="section-card contact-card">
         <view class="section-header">
           <text class="section-icon">💬</text>
-          <text class="section-title">还有疑问？</text>
+          <text class="section-title">{{ t('faq.contactSection') }}</text>
         </view>
         <view class="contact-content">
-          <text class="contact-text">找不到答案？我们的客服小姐姐随时为您解答～</text>
+          <text class="contact-text">{{ t('faq.contactDesc') }}</text>
           <view class="contact-actions">
             <view class="contact-btn" @tap="contactService">
               <text class="contact-icon">💬</text>
-              <text class="contact-label">在线客服</text>
+              <text class="contact-label">{{ t('faq.onlineService') }}</text>
             </view>
             <view class="contact-btn" @tap="callService">
               <text class="contact-icon">📞</text>
-              <text class="contact-label">电话咨询</text>
+              <text class="contact-label">{{ t('faq.phoneConsult') }}</text>
             </view>
           </view>
         </view>
@@ -181,11 +181,11 @@
       <view class="quick-actions">
         <view class="action-btn primary-btn" @tap="goToShipping">
           <text class="btn-icon">📦</text>
-          <text class="btn-text">发货需知</text>
+          <text class="btn-text">{{ t('faq.shippingGuide') }}</text>
         </view>
         <view class="action-btn secondary-btn" @tap="goToGuide">
           <text class="btn-icon">📖</text>
-          <text class="btn-text">操作指南</text>
+          <text class="btn-text">{{ t('faq.operationGuide') }}</text>
         </view>
       </view>
     </view>
@@ -216,108 +216,110 @@ export default {
   data() {
     return {
       searchText: '',
-      expandedQuestions: {}, // 记录展开状态的问题
-      allQuestions: [
+      expandedQuestions: {} // 记录展开状态的问题
+    }
+  },
+  computed: {
+    allQuestions() {
+      // 使用多语言系统动态生成问题列表
+      return [
         // 发货相关
         {
           id: 'shipping-time',
           category: 'shipping',
-          question: 'Q: 包裹多长时间能到韩国？',
-          answer: 'A: 海运7-10个工作日，空运3-5个工作日。具体时效受海关检查、天气等因素影响。',
-          keywords: '时间 多久 到达 韩国 海运 空运 工作日'
+          question: this.t('faq.questions.shippingTimeQ'),
+          answer: this.t('faq.questions.shippingTimeA'),
+          keywords: '时间 多久 到达 韩国 해운 항공 工作日 운송 배송'
         },
         {
           id: 'shipping-pickup',
           category: 'shipping',
-          question: 'Q: 可以上门取件吗？',
-          answer: 'A: 可以！我们提供上门取件服务，需提前1-2天预约。部分偏远地区可能无法覆盖。',
-          keywords: '上门 取件 预约 偏远地区'
+          question: this.t('faq.questions.shippingPickupQ'),
+          answer: this.t('faq.questions.shippingPickupA'),
+          keywords: '상문 取件 예약 偏远地区 픽업 집으로'
         },
         {
           id: 'shipping-package',
           category: 'shipping',
-          question: 'Q: 包装有什么要求？',
-          answer: 'A: 使用结实的纸箱或塑料袋，易碎品需填充保护材料，用透明胶带密封，面单粘贴在平整面。详情查看"发货需知"页面。',
-          keywords: '包装 要求 纸箱 塑料袋 易碎 填充 密封 胶带 面单'
+          question: this.t('faq.questions.shippingPackageQ'),
+          answer: this.t('faq.questions.shippingPackageA'),
+          keywords: '包装 要求 纸箱 포장 박스 완충재 易碎 填充 密封 胶带 面单'
         },
         {
           id: 'shipping-weight-limit',
           category: 'shipping',
-          question: 'Q: 重量和尺寸有什么限制？',
-          answer: 'A: 单件重量≤20kg，单边长度≤60cm，长+宽+高≤120cm。超出限制将产生额外费用。',
-          keywords: '重量 尺寸 限制 20kg 60cm 120cm 额外费用'
+          question: this.t('faq.questions.shippingWeightLimitQ'),
+          answer: this.t('faq.questions.shippingWeightLimitA'),
+          keywords: '重量 尺寸 限制 20kg 60cm 120cm 무게 크기 额外费用 추가요금'
         },
         // 费用相关
         {
           id: 'fee-calculation',
           category: 'fee',
-          question: 'Q: 运费是怎么计算的？',
-          answer: 'A: 按重量计费。海运首重25元+续重6元/kg，空运首重33.8元+续重9元/0.5kg。使用运费计算器可精确计算。',
-          keywords: '运费 计算 重量 海运 25元 6元 空运 33.8元 9元 计算器'
+          question: this.t('faq.questions.feeCalculationQ'),
+          answer: this.t('faq.questions.feeCalculationA'),
+          keywords: '运费 计算 重量 海运 25元 6元 공运 33.8元 9元 계산기 운임'
         },
         {
           id: 'fee-extra',
           category: 'fee',
-          question: 'Q: 有额外费用吗？',
-          answer: 'A: 基础运费外，可选购保险服务。个人物品无需额外通关费。超重超尺寸会产生额外费用，发货前请仔细核对。',
-          keywords: '额外费用 保险 通关费 个人物品 超重 超尺寸'
+          question: this.t('faq.questions.feeExtraQ'),
+          answer: this.t('faq.questions.feeExtraA'),
+          keywords: '额外费用 보험 通关费 개人물품 초과중량 超尺寸 추가요금'
         },
         {
           id: 'fee-payment',
           category: 'fee',
-          question: 'Q: 支持哪些支付方式？',
-          answer: 'A: 支持微信支付、支付宝、银行卡等多种支付方式，安全便捷。',
-          keywords: '支付方式 微信支付 支付宝 银行卡'
+          question: this.t('faq.questions.feePaymentQ'),
+          answer: this.t('faq.questions.feePaymentA'),
+          keywords: '支付方式 微信支付 支付宝 은행카드 위챗페이 알리페이'
         },
         // 禁寄物品
         {
           id: 'prohibited-items',
           category: 'prohibited',
-          question: 'Q: 哪些物品不能邮寄？',
-          answer: 'A: 禁寄电池类（锂电池、充电宝、电子烟）、液体类（化妆品、香水、药品）、尖锐物（刀具、剪刀）、贵重物品（现金、首饰）等。详细清单请查看"发货需知"页面。',
-          keywords: '禁寄 物品 电池 锂电池 充电宝 电子烟 液体 化妆品 香水 药品 尖锐物 刀具 剪刀 贵重物品 现金 首饰'
+          question: this.t('faq.questions.prohibitedItemsQ'),
+          answer: this.t('faq.questions.prohibitedItemsA'),
+          keywords: '禁寄 물품 电池 리튬배터리 충전보 电子烟 액체 화장품 향수 의약품 날카로운 칼 가위 귀중품 현금 보석'
         },
         {
           id: 'prohibited-cosmetics',
           category: 'prohibited',
-          question: 'Q: 化妆品可以邮寄吗？',
-          answer: 'A: 液体类化妆品不可邮寄，粉状、固体类可以。建议发货前咨询客服确认。',
-          keywords: '化妆品 液体 粉状 固体 客服'
+          question: this.t('faq.questions.prohibitedCosmeticsQ'),
+          answer: this.t('faq.questions.prohibitedCosmeticsA'),
+          keywords: '화장품 액체 파우더 고체 고객센터'
         },
         {
           id: 'prohibited-food',
           category: 'prohibited',
-          question: 'Q: 食品可以邮寄吗？',
-          answer: 'A: 密封包装的干货类食品可以，但需符合韩国海关要求。新鲜食品、液体食品不可邮寄。',
-          keywords: '食品 密封 干货 韩国海关 新鲜 液体'
+          question: this.t('faq.questions.prohibitedFoodQ'),
+          answer: this.t('faq.questions.prohibitedFoodA'),
+          keywords: '식품 밀봉 건식품 한국세관 신선식품 액체식품'
         },
         // 通关相关
         {
           id: 'customs-code',
           category: 'customs',
-          question: 'Q: 什么是个人通关号？',
-          answer: 'A: 个人通关号是以P开头的一串数字，是韩国海关的身份识别码，用于清关。每个收件人都需要提供，详情查看相关页面。',
-          keywords: '个人通关号 P开头 数字 韩国海关 身份识别码 清关 收件人'
+          question: this.t('faq.questions.customsCodeQ'),
+          answer: this.t('faq.questions.customsCodeA'),
+          keywords: '개인통관고유부호 P开头 숫자 한국세관 신분식별코드 통관 수령인'
         },
         {
           id: 'customs-detained',
           category: 'customs',
-          question: 'Q: 包裹被海关扣留怎么办？',
-          answer: 'A: 我们会协助处理，通常需要提供相关证明文件。请保持联系方式畅通，配合处理流程。',
-          keywords: '海关 扣留 协助 证明文件 联系方式 流程'
+          question: this.t('faq.questions.customsDetainedQ'),
+          answer: this.t('faq.questions.customsDetainedA'),
+          keywords: '해관 압류 도움 증명서류 연락처 처리과정'
         },
         {
           id: 'customs-tax',
           category: 'customs',
-          question: 'Q: 需要缴纳关税吗？',
-          answer: 'A: 个人物品一般无需缴纳关税，但超过限额或商业用途可能产生关税，由收件人承担。',
-          keywords: '关税 个人物品 限额 商业用途 收件人'
+          question: this.t('faq.questions.customsTaxQ'),
+          answer: this.t('faq.questions.customsTaxA'),
+          keywords: '관세 개인물품 한도초과 상업용도 수령인'
         }
-      ],
-      filteredQuestions: []
-    }
-  },
-  computed: {
+      ]
+    },
     searchResults() {
       if (!this.searchText.trim()) {
         return this.allQuestions
@@ -360,7 +362,7 @@ export default {
     contactService() {
       // 联系在线客服
       uni.showToast({
-        title: '正在连接客服...',
+        title: this.t('faq.contactConnecting'),
         icon: 'loading'
       });
     },

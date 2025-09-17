@@ -32,6 +32,7 @@ export interface LanguagePack {
     promoText: string
     sectionTitle: string
     sectionDesc: string
+    chooseLanguage: string
     serviceTime: string
     needHelp: string
     needHelpDesc: string
@@ -107,15 +108,44 @@ export interface LanguagePack {
     step1Tip: string
     step2Title: string
     step2Tag: string
+    step2Desc1: string
+    step2Desc2: string
+    step2Desc3: string
     step2Warning: string
     step3Title: string
     step3Tag: string
+    step3Subtitle: string
+    step3Item1: string
+    step3Item2: string
+    step3Item3: string
     step4Title: string
     step4Tag: string
+    step4Desc1: string
+    step4Desc2: string
+    step4Desc3: string
+    step4Note: string
     step5Title: string
     step5Tag: string
+    step5Desc1: string
+    step5Desc2: string
+    step5Desc3: string
+    step5Desc4: string
     notesTitle: string
+    note1Title: string
+    note1Content: string
+    note2Title: string
+    note2Content: string
+    note3Title: string
+    note3Content: string
+    note4Title: string
+    note4Content: string
     quickActionsTitle: string
+    actionCalculator: string
+    actionFlow: string
+    actionCustoms: string
+    actionShipping: string
+    actionFAQ: string
+    actionService: string
   }
   // 发货流程页面
   flow: {
@@ -136,6 +166,25 @@ export interface LanguagePack {
     userCard: string
     warehouseCard: string
     tipsTitle: string
+    connectionLabel1: string
+    connectionLabel2: string
+    userDetail1: string
+    userDetail1Desc: string
+    userDetail2: string
+    userDetail2Desc: string
+    userDetail3: string
+    userDetail3Desc: string
+    userDetail4: string
+    userDetail4Desc: string
+    warehouseDetail1: string
+    warehouseDetail1Desc: string
+    warehouseDetail2: string
+    warehouseDetail2Desc: string
+    warehouseDetail3: string
+    warehouseDetail3Desc: string
+    tip1: string
+    tip2: string
+    tip3: string
   }
   // 个人通关号页面
   customs: {
@@ -143,14 +192,45 @@ export interface LanguagePack {
     welcomeTitle: string
     welcomeDesc: string
     importantTitle: string
+    // 重要说明内容
+    importantInfo1: string
+    importantInfo2: string
+    importantInfo3: string
+    // 申请步骤
     stepsTitle: string
     step1Title: string
+    step1Desc: string
     step2Title: string
+    step2Desc: string
+    step2Tag1: string
+    step2Tag2: string
     step3Title: string
+    step3Desc: string
+    step3Tip1: string
+    step3Tip2: string
+    step3Tip3: string
     step4Title: string
+    step4Desc: string
+    step4Success: string
+    // 备用方案
     alternativeTitle: string
+    alternativeText: string
+    alternativeWarning: string
+    alternativeNote: string
+    // 常见问题
     faqTitle: string
+    faqQ1: string
+    faqA1: string
+    faqQ2: string
+    faqA2: string
+    faqQ3: string
+    faqA3: string
+    // 联系帮助
     helpTitle: string
+    helpText: string
+    helpButton: string
+    // 复制成功消息
+    urlCopied: string
   }
   // 发货需知页面
   shipping: {
@@ -172,13 +252,59 @@ export interface LanguagePack {
     searchPlaceholder: string
     noResults: string
     noResultsDesc: string
+    // 热门问题
     hotQuestions: string
+    hotQ1: string
+    hotQ2: string
+    hotQ3: string
+    hotQ4: string
+    // 分类标题
     shippingSection: string
     feeSection: string
     prohibitedSection: string
     customsSection: string
     contactSection: string
     contactDesc: string
+    // 联系方式
+    onlineService: string
+    phoneConsult: string
+    contactConnecting: string
+    // 快捷入口
+    shippingGuide: string
+    operationGuide: string
+    // 具体问答内容
+    questions: {
+      // 发货相关
+      shippingTimeQ: string
+      shippingTimeA: string
+      shippingPickupQ: string
+      shippingPickupA: string
+      shippingPackageQ: string
+      shippingPackageA: string
+      shippingWeightLimitQ: string
+      shippingWeightLimitA: string
+      // 费用相关
+      feeCalculationQ: string
+      feeCalculationA: string
+      feeExtraQ: string
+      feeExtraA: string
+      feePaymentQ: string
+      feePaymentA: string
+      // 禁寄物品
+      prohibitedItemsQ: string
+      prohibitedItemsA: string
+      prohibitedCosmeticsQ: string
+      prohibitedCosmeticsA: string
+      prohibitedFoodQ: string
+      prohibitedFoodA: string
+      // 通关相关
+      customsCodeQ: string
+      customsCodeA: string
+      customsDetainedQ: string
+      customsDetainedA: string
+      customsTaxQ: string
+      customsTaxA: string
+    }
   }
   // 预报页面
   order: {

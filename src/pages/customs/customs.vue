@@ -27,15 +27,15 @@
         <view class="info-content">
           <view class="info-item">
             <text class="info-bullet">•</text>
-            <text class="info-text">个人通关号码是以<text class="highlight">P开头的一串数字</text></text>
+            <text class="info-text">{{ t('customs.importantInfo1') }}</text>
           </view>
           <view class="info-item">
             <text class="info-bullet">•</text>
-            <text class="info-text">这是发运必须提交的<text class="highlight">关键数据</text></text>
+            <text class="info-text">{{ t('customs.importantInfo2') }}</text>
           </view>
           <view class="info-item">
             <text class="info-bullet">•</text>
-            <text class="info-text">需要登录<text class="highlight">韩国海关网站</text>申请</text>
+            <text class="info-text">{{ t('customs.importantInfo3') }}</text>
           </view>
         </view>
       </view>
@@ -43,14 +43,14 @@
       <!-- 申请步骤 -->
       <view class="steps-section">
         <view class="section-header">
-          <text class="section-title">📝 申请步骤</text>
+          <text class="section-title">{{ t('customs.stepsTitle') }}</text>
         </view>
         
         <view class="step-card">
           <view class="step-number">1</view>
           <view class="step-content">
-            <text class="step-title">访问韩国海关网站</text>
-            <text class="step-desc">点击下方链接即可直接访问</text>
+            <text class="step-title">{{ t('customs.step1Title') }}</text>
+            <text class="step-desc">{{ t('customs.step1Desc') }}</text>
             <view class="link-container" @click="openWebsite">
               <text class="link-text">unipass.customs.go.kr/csp/persIndex.do</text>
               <text class="link-icon">🔗</text>
@@ -61,14 +61,14 @@
         <view class="step-card">
           <view class="step-number">2</view>
           <view class="step-content">
-            <text class="step-title">选择申请类型</text>
-            <text class="step-desc">在网站首页找到个人通关号码申请入口</text>
+            <text class="step-title">{{ t('customs.step2Title') }}</text>
+            <text class="step-desc">{{ t('customs.step2Desc') }}</text>
             <view class="feature-tags">
               <view class="feature-tag">
-                <text class="tag-text">조회 (查询)</text>
+                <text class="tag-text">{{ t('customs.step2Tag1') }}</text>
               </view>
               <view class="feature-tag">
-                <text class="tag-text">신규발급 (新发放)</text>
+                <text class="tag-text">{{ t('customs.step2Tag2') }}</text>
               </view>
             </view>
           </view>
@@ -77,20 +77,20 @@
         <view class="step-card">
           <view class="step-number">3</view>
           <view class="step-content">
-            <text class="step-title">填写个人信息</text>
-            <text class="step-desc">按照页面提示填写真实个人信息</text>
+            <text class="step-title">{{ t('customs.step3Title') }}</text>
+            <text class="step-desc">{{ t('customs.step3Desc') }}</text>
             <view class="info-tips">
               <view class="tip-item">
                 <text class="tip-icon">📝</text>
-                <text class="tip-text">姓名要与护照完全一致</text>
+                <text class="tip-text">{{ t('customs.step3Tip1') }}</text>
               </view>
               <view class="tip-item">
                 <text class="tip-icon">📅</text>
-                <text class="tip-text">生日格式要正确</text>
+                <text class="tip-text">{{ t('customs.step3Tip2') }}</text>
               </view>
               <view class="tip-item">
                 <text class="tip-icon">📧</text>
-                <text class="tip-text">邮箱地址要能正常接收</text>
+                <text class="tip-text">{{ t('customs.step3Tip3') }}</text>
               </view>
             </view>
           </view>
@@ -99,11 +99,11 @@
         <view class="step-card">
           <view class="step-number">4</view>
           <view class="step-content">
-            <text class="step-title">提交申请</text>
-            <text class="step-desc">完成申请后会收到通关号码</text>
+            <text class="step-title">{{ t('customs.step4Title') }}</text>
+            <text class="step-desc">{{ t('customs.step4Desc') }}</text>
             <view class="success-note">
               <text class="success-icon">✅</text>
-              <text class="success-text">申请成功后，通关号会发送到你的邮箱</text>
+              <text class="success-text">{{ t('customs.step4Success') }}</text>
             </view>
           </view>
         </view>
@@ -112,16 +112,16 @@
       <!-- 备用方案 -->
       <view class="alternative-section">
         <view class="alt-header">
-          <text class="alt-title">🆘 无法申请怎么办？</text>
+          <text class="alt-title">{{ t('customs.alternativeTitle') }}</text>
         </view>
         <view class="alt-card">
           <view class="alt-content">
-            <text class="alt-main">如果无法申请个人通关号，可以使用护照号</text>
-            <text class="alt-warning">将通过简易申报进行清关</text>
+            <text class="alt-main">{{ t('customs.alternativeText') }}</text>
+            <text class="alt-warning">{{ t('customs.alternativeWarning') }}</text>
           </view>
           <view class="alt-note">
             <text class="note-icon">💡</text>
-            <text class="note-text">护照号也是有效的清关方式，不用担心哦～</text>
+            <text class="note-text">{{ t('customs.alternativeNote') }}</text>
           </view>
         </view>
       </view>
@@ -132,39 +132,39 @@
       <!-- 常见问题 -->
       <view class="faq-section">
         <view class="faq-header">
-          <text class="faq-title">❓ 常见问题</text>
+          <text class="faq-title">{{ t('customs.faqTitle') }}</text>
         </view>
         
         <view class="faq-item">
           <view class="question">
             <text class="q-icon">Q:</text>
-            <text class="q-text">申请需要多长时间？</text>
+            <text class="q-text">{{ t('customs.faqQ1') }}</text>
           </view>
           <view class="answer">
             <text class="a-icon">A:</text>
-            <text class="a-text">通常几分钟就能完成，立即获得通关号</text>
+            <text class="a-text">{{ t('customs.faqA1') }}</text>
           </view>
         </view>
 
         <view class="faq-item">
           <view class="question">
             <text class="q-icon">Q:</text>
-            <text class="q-text">通关号有有效期吗？</text>
+            <text class="q-text">{{ t('customs.faqQ2') }}</text>
           </view>
           <view class="answer">
             <text class="a-icon">A:</text>
-            <text class="a-text">个人通关号长期有效，申请一次可重复使用</text>
+            <text class="a-text">{{ t('customs.faqA2') }}</text>
           </view>
         </view>
 
         <view class="faq-item">
           <view class="question">
             <text class="q-icon">Q:</text>
-            <text class="q-text">忘记通关号怎么办？</text>
+            <text class="q-text">{{ t('customs.faqQ3') }}</text>
           </view>
           <view class="answer">
             <text class="a-icon">A:</text>
-            <text class="a-text">可以在网站上用个人信息查询，或联系客服</text>
+            <text class="a-text">{{ t('customs.faqA3') }}</text>
           </view>
         </view>
       </view>
@@ -172,13 +172,13 @@
       <!-- 联系帮助 -->
       <view class="help-section">
         <view class="help-header">
-          <text class="help-title">🤝 需要帮助？</text>
+          <text class="help-title">{{ t('customs.helpTitle') }}</text>
         </view>
         <view class="help-content">
-          <text class="help-text">如果申请过程中遇到困难，随时联系我们的客服小姐姐</text>
+          <text class="help-text">{{ t('customs.helpText') }}</text>
           <view class="help-actions">
             <view class="help-btn" @click="contactService">
-              <text class="help-btn-text">联系客服</text>
+              <text class="help-btn-text">{{ t('customs.helpButton') }}</text>
             </view>
           </view>
         </view>
@@ -213,7 +213,7 @@ const openWebsite = () => {
     data: 'unipass.customs.go.kr/csp/persIndex.do',
     success: () => {
       uni.showToast({
-        title: '网址已复制到剪贴板',
+        title: t('customs.urlCopied'),
         icon: 'success'
       })
     }

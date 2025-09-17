@@ -65,39 +65,39 @@
           <view class="connection-area">
             <view class="connection-line line-1"></view>
             <view class="connection-label label-1">
-              <text class="label-text">公众号信息推送</text>
+              <text class="label-text">{{ t('flow.connectionLabel1') }}</text>
             </view>
             
             <view class="connection-line line-2"></view>
             <view class="connection-label label-2">
-              <text class="label-text">公众号信息推送</text>
+              <text class="label-text">{{ t('flow.connectionLabel2') }}</text>
             </view>
           </view>
 
           <!-- 仓库操作区域 -->
           <view class="flow-section warehouse-section">
             <view class="section-header">
-              <text class="section-title">仓库操作</text>
+              <text class="section-title">{{ t('flow.warehouseOperations') }}</text>
             </view>
             
             <view class="flow-steps">
               <view class="flow-step">
                 <view class="step-box warehouse-box">
-                  <text class="step-text">收货检查</text>
+                  <text class="step-text">{{ t('flow.warehouseReceive') }}</text>
                 </view>
                 <view class="step-arrow down"></view>
               </view>
               
               <view class="flow-step">
                 <view class="step-box warehouse-box">
-                  <text class="step-text">打包</text>
+                  <text class="step-text">{{ t('flow.packagePacking') }}</text>
                 </view>
                 <view class="step-arrow down"></view>
               </view>
               
               <view class="flow-step last">
                 <view class="step-box warehouse-box">
-                  <text class="step-text">出库发运</text>
+                  <text class="step-text">{{ t('flow.warehouseShipping') }}</text>
                 </view>
               </view>
             </view>
@@ -108,31 +108,31 @@
       <!-- 流程详解 -->
       <view class="flow-details">
         <view class="details-header">
-          <text class="details-title">📝 流程详解</text>
+          <text class="details-title">{{ t('flow.detailsTitle') }}</text>
         </view>
         
         <view class="detail-cards">
           <view class="detail-card user-card">
             <view class="card-header">
               <text class="card-emoji">👤</text>
-              <text class="card-title">用户操作</text>
+              <text class="card-title">{{ t('flow.userCard') }}</text>
             </view>
             <view class="card-content">
               <view class="detail-item">
                 <text class="detail-number">1️⃣</text>
-                <text class="detail-text"><text class="highlight">包裹预报</text> - 网购后立即预报包裹信息</text>
+                <text class="detail-text"><text class="highlight">{{ t('flow.userDetail1') }}</text> - {{ t('flow.userDetail1Desc') }}</text>
               </view>
               <view class="detail-item">
                 <text class="detail-number">2️⃣</text>
-                <text class="detail-text"><text class="highlight">提交发运</text> - 包裹到库后申请发运到韩国</text>
+                <text class="detail-text"><text class="highlight">{{ t('flow.userDetail2') }}</text> - {{ t('flow.userDetail2Desc') }}</text>
               </view>
               <view class="detail-item">
                 <text class="detail-number">3️⃣</text>
-                <text class="detail-text"><text class="highlight">支付运费</text> - 确认运费并完成支付</text>
+                <text class="detail-text"><text class="highlight">{{ t('flow.userDetail3') }}</text> - {{ t('flow.userDetail3Desc') }}</text>
               </view>
               <view class="detail-item">
                 <text class="detail-number">4️⃣</text>
-                <text class="detail-text"><text class="highlight">收货</text> - 坐等包裹送到韩国地址</text>
+                <text class="detail-text"><text class="highlight">{{ t('flow.userDetail4') }}</text> - {{ t('flow.userDetail4Desc') }}</text>
               </view>
             </view>
           </view>
@@ -140,20 +140,20 @@
           <view class="detail-card warehouse-card">
             <view class="card-header">
               <text class="card-emoji">🏢</text>
-              <text class="card-title">仓库操作</text>
+              <text class="card-title">{{ t('flow.warehouseCard') }}</text>
             </view>
             <view class="card-content">
               <view class="detail-item">
                 <text class="detail-number">1️⃣</text>
-                <text class="detail-text"><text class="highlight">收货检查</text> - 仓库收货并拍照验货</text>
+                <text class="detail-text"><text class="highlight">{{ t('flow.warehouseDetail1') }}</text> - {{ t('flow.warehouseDetail1Desc') }}</text>
               </view>
               <view class="detail-item">
                 <text class="detail-number">2️⃣</text>
-                <text class="detail-text"><text class="highlight">打包</text> - 专业打包，确保运输安全</text>
+                <text class="detail-text"><text class="highlight">{{ t('flow.warehouseDetail2') }}</text> - {{ t('flow.warehouseDetail2Desc') }}</text>
               </view>
               <view class="detail-item">
                 <text class="detail-number">3️⃣</text>
-                <text class="detail-text"><text class="highlight">出库发运</text> - 发往韩国，全程可追踪</text>
+                <text class="detail-text"><text class="highlight">{{ t('flow.warehouseDetail3') }}</text> - {{ t('flow.warehouseDetail3Desc') }}</text>
               </view>
             </view>
           </view>
@@ -163,20 +163,20 @@
       <!-- 温馨提示 -->
       <view class="tips-section">
         <view class="tips-header">
-          <text class="tips-title">💡 温馨提示</text>
+          <text class="tips-title">{{ t('flow.tipsTitle') }}</text>
         </view>
         <view class="tips-content">
           <view class="tip-item">
             <text class="tip-icon">🔔</text>
-            <text class="tip-text">关注微信公众号【中韩跨境邮】，及时接收流程推送</text>
+            <text class="tip-text">{{ t('flow.tip1') }}</text>
           </view>
           <view class="tip-item">
             <text class="tip-icon">⏰</text>
-            <text class="tip-text">包裹预报越早越好，有助于仓库提前准备</text>
+            <text class="tip-text">{{ t('flow.tip2') }}</text>
           </view>
           <view class="tip-item">
             <text class="tip-icon">📦</text>
-            <text class="tip-text">每个步骤都有状态更新，随时掌握包裹动态</text>
+            <text class="tip-text">{{ t('flow.tip3') }}</text>
           </view>
         </view>
       </view>
