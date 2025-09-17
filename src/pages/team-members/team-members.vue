@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">←</text>
             </view>
-            <text class="page-title">团成员</text>
+            <text class="page-title">{{ t('teamMembers.title') }}</text>
             <view class="header-placeholder"></view>
           </view>
         </view>
@@ -20,21 +20,21 @@
       <!-- 统计概览 -->
       <view class="overview-card">
         <view class="overview-header">
-          <text class="overview-title">团队概览</text>
+          <text class="overview-title">{{ t('teamMembers.teamOverview') }}</text>
         </view>
         
         <view class="overview-stats">
           <view class="stat-item">
             <text class="stat-number">{{ teamStats.totalMembers }}</text>
-            <text class="stat-label">团队成员</text>
+            <text class="stat-label">{{ t('teamMembers.totalMembers') }}</text>
           </view>
           <view class="stat-item">
             <text class="stat-number">{{ teamStats.activeMembers }}</text>
-            <text class="stat-label">活跃成员</text>
+            <text class="stat-label">{{ t('teamMembers.activeMembers') }}</text>
           </view>
           <view class="stat-item">
             <text class="stat-number">{{ teamStats.newMembers }}</text>
-            <text class="stat-label">本月新增</text>
+            <text class="stat-label">{{ t('teamMembers.newMembers') }}</text>
           </view>
         </view>
       </view>
@@ -53,8 +53,8 @@
       <!-- 空状态 -->
       <view v-else-if="members.length === 0" class="empty-section">
         <view class="empty-icon">👥</view>
-        <text class="empty-text">暂无团成员</text>
-        <text class="empty-desc">快去分享推广码邀请好友加入吧</text>
+        <text class="empty-text">{{ t('teamMembers.emptyTitle') }}</text>
+        <text class="empty-desc">{{ t('teamMembers.emptyDesc') }}</text>
         <view class="empty-btn" @click="goToPromotionCode">
           <text class="btn-text">分享推广码</text>
         </view>
@@ -129,6 +129,8 @@
 </template>
 
 <script>
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 // TODO: 引入API配置
 // import { getTeamMembers, getTeamStats } from '@/utils/api.js'
 
@@ -147,10 +149,17 @@ export default {
   },
   
   onLoad() {
+    // 初始化多语言系统
+    setLanguagePacks({ zh: zhLanguagePack, ko: koLanguagePack })
+    initLocale()
+    
     this.loadTeamData()
   },
   
   methods: {
+    // 多语言翻译函数
+    t,
+    
     // 加载团队数据
     async loadTeamData() {
       try {

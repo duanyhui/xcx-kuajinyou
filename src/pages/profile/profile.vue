@@ -5,7 +5,7 @@
       <view class="header-bg">
         <view class="header-content">
           <view class="header-top">
-            <text class="page-title">{{ isLoggedIn ? '会员中心' : '登录' }}</text>
+            <text class="page-title">{{ isLoggedIn ? t('profile.memberCenter') : t('profile.loginTitle') }}</text>
           </view>
         </view>
       </view>
@@ -32,7 +32,7 @@
         <view class="login-btn-container">
           <view class="wechat-login-btn" @click="handleWechatLogin">
             <text class="wechat-icon">💬</text>
-            <text class="login-btn-text">微信一键登录</text>
+            <text class="login-btn-text">{{ t('profile.wechatLogin') }}</text>
           </view>
         </view>
       </view>
@@ -56,7 +56,7 @@
         <!-- 推广赚钱区域 -->
         <view class="promotion-section">
           <view class="section-header">
-            <text class="section-title">推广赚钱</text>
+            <text class="section-title">{{ t('profile.promotionTitle') }}</text>
           </view>
           <view class="promotion-grid">
             <view class="promotion-item" @click="navigateToPromotion('qrcode')">
@@ -185,25 +185,25 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('home.navHome') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('home.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('home.navShipping') }}</text>
       </view>
       <view class="nav-item active" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('home.navProfile') }}</text>
       </view>
     </view>
   </view>
@@ -211,9 +211,26 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 
 export default {
   setup() {
+    // 初始化多语言系统
+    onMounted(() => {
+      setLanguagePacks({
+        zh: zhLanguagePack,
+        ko: koLanguagePack
+      })
+      initLocale()
+      
+      // 检查登录状态
+      const savedUserInfo = uni.getStorageSync('userInfo')
+      if (savedUserInfo && savedUserInfo.nickname) {
+        isLoggedIn.value = true
+        userInfo.value = savedUserInfo
+      }
+    })
     const isLoggedIn = ref(false)
     const warehouseBadge = ref(true)
     const userInfo = ref({
@@ -388,15 +405,6 @@ export default {
       }
     }
 
-    // 页面加载时检查登录状态
-    onMounted(() => {
-      const savedUserInfo = uni.getStorageSync('userInfo')
-      if (savedUserInfo && savedUserInfo.nickname) {
-        isLoggedIn.value = true
-        userInfo.value = savedUserInfo
-      }
-    })
-
     return {
       isLoggedIn,
       warehouseBadge,
@@ -410,7 +418,8 @@ export default {
       navigateToWarehouse,
       navigateToMyAddress,
       handleLogout,
-      switchTab
+      switchTab,
+      t
     }
   }
 }

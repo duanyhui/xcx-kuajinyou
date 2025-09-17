@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">←</text>
             </view>
-            <text class="page-title">团订单</text>
+            <text class="page-title">{{ t('teamOrders.title') }}</text>
             <view class="header-placeholder"></view>
           </view>
         </view>
@@ -20,22 +20,22 @@
       <!-- 统计概览 -->
       <view class="overview-card">
         <view class="overview-header">
-          <text class="overview-title">团队订单概览</text>
+          <text class="overview-title">{{ t('teamOrders.teamOrderOverview') }}</text>
           <text class="overview-period">{{ currentMonth }}月</text>
         </view>
         
         <view class="overview-stats">
           <view class="stat-item">
             <text class="stat-number">{{ orderStats.totalOrders }}</text>
-            <text class="stat-label">总订单数</text>
+            <text class="stat-label">{{ t('teamOrders.totalOrders') }}</text>
           </view>
           <view class="stat-item">
             <text class="stat-number">¥{{ orderStats.totalAmount }}</text>
-            <text class="stat-label">总订单金额</text>
+            <text class="stat-label">{{ t('teamOrders.totalAmount') }}</text>
           </view>
           <view class="stat-item">
             <text class="stat-number">¥{{ orderStats.commission }}</text>
-            <text class="stat-label">预计佣金</text>
+            <text class="stat-label">{{ t('teamOrders.expectedCommission') }}</text>
           </view>
         </view>
       </view>
@@ -48,7 +48,7 @@
             :class="{ active: activeFilter === 'all' }" 
             @click="switchFilter('all')"
           >
-            <text class="tab-text">全部</text>
+            <text class="tab-text">{{ t('teamOrders.all') }}</text>
             <text class="tab-count" v-if="orderStats.all > 0">({{ orderStats.all }})</text>
           </view>
           <view 
@@ -56,7 +56,7 @@
             :class="{ active: activeFilter === 'pending' }" 
             @click="switchFilter('pending')"
           >
-            <text class="tab-text">进行中</text>
+            <text class="tab-text">{{ t('teamOrders.pending') }}</text>
             <text class="tab-count" v-if="orderStats.pending > 0">({{ orderStats.pending }})</text>
           </view>
           <view 
@@ -64,7 +64,7 @@
             :class="{ active: activeFilter === 'completed' }" 
             @click="switchFilter('completed')"
           >
-            <text class="tab-text">已完成</text>
+            <text class="tab-text">{{ t('teamOrders.completed') }}</text>
             <text class="tab-count" v-if="orderStats.completed > 0">({{ orderStats.completed }})</text>
           </view>
         </view>
@@ -139,8 +139,8 @@
       <!-- 空状态 -->
       <view v-else class="empty-state">
         <view class="empty-icon">📋</view>
-        <text class="empty-title">暂无团订单</text>
-        <text class="empty-desc">您的团队成员还没有下单哦</text>
+        <text class="empty-title">{{ t('teamOrders.emptyTitle') }}</text>
+        <text class="empty-desc">{{ t('teamOrders.emptyDesc') }}</text>
         <view class="empty-action">
           <view class="action-btn primary" @click="sharePromotion">
             <text class="btn-text">去推广</text>
@@ -173,6 +173,8 @@
 
 <script>
 import { ref, computed, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 import { getTeamOrders } from '@/utils/api.js'
 
 export default {
@@ -377,10 +379,15 @@ export default {
     }
 
     onMounted(() => {
+      // 初始化多语言系统
+      setLanguagePacks({ zh: zhLanguagePack, ko: koLanguagePack })
+      initLocale()
+      
       loadTeamOrders()
     })
 
     return {
+      t,
       loading,
       activeFilter,
       orders,

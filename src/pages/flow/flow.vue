@@ -5,7 +5,7 @@
       <view class="nav-back" @click="goBack">
         <text class="back-icon">←</text>
       </view>
-      <text class="nav-title">发货流程图示</text>
+      <text class="nav-title">{{ t('flow.title') }}</text>
       <view class="nav-placeholder"></view>
     </view>
 
@@ -14,48 +14,48 @@
       <!-- 欢迎卡片 -->
       <view class="welcome-card">
         <view class="welcome-icon">📋</view>
-        <text class="welcome-title">超清晰流程图来啦！</text>
-        <text class="welcome-desc">姐妹们，一图看懂整个发货流程～</text>
+        <text class="welcome-title">{{ t('flow.welcomeTitle') }}</text>
+        <text class="welcome-desc">{{ t('flow.welcomeDesc') }}</text>
       </view>
 
       <!-- 流程图 -->
       <view class="flow-chart">
         <view class="chart-header">
-          <text class="chart-title">🚀 完整发货流程</text>
+          <text class="chart-title">{{ t('flow.chartTitle') }}</text>
         </view>
         
         <view class="flow-container">
           <!-- 用户操作区域 -->
           <view class="flow-section user-section">
             <view class="section-header">
-              <text class="section-title">用户操作</text>
+              <text class="section-title">{{ t('flow.userOperations') }}</text>
             </view>
             
             <view class="flow-steps">
               <view class="flow-step">
                 <view class="step-box user-box">
-                  <text class="step-text">包裹预报</text>
+                  <text class="step-text">{{ t('flow.packagePreview') }}</text>
                 </view>
                 <view class="step-arrow down"></view>
               </view>
               
               <view class="flow-step">
                 <view class="step-box user-box">
-                  <text class="step-text">提交发运</text>
+                  <text class="step-text">{{ t('flow.submitShipping') }}</text>
                 </view>
                 <view class="step-arrow down"></view>
               </view>
               
               <view class="flow-step">
                 <view class="step-box user-box">
-                  <text class="step-text">支付运费</text>
+                  <text class="step-text">{{ t('flow.payShippingFee') }}</text>
                 </view>
                 <view class="step-arrow down"></view>
               </view>
               
               <view class="flow-step last">
                 <view class="step-box user-box">
-                  <text class="step-text">收货</text>
+                  <text class="step-text">{{ t('flow.receivePackage') }}</text>
                 </view>
               </view>
             </view>
@@ -188,6 +188,19 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+
+// 初始化多语言系统
+onMounted(() => {
+  setLanguagePacks({
+    zh: zhLanguagePack,
+    ko: koLanguagePack
+  })
+  initLocale()
+})
+
 const goBack = () => {
   uni.navigateBack()
 }

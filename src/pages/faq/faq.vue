@@ -5,15 +5,15 @@
       <view class="nav-back" @click="goBack">
         <text class="back-icon">←</text>
       </view>
-      <text class="nav-title">常见问题</text>
+      <text class="nav-title">{{ t('faq.title') }}</text>
       <view class="nav-placeholder"></view>
     </view>
 
     <!-- 头部标题 -->
     <view class="header">
       <view class="header-content">
-        <text class="header-title">❓ 常见问题</text>
-        <text class="header-subtitle">解答您的疑惑，发货无忧！</text>
+        <text class="header-title">{{ t('faq.headerTitle') }}</text>
+        <text class="header-subtitle">{{ t('faq.headerSubtitle') }}</text>
       </view>
     </view>
 
@@ -21,7 +21,7 @@
     <view class="search-section">
       <view class="search-box">
         <text class="search-icon">🔍</text>
-        <input class="search-input" placeholder="搜索您的问题..." v-model="searchText" />
+        <input class="search-input" :placeholder="t('faq.searchPlaceholder')" v-model="searchText" />
       </view>
     </view>
 
@@ -193,8 +193,26 @@
 </template>
 
 <script>
+import { onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+
 export default {
   name: 'FAQ',
+  setup() {
+    // 初始化多语言系统
+    onMounted(() => {
+      setLanguagePacks({
+        zh: zhLanguagePack,
+        ko: koLanguagePack
+      })
+      initLocale()
+    })
+
+    return {
+      t
+    }
+  },
   data() {
     return {
       searchText: '',

@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">←</text>
             </view>
-            <text class="page-title">包裹预报</text>
+            <text class="page-title">{{ t('order.title') }}</text>
             <view class="header-placeholder"></view>
           </view>
         </view>
@@ -20,22 +20,22 @@
       <!-- 基本信息卡片 -->
       <view class="form-card">
         <view class="card-header">
-          <text class="card-title">包裹预报</text>
+          <text class="card-title">{{ t('order.title') }}</text>
         </view>
         
         <view class="form-group">
           <view class="form-item required">
-            <text class="form-label">快递单号</text>
+            <text class="form-label">{{ t('order.trackingNumber') }}</text>
             <input 
               class="form-input" 
               v-model="packageForm.trackingNumber"
-              placeholder="单个国内快递或物流单号"
+              :placeholder="t('order.trackingPlaceholder')"
               @input="onTrackingNumberInput"
             />
           </view>
           
           <view class="form-item required">
-            <text class="form-label">包裹件数</text>
+            <text class="form-label">{{ t('order.packageCount') }}</text>
             <input 
               class="form-input" 
               v-model="packageForm.packageCount"
@@ -46,11 +46,11 @@
           </view>
           
           <view class="form-item">
-            <text class="form-label">留言备注</text>
+            <text class="form-label">{{ t('order.remarks') }}</text>
             <textarea 
               class="form-textarea" 
               v-model="packageForm.remarks"
-              placeholder="如有特别要求请在此填写"
+              :placeholder="t('order.remarksPlaceholder')"
               maxlength="200"
               show-confirm-bar="false"
             />
@@ -61,9 +61,9 @@
       <!-- 包裹明细卡片 -->
       <view class="form-card">
         <view class="card-header">
-          <text class="card-title">包裹明细</text>
+          <text class="card-title">{{ t('order.packageDetails') }}</text>
           <view class="add-btn" @click="addPackageDetail">
-            <text class="add-btn-text">添加明细</text>
+            <text class="add-btn-text">{{ t('order.addDetail') }}</text>
           </view>
         </view>
         
@@ -169,7 +169,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+
+// 初始化多语言系统
+onMounted(() => {
+  setLanguagePacks({
+    zh: zhLanguagePack,
+    ko: koLanguagePack
+  })
+  initLocale()
+})
 
 // 包裹基本信息
 interface PackageForm {

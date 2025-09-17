@@ -170,7 +170,13 @@
 
 <script>
 import { ref, computed, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 import { getCommissionRecords, getCommissionStats } from '@/utils/api.js'
+
+// 初始化多语言
+setLanguagePacks({ zh: zhLanguagePack, ko: koLanguagePack })
+initLocale()
 
 export default {
   name: 'Commission',

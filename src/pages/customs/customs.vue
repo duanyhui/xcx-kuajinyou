@@ -5,7 +5,7 @@
       <view class="nav-back" @click="goBack">
         <text class="back-icon">←</text>
       </view>
-      <text class="nav-title">如何获取个人通关号</text>
+      <text class="nav-title">{{ t('customs.title') }}</text>
       <view class="nav-placeholder"></view>
     </view>
 
@@ -14,15 +14,15 @@
       <!-- 欢迎卡片 -->
       <view class="welcome-card">
         <view class="welcome-icon">🆔</view>
-        <text class="welcome-title">个人通关号申请攻略！</text>
-        <text class="welcome-desc">轻松搞定韩国个人通关号～</text>
+        <text class="welcome-title">{{ t('customs.welcomeTitle') }}</text>
+        <text class="welcome-desc">{{ t('customs.welcomeDesc') }}</text>
       </view>
 
       <!-- 重要说明 -->
       <view class="important-info">
         <view class="info-header">
           <text class="info-icon">⚠️</text>
-          <text class="info-title">重要提醒</text>
+          <text class="info-title">{{ t('customs.importantTitle') }}</text>
         </view>
         <view class="info-content">
           <view class="info-item">
@@ -191,6 +191,19 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+
+// 初始化多语言系统
+onMounted(() => {
+  setLanguagePacks({
+    zh: zhLanguagePack,
+    ko: koLanguagePack
+  })
+  initLocale()
+})
+
 const goBack = () => {
   uni.navigateBack()
 }

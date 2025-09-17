@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">←</text>
             </view>
-            <text class="page-title">推广码</text>
+            <text class="page-title">{{ t('promotionCode.title') }}</text>
             <view class="header-placeholder"></view>
           </view>
         </view>
@@ -42,11 +42,99 @@
           </view>
         </view>
 
+        <!-- 功能导航区域 -->
+        <view class="function-nav-card">
+          <view class="function-grid">
+            <view class="function-item" @click="navigateToPromotion">
+              <view class="function-icon">📱</view>
+              <text class="function-text">推广码</text>
+            </view>
+            <view class="function-item" @click="navigateToTeamMembers">
+              <view class="function-icon">👥</view>
+              <text class="function-text">团成员</text>
+            </view>
+            <view class="function-item" @click="navigateToTeamOrders">
+              <view class="function-icon">📋</view>
+              <text class="function-text">团订单</text>
+            </view>
+            <view class="function-item" @click="navigateToCommission">
+              <view class="function-icon">💰</view>
+              <text class="function-text">佣金</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 包裹状态区域 -->
+        <view class="package-section">
+          <view class="section-header">
+            <text class="section-title">包裹</text>
+            <text class="section-more" @click="viewAllPackages">全部</text>
+          </view>
+          
+          <view class="package-status-grid">
+            <view class="package-status-item" @click="navigateToPackages('claimed')">
+              <view class="status-icon">👁️</view>
+              <text class="status-text">认领</text>
+              <view class="status-badge" v-if="packageCounts.claimed > 0">
+                <text class="badge-text">{{ packageCounts.claimed }}</text>
+              </view>
+            </view>
+            <view class="package-status-item" @click="navigateToPackages('waiting')">
+              <view class="status-icon">⏰</view>
+              <text class="status-text">待入仓</text>
+              <view class="status-badge red" v-if="packageCounts.waiting > 0">
+                <text class="badge-text">{{ packageCounts.waiting }}</text>
+              </view>
+            </view>
+            <view class="package-status-item" @click="navigateToPackages('abnormal')">
+              <view class="status-icon">⚠️</view>
+              <text class="status-text">异常</text>
+              <view class="status-badge" v-if="packageCounts.abnormal > 0">
+                <text class="badge-text">{{ packageCounts.abnormal }}</text>
+              </view>
+            </view>
+            <view class="package-status-item" @click="navigateToPackages('pending')">
+              <view class="status-icon">❓</view>
+              <text class="status-text">待确认</text>
+              <view class="status-badge" v-if="packageCounts.pending > 0">
+                <text class="badge-text">{{ packageCounts.pending }}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 订单状态区域 -->
+        <view class="order-section">
+          <view class="section-header">
+            <text class="section-title">订单</text>
+            <text class="section-more" @click="viewAllOrders">全部</text>
+          </view>
+          
+          <view class="order-status-grid">
+            <view class="order-status-item" @click="navigateToOrders('waiting-goods')">
+              <view class="status-icon">🚚</view>
+              <text class="status-text">待货齐</text>
+            </view>
+            <view class="order-status-item" @click="navigateToOrders('packing')">
+              <view class="status-icon">📦</view>
+              <text class="status-text">待打包</text>
+            </view>
+            <view class="order-status-item" @click="navigateToOrders('payment')">
+              <view class="status-icon">💎</view>
+              <text class="status-text">待支付</text>
+            </view>
+            <view class="order-status-item" @click="navigateToOrders('shipping')">
+              <view class="status-icon">🔔</view>
+              <text class="status-text">待发货</text>
+            </view>
+          </view>
+        </view>
+
         <!-- 二维码卡片 -->
         <view class="qr-card">
           <view class="qr-header">
-            <text class="qr-title">我的推广码</text>
-            <text class="qr-subtitle">扫码注册，享受优惠价格</text>
+            <text class="qr-title">{{ t('promotionCode.myPromotion') }}</text>
+            <text class="qr-subtitle">{{ t('promotionCode.scanToRegister') }}</text>
           </view>
           
           <view class="qr-container">
@@ -69,25 +157,25 @@
         <!-- 推广统计 -->
         <view class="stats-card">
           <view class="stats-header">
-            <text class="stats-title">推广统计</text>
+            <text class="stats-title">{{ t('promotionCode.promotionStats') }}</text>
           </view>
           
           <view class="stats-grid">
             <view class="stats-item">
               <text class="stats-number">{{ stats.totalUsers }}</text>
-              <text class="stats-label">累计推广</text>
+              <text class="stats-label">{{ t('promotionCode.totalPromotion') }}</text>
             </view>
             <view class="stats-item">
               <text class="stats-number">{{ stats.monthUsers }}</text>
-              <text class="stats-label">本月推广</text>
+              <text class="stats-label">{{ t('promotionCode.monthPromotion') }}</text>
             </view>
             <view class="stats-item">
               <text class="stats-number">¥{{ stats.totalCommission }}</text>
-              <text class="stats-label">累计佣金</text>
+              <text class="stats-label">{{ t('promotionCode.totalCommission') }}</text>
             </view>
             <view class="stats-item">
               <text class="stats-number">¥{{ stats.monthCommission }}</text>
-              <text class="stats-label">本月佣金</text>
+              <text class="stats-label">{{ t('promotionCode.monthCommission') }}</text>
             </view>
           </view>
         </view>
@@ -117,10 +205,10 @@
         <!-- 操作按钮 -->
         <view class="action-section">
           <view class="action-btn primary" @click="shareQRCode">
-            <text class="btn-text">分享推广码</text>
+            <text class="btn-text">{{ t('promotionCode.sharePromotion') }}</text>
           </view>
           <view class="action-btn secondary" @click="refreshQRCode">
-            <text class="btn-text">刷新二维码</text>
+            <text class="btn-text">{{ t('promotionCode.refreshQR') }}</text>
           </view>
         </view>
       </view>
@@ -149,6 +237,8 @@
 </template>
 
 <script>
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 // TODO: 引入API配置
 // import { getPromotionQRCode, getPromotionStats } from '@/utils/api.js'
 
@@ -165,16 +255,29 @@ export default {
         monthUsers: 0,
         totalCommission: 0,
         monthCommission: 0
+      },
+      packageCounts: {
+        claimed: 0,
+        waiting: 2,
+        abnormal: 0,
+        pending: 0
       }
     }
   },
   
   onLoad() {
+    // 初始化多语言系统
+    setLanguagePacks({ zh: zhLanguagePack, ko: koLanguagePack })
+    initLocale()
+    
     this.loadUserInfo()
     this.loadPromotionData()
   },
   
   methods: {
+    // 多语言翻译函数
+    t,
+    
     // 加载用户信息
     loadUserInfo() {
       const savedUserInfo = uni.getStorageSync('userInfo')
@@ -324,6 +427,59 @@ export default {
           url: route
         })
       }
+    },
+    
+    // 功能导航跳转
+    navigateToPromotion() {
+      // 当前页面，可以滚动到二维码区域
+      uni.pageScrollTo({
+        selector: '.qr-card',
+        duration: 300
+      })
+    },
+    
+    navigateToTeamMembers() {
+      uni.navigateTo({
+        url: '/pages/team-members/team-members'
+      })
+    },
+    
+    navigateToTeamOrders() {
+      uni.navigateTo({
+        url: '/pages/team-orders/team-orders'
+      })
+    },
+    
+    navigateToCommission() {
+      uni.navigateTo({
+        url: '/pages/commission/commission'
+      })
+    },
+    
+    // 包裹状态跳转
+    navigateToPackages(status) {
+      uni.navigateTo({
+        url: `/pages/packages/packages?status=${status}`
+      })
+    },
+    
+    viewAllPackages() {
+      uni.navigateTo({
+        url: '/pages/packages/packages'
+      })
+    },
+    
+    // 订单状态跳转
+    navigateToOrders(status) {
+      uni.navigateTo({
+        url: `/pages/orders/orders?status=${status}`
+      })
+    },
+    
+    viewAllOrders() {
+      uni.navigateTo({
+        url: '/pages/orders/orders'
+      })
     }
   }
 }
@@ -493,6 +649,135 @@ export default {
 .user-id {
   font-size: 26rpx;
   color: #666;
+}
+
+/* 功能导航卡片 */
+.function-nav-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  border: 3rpx solid #4ade80;
+}
+
+.function-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.function-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+  min-width: 100rpx;
+}
+
+.function-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f9ff;
+  border-radius: 16rpx;
+}
+
+.function-text {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 包裹和订单区域 */
+.package-section,
+.order-section {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  border: 3rpx solid #4ade80;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.section-more {
+  font-size: 26rpx;
+  color: #667eea;
+}
+
+.package-status-grid,
+.order-status-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.package-status-item,
+.order-status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+  min-width: 100rpx;
+  position: relative;
+}
+
+.status-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f9ff;
+  border-radius: 16rpx;
+}
+
+.status-text {
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.status-badge {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  background: #ff4757;
+  color: white;
+  border-radius: 20rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20rpx;
+  padding: 0 8rpx;
+}
+
+.status-badge.red {
+  background: #ff4757;
+}
+
+.badge-text {
+  font-size: 20rpx;
+  font-weight: 600;
 }
 
 /* 二维码卡片 */

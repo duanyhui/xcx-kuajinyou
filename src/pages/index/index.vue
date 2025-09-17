@@ -11,21 +11,22 @@
         <!-- 头部内容 -->
         <view class="header-content">
           <view class="header-top">
-            <text class="greeting">Hi, 欢迎使用</text>
+            <text class="greeting">{{ t('home.greeting') }}</text>
             <view class="header-menu">
-              <view class="menu-btn">
-                <text class="menu-icon">⋯</text>
+              <view class="language-switch" @click="switchLanguage">
+                <text class="lang-text">{{ getLocaleName(locale) }}</text>
+                <text class="switch-icon">🌐</text>
               </view>
             </view>
           </view>
           
           <view class="header-main">
-            <text class="main-title">中韩跨境邮</text>
-            <text class="sub-title">快速·安全·便捷的跨境物流服务</text>
+            <text class="main-title">{{ t('home.mainTitle') }}</text>
+            <text class="sub-title">{{ t('home.subTitle') }}</text>
           </view>
           
           <view class="promo-badge">
-            <text class="promo-text">🎉 新用户首单免运费</text>
+            <text class="promo-text">{{ t('home.promoText') }}</text>
           </view>
         </view>
       </view>
@@ -34,8 +35,8 @@
     <!-- 功能卡片网格 -->
     <view class="function-section">
       <view class="section-title">
-        <text class="title-text">服务功能</text>
-        <text class="title-desc">一站式跨境物流解决方案</text>
+        <text class="title-text">{{ t('home.sectionTitle') }}</text>
+        <text class="title-desc">{{ t('home.sectionDesc') }}</text>
       </view>
       
       <view class="function-grid">
@@ -43,48 +44,48 @@
           <view class="icon-container guide">
             <text class="icon">📖</text>
           </view>
-          <text class="item-title">操作指南</text>
-          <text class="item-desc">详细使用说明</text>
+          <text class="item-title">{{ t('home.guide') }}</text>
+          <text class="item-desc">{{ t('home.guideDesc') }}</text>
         </view>
         
         <view class="grid-item" @click="navigateTo('calculator')">
           <view class="icon-container calculator">
             <text class="icon">💰</text>
           </view>
-          <text class="item-title">运费计算</text>
-          <text class="item-desc">智能费用估算</text>
+          <text class="item-title">{{ t('home.calculator') }}</text>
+          <text class="item-desc">{{ t('home.calculatorDesc') }}</text>
         </view>
         
         <view class="grid-item" @click="navigateTo('flow')">
           <view class="icon-container flow">
             <text class="icon">🔄</text>
           </view>
-          <text class="item-title">发货流程</text>
-          <text class="item-desc">图示操作步骤</text>
+          <text class="item-title">{{ t('home.flow') }}</text>
+          <text class="item-desc">{{ t('home.flowDesc') }}</text>
         </view>
         
         <view class="grid-item" @click="navigateTo('customs')">
           <view class="icon-container customs">
             <text class="icon">📋</text>
           </view>
-          <text class="item-title">个人通关号</text>
-          <text class="item-desc">通关身份码申请</text>
+          <text class="item-title">{{ t('home.customs') }}</text>
+          <text class="item-desc">{{ t('home.customsDesc') }}</text>
         </view>
         
         <view class="grid-item" @click="navigateTo('shipping')">
           <view class="icon-container shipping">
             <text class="icon">📦</text>
           </view>
-          <text class="item-title">发货需知</text>
-          <text class="item-desc">包装要求说明</text>
+          <text class="item-title">{{ t('home.shipping') }}</text>
+          <text class="item-desc">{{ t('home.shippingDesc') }}</text>
         </view>
         
         <view class="grid-item" @click="navigateTo('faq')">
           <view class="icon-container faq">
             <text class="icon">❓</text>
           </view>
-          <text class="item-title">常见问题</text>
-          <text class="item-desc">快速问题解答</text>
+          <text class="item-title">{{ t('home.faq') }}</text>
+          <text class="item-desc">{{ t('home.faqDesc') }}</text>
         </view>
       </view>
     </view>
@@ -97,8 +98,8 @@
             <text class="icon">💬</text>
           </view>
           <view class="contact-info">
-            <text class="contact-title">需要帮助？</text>
-            <text class="contact-desc">专业客服团队为您服务</text>
+            <text class="contact-title">{{ t('home.needHelp') }}</text>
+            <text class="contact-desc">{{ t('home.needHelpDesc') }}</text>
           </view>
         </view>
         
@@ -112,8 +113,8 @@
                 @error="onImageError"
               />
             </view>
-            <text class="qr-title">关注公众号</text>
-            <text class="qr-desc">获取最新优惠</text>
+            <text class="qr-title">{{ t('home.followWechat') }}</text>
+            <text class="qr-desc">{{ t('home.getLatestOffers') }}</text>
           </view>
           <view class="qr-item">
             <view class="image">
@@ -124,13 +125,13 @@
                 @error="onImageError"
               />
             </view>
-            <text class="qr-title">联系客服</text>
-            <text class="qr-desc">专业服务支持</text>
+            <text class="qr-title">{{ t('home.contactService') }}</text>
+            <text class="qr-desc">{{ t('home.professionalSupport') }}</text>
           </view>
         </view>
         
         <view class="service-time">
-          <text class="time-text">服务时间：工作日 8:30-17:30</text>
+          <text class="time-text">{{ t('home.serviceTime') }}</text>
         </view>
       </view>
     </view>
@@ -139,27 +140,27 @@
     <view class="pricing-section">
       <view class="pricing-card">
         <view class="pricing-header">
-          <text class="pricing-title">运费标准</text>
-          <text class="pricing-subtitle">透明计费，安心选择</text>
+          <text class="pricing-title">{{ t('home.pricingTitle') }}</text>
+          <text class="pricing-subtitle">{{ t('home.pricingSubtitle') }}</text>
         </view>
         
         <view class="pricing-grid">
           <view class="price-item">
             <view class="price-icon">🚢</view>
-            <text class="price-type">海运</text>
-            <text class="price-detail">首重25元+续重6元/kg</text>
+            <text class="price-type">{{ t('home.seaShipping') }}</text>
+            <text class="price-detail">{{ t('home.seaShippingPrice') }}</text>
           </view>
           
           <view class="price-item">
             <view class="price-icon">✈️</view>
-            <text class="price-type">空运</text>
-            <text class="price-detail">首重33.8元+续重9元/0.5kg</text>
+            <text class="price-type">{{ t('home.airShipping') }}</text>
+            <text class="price-detail">{{ t('home.airShippingPrice') }}</text>
           </view>
           
           <view class="price-item">
             <view class="price-icon">📮</view>
-            <text class="price-type">邮政</text>
-            <text class="price-detail">首重70元/50g+续重1元/50g</text>
+            <text class="price-type">{{ t('home.postShipping') }}</text>
+            <text class="price-detail">{{ t('home.postShippingPrice') }}</text>
           </view>
         </view>
       </view>
@@ -171,25 +172,25 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('home.navHome') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('home.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('home.navShipping') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('home.navProfile') }}</text>
       </view>
     </view>
 
@@ -199,12 +200,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { locale, t, toggleLocale, initLocale, getLocaleName, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 
 const onImageError = (e: any) => {
   console.log('二维码图片加载失败:', e)
   uni.showToast({
     title: '图片加载失败',
+    icon: 'none',
+    duration: 1000
+  })
+}
+
+// 初始化多语言系统
+onMounted(() => {
+  // 设置语言包
+  setLanguagePacks({
+    zh: zhLanguagePack,
+    ko: koLanguagePack
+  })
+  
+  // 初始化语言设置
+  initLocale()
+})
+
+// 语言切换函数
+const switchLanguage = () => {
+  toggleLocale()
+  uni.showToast({
+    title: `已切换为${getLocaleName(locale.value)}`,
     icon: 'none',
     duration: 1000
   })
@@ -359,19 +384,44 @@ const switchTab = (tab: string) => {
 }
 
 .header-menu {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 20rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50rpx;
+  backdrop-filter: blur(10rpx);
+  transition: all 0.3s ease;
+}
+
+.language-switch:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lang-text {
+  font-size: 24rpx;
+  color: white;
+  font-weight: 500;
+}
+
+.switch-icon {
+  font-size: 28rpx;
+  line-height: 1;
+}
+
+.menu-btn {
   width: 60rpx;
   height: 60rpx;
   border-radius: 20rpx;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10rpx);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.menu-btn {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

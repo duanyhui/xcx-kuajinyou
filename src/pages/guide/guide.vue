@@ -5,7 +5,7 @@
       <view class="nav-back" @click="goBack">
         <text class="back-icon">←</text>
       </view>
-      <text class="nav-title">操作指南</text>
+      <text class="nav-title">{{ t('guide.title') }}</text>
       <view class="nav-placeholder"></view>
     </view>
 
@@ -14,15 +14,15 @@
       <!-- 欢迎卡片 -->
       <view class="welcome-card">
         <view class="welcome-icon">✨</view>
-        <text class="welcome-title">超详细攻略来啦！</text>
-        <text class="welcome-desc">姐妹们，跨境寄包裹再也不踩坑～</text>
+        <text class="welcome-title">{{ t('guide.welcomeTitle') }}</text>
+        <text class="welcome-desc">{{ t('guide.welcomeDesc') }}</text>
       </view>
 
       <!-- 步骤列表 -->
       <view class="steps-section">
         <view class="section-title">
           <text class="title-emoji">📝</text>
-          <text class="title-text">寄件流程</text>
+          <text class="title-text">{{ t('guide.stepsTitle') }}</text>
         </view>
 
         <!-- 步骤1 -->
@@ -197,7 +197,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+
+// 初始化多语言系统
+onMounted(() => {
+  setLanguagePacks({
+    zh: zhLanguagePack,
+    ko: koLanguagePack
+  })
+  initLocale()
+})
 
 const goBack = () => {
   uni.navigateBack()

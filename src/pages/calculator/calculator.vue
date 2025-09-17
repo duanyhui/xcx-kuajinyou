@@ -5,7 +5,7 @@
       <view class="nav-back" @click="goBack">
         <text class="back-icon">←</text>
       </view>
-      <text class="nav-title">运费计算</text>
+      <text class="nav-title">{{ t('calculator.title') }}</text>
       <view class="nav-placeholder"></view>
     </view>
 
@@ -18,8 +18,7 @@
         <view class="form-section">
           <view class="section-header">
             <text class="required-star">*</text>
-            <text class="section-title">运输
-</text>
+            <text class="section-title">{{ t('calculator.transport') }}</text>
           </view>
           <view class="radio-group">
             <view 
@@ -30,8 +29,7 @@
               <view class="radio-check">
                 <text v-if="formData.transport === 'sea'" class="check-icon">✓</text>
               </view>
-              <text class="radio-label">海运（走得慢，省得多，值！）
-</text>
+              <text class="radio-label">{{ t('calculator.seaTransport') }}</text>
             </view>
             <view 
               class="radio-item" 
@@ -41,7 +39,7 @@
               <view class="radio-check">
                 <text v-if="formData.transport === 'air'" class="check-icon">✓</text>
               </view>
-              <text class="radio-label">空运（飞一般的寄件速度～）</text>
+              <text class="radio-label">{{ t('calculator.airTransport') }}</text>
             </view>
           </view>
           <text v-if="errors.transport" class="error-text">{{ errors.transport }}</text>
@@ -51,7 +49,7 @@
         <view class="form-section">
           <view class="section-header">
             <text class="required-star">*</text>
-            <text class="section-title">物流</text>
+            <text class="section-title">{{ t('calculator.logistics') }}</text>
           </view>
           <view class="radio-group">
             <view 
@@ -62,7 +60,7 @@
               <view class="radio-check">
                 <text v-if="formData.logistics === 'korea_express'" class="check-icon">✓</text>
               </view>
-              <text class="radio-label">韩国快递</text>
+              <text class="radio-label">{{ t('calculator.koreaExpress') }}</text>
             </view>
             <view 
               class="radio-item" 
@@ -72,7 +70,7 @@
               <view class="radio-check">
                 <text v-if="formData.logistics === 'postal_ems'" class="check-icon">✓</text>
               </view>
-              <text class="radio-label">邮政EMS</text>
+              <text class="radio-label">{{ t('calculator.postalEms') }}</text>
             </view>
           </view>
           <text v-if="errors.logistics" class="error-text">{{ errors.logistics }}</text>
@@ -82,14 +80,14 @@
         <view class="form-section">
           <view class="section-header">
             <text class="required-star">*</text>
-            <text class="section-title">重量</text>
+            <text class="section-title">{{ t('calculator.weight') }}</text>
           </view>
           <view class="input-group">
             <input 
               class="form-input"
               :class="{ error: errors.weight }"
               type="digit"
-              placeholder="请输入重量"
+              :placeholder="t('calculator.weightPlaceholder')"
               v-model="formData.weight"
               @blur="validateWeight"
               @input="clearError('weight')"
@@ -105,14 +103,14 @@
           <view class="form-section">
             <view class="section-header">
               <text class="required-star">*</text>
-              <text class="section-title">长</text>
+              <text class="section-title">{{ t('calculator.length') }}</text>
             </view>
             <view class="input-group">
               <input 
                 class="form-input"
                 :class="{ error: errors.length }"
                 type="digit"
-                placeholder="长度"
+                :placeholder="t('calculator.lengthPlaceholder')"
                 v-model="formData.length"
                 @blur="validateLength"
                 @input="clearError('length')"
@@ -126,14 +124,14 @@
           <view class="form-section">
             <view class="section-header">
               <text class="required-star">*</text>
-              <text class="section-title">宽</text>
+              <text class="section-title">{{ t('calculator.width') }}</text>
             </view>
             <view class="input-group">
               <input 
                 class="form-input"
                 :class="{ error: errors.width }"
                 type="digit"
-                placeholder="宽度"
+                :placeholder="t('calculator.widthPlaceholder')"
                 v-model="formData.width"
                 @blur="validateWidth"
                 @input="clearError('width')"
@@ -147,14 +145,14 @@
           <view class="form-section">
             <view class="section-header">
               <text class="required-star">*</text>
-              <text class="section-title">高</text>
+              <text class="section-title">{{ t('calculator.height') }}</text>
             </view>
             <view class="input-group">
               <input 
                 class="form-input"
                 :class="{ error: errors.height }"
                 type="digit"
-                placeholder="高度"
+                :placeholder="t('calculator.heightPlaceholder')"
                 v-model="formData.height"
                 @blur="validateHeight"
                 @input="clearError('height')"
@@ -169,14 +167,14 @@
         <view class="form-section">
           <view class="section-header">
             <text class="required-star">*</text>
-            <text class="section-title">件数</text>
+            <text class="section-title">{{ t('calculator.quantity') }}</text>
           </view>
           <view class="input-group">
             <input 
               class="form-input"
               :class="{ error: errors.quantity }"
               type="number"
-              placeholder="请输入件数"
+              :placeholder="t('calculator.quantityPlaceholder')"
               v-model="formData.quantity"
               @blur="validateQuantity"
               @input="clearError('quantity')"
@@ -193,8 +191,8 @@
             @click="calculateShipping"
             :disabled="isCalculating"
           >
-            <text v-if="isCalculating" class="loading-text">计算中...</text>
-            <text v-else class="btn-text">提交</text>
+            <text v-if="isCalculating" class="loading-text">{{ t('calculator.calculating') }}</text>
+            <text v-else class="btn-text">{{ t('calculator.calculate') }}</text>
           </button>
         </view>
 
@@ -271,7 +269,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+
+// 初始化多语言系统
+onMounted(() => {
+  setLanguagePacks({
+    zh: zhLanguagePack,
+    ko: koLanguagePack
+  })
+  initLocale()
+})
 
 // 类型定义
 interface FormData {
@@ -456,21 +465,14 @@ const validateAll = () => {
   return validations.every(v => v)
 }
 
-// 获取标签文本
-const getTransportLabel = (type: string) => {
-  const labels: Record<string, string> = {
-    'sea': '海运',
-    'air': '空运'
-  }
-  return labels[type] || ''
+// 获取运输方式标签
+const getTransportLabel = (transport: string) => {
+  return transport === 'sea' ? t('calculator.seaTransport') : t('calculator.airTransport')
 }
 
-const getLogisticsLabel = (type: string) => {
-  const labels: Record<string, string> = {
-    'korea_express': '韩国快递',
-    'postal_ems': '邮政EMS'
-  }
-  return labels[type] || ''
+// 获取物流方式标签  
+const getLogisticsLabel = (logistics: string) => {
+  return logistics === 'korea_express' ? t('calculator.koreaExpress') : t('calculator.postalEms')
 }
 
 // 计算运费接口（预留）

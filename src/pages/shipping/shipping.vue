@@ -5,15 +5,15 @@
       <view class="nav-back" @click="goBack">
         <text class="back-icon">←</text>
       </view>
-      <text class="nav-title">发货需知</text>
+      <text class="nav-title">{{ t('shipping.title') }}</text>
       <view class="nav-placeholder"></view>
     </view>
 
     <!-- 头部标题 -->
     <view class="header">
       <view class="header-content">
-        <text class="header-title">📦 发货需知</text>
-        <text class="header-subtitle">新手必看，发货不踩坑！</text>
+        <text class="header-title">{{ t('shipping.headerTitle') }}</text>
+        <text class="header-subtitle">{{ t('shipping.headerSubtitle') }}</text>
       </view>
     </view>
 
@@ -23,7 +23,7 @@
       <view class="section-card important-card">
         <view class="section-header">
           <text class="section-icon">⚠️</text>
-          <text class="section-title">重要提醒</text>
+          <text class="section-title">{{ t('shipping.importantTitle') }}</text>
         </view>
         <view class="important-content">
           <view class="important-item">
@@ -185,8 +185,26 @@
 </template>
 
 <script>
+import { onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+
 export default {
   name: 'Shipping',
+  setup() {
+    // 初始化多语言系统
+    onMounted(() => {
+      setLanguagePacks({
+        zh: zhLanguagePack,
+        ko: koLanguagePack
+      })
+      initLocale()
+    })
+
+    return {
+      t
+    }
+  },
   methods: {
     goBack() {
       uni.navigateBack()
