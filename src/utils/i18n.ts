@@ -632,10 +632,59 @@ export interface LanguagePack {
   addressForm: {
     title: string
     editTitle: string
+    customsCodeLabel: string
+    customsCodePlaceholder: string
+    customsCodeRequired: string
+    recipientNameLabel: string
+    recipientNamePlaceholder: string
+    recipientNameRequired: string
+    phoneLabel: string
+    phonePlaceholder: string
+    phoneRequired: string
+    phoneInvalid: string
+    koreanAddressLabel: string
+    koreanAddressPlaceholder: string
+    koreanAddressRequired: string
+    addressFormatTips: string
+    koreanPostalCodeLabel: string
+    koreanPostalCodePlaceholder: string
+    koreanPostalCodeRequired: string
+    setDefaultAddress: string
+    submit: string
+    submitting: string
+    addressFormatTitle: string
+    formatRequirement: string
+    formatRequirementDesc: string
+    addressOrder: string
+    addressOrderDesc: string
+    example: string
+    exampleDesc: string
+    suggestion: string
+    suggestionDesc: string
+    navHome: string
+    navOrder: string
+    navShipping: string
+    navProfile: string
   }
   // 我的地址页面
   myAddress: {
     title: string
+    emptyTitle: string
+    emptyDesc: string
+    defaultTag: string
+    editBtn: string
+    deleteBtn: string
+    loading: string
+    addNewBtn: string
+    fetchError: string
+    confirmDeleteTitle: string
+    confirmDeleteContent: string
+    deleteSuccess: string
+    deleteFailed: string
+    navHome: string
+    navOrder: string
+    navShipping: string
+    navProfile: string
   }
   // 佣金页面
   commission: {

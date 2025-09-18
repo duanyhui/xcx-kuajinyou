@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">‹</text>
             </view>
-            <text class="page-title">我的地址</text>
+            <text class="page-title">{{ t('myAddress.title') }}</text>
             <view class="placeholder"></view>
           </view>
         </view>
@@ -20,8 +20,8 @@
       <!-- 空状态 -->
       <view class="empty-state" v-if="addressList.length === 0 && !loading">
         <view class="empty-icon">📮</view>
-        <text class="empty-title">暂无收货地址</text>
-        <text class="empty-desc">添加收货地址，让包裹快速到达</text>
+        <text class="empty-title">{{ t('myAddress.emptyTitle') }}</text>
+        <text class="empty-desc">{{ t('myAddress.emptyDesc') }}</text>
       </view>
 
       <!-- 地址列表 -->
@@ -37,17 +37,17 @@
               <text class="recipient-name">{{ address.name }}</text>
               <text class="recipient-phone">{{ address.phone }}</text>
               <view class="default-tag" v-if="address.isDefault">
-                <text class="tag-text">默认</text>
+                <text class="tag-text">{{ t('myAddress.defaultTag') }}</text>
               </view>
             </view>
             <text class="address-detail">{{ address.fullAddress }}</text>
           </view>
           <view class="address-actions">
             <view class="action-btn edit" @click.stop="editAddress(address)">
-              <text class="action-text">编辑</text>
+              <text class="action-text">{{ t('myAddress.editBtn') }}</text>
             </view>
             <view class="action-btn delete" @click.stop="deleteAddress(address.id, index)">
-              <text class="action-text">删除</text>
+              <text class="action-text">{{ t('myAddress.deleteBtn') }}</text>
             </view>
           </view>
           <view class="arrow-icon">
@@ -58,14 +58,14 @@
 
       <!-- 加载状态 -->
       <view class="loading-state" v-if="loading">
-        <text class="loading-text">加载中...</text>
+        <text class="loading-text">{{ t('myAddress.loading') }}</text>
       </view>
     </view>
 
     <!-- 新增收货地址按钮 -->
     <view class="add-address-section">
       <view class="add-btn" @click="addNewAddress">
-        <text class="add-btn-text">新增收货地址</text>
+        <text class="add-btn-text">{{ t('myAddress.addNewBtn') }}</text>
       </view>
     </view>
 
@@ -75,25 +75,25 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('myAddress.navHome') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('myAddress.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('myAddress.navShipping') }}</text>
       </view>
       <view class="nav-item active" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('myAddress.navProfile') }}</text>
       </view>
     </view>
   </view>
@@ -102,11 +102,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
-import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+import { languagePacks } from '../../locales/index'
 
 // 初始化多语言
-setLanguagePacks({ zh: zhLanguagePack, ko: koLanguagePack })
-initLocale()
+onMounted(() => {
+  initLocale()
+  setLanguagePacks(languagePacks)
+})
 
 interface Address {
   id: string
@@ -154,7 +156,7 @@ const getAddressList = async () => {
   } catch (error) {
     loading.value = false
     uni.showToast({
-      title: '获取地址列表失败',
+      title: t('myAddress.fetchError'),
       icon: 'none'
     })
   }
@@ -177,8 +179,8 @@ const editAddress = (address: Address) => {
 // 删除地址
 const deleteAddress = (addressId: string, index: number) => {
   uni.showModal({
-    title: '确认删除',
-    content: '确定要删除这个地址吗？',
+    title: t('myAddress.confirmDeleteTitle'),
+    content: t('myAddress.confirmDeleteContent'),
     success: async (res) => {
       if (res.confirm) {
         try {
@@ -194,12 +196,12 @@ const deleteAddress = (addressId: string, index: number) => {
           // 模拟删除
           addressList.value.splice(index, 1)
           uni.showToast({
-            title: '删除成功',
+            title: t('myAddress.deleteSuccess'),
             icon: 'success'
           })
         } catch (error) {
           uni.showToast({
-            title: '删除失败',
+            title: t('myAddress.deleteFailed'),
             icon: 'none'
           })
         }

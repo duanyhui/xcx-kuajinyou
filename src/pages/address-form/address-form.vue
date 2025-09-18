@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">‹</text>
             </view>
-            <text class="page-title">{{ isEditMode ? '编辑地址' : '新增地址' }}</text>
+            <text class="page-title">{{ isEditMode ? t('addressForm.editTitle') : t('addressForm.title') }}</text>
             <view class="placeholder"></view>
           </view>
         </view>
@@ -21,19 +21,19 @@
         <!-- 通关号码 -->
         <view class="form-group">
           <view class="form-label">
-            <text class="label-text">通关号码</text>
+            <text class="label-text">{{ t('addressForm.customsCodeLabel') }}</text>
             <text class="required">*</text>
           </view>
           <view class="form-input">
             <input 
               v-model="formData.customsCode"
-              placeholder="个人通关号"
+              :placeholder="t('addressForm.customsCodePlaceholder')"
               class="input-field"
               :class="{ error: formData.customsCode.trim() !== '' && formData.customsCode.trim() === '' }"
               maxlength="50"
             />
             <text class="field-error" v-if="formData.customsCode.trim() === '' && hasSubmitAttempt">
-              请填写通关号码
+              {{ t('addressForm.customsCodeRequired') }}
             </text>
           </view>
         </view>
@@ -41,19 +41,19 @@
         <!-- 收件人名 -->
         <view class="form-group">
           <view class="form-label">
-            <text class="label-text">收件人名</text>
+            <text class="label-text">{{ t('addressForm.recipientNameLabel') }}</text>
             <text class="required">*</text>
           </view>
           <view class="form-input">
             <input 
               v-model="formData.recipientName"
-              placeholder="请填写名称"
+              :placeholder="t('addressForm.recipientNamePlaceholder')"
               class="input-field"
               :class="{ error: formData.recipientName.trim() === '' && hasSubmitAttempt }"
               maxlength="20"
             />
             <text class="field-error" v-if="formData.recipientName.trim() === '' && hasSubmitAttempt">
-              请填写收件人名
+              {{ t('addressForm.recipientNameRequired') }}
             </text>
           </view>
         </view>
@@ -61,23 +61,23 @@
         <!-- 联系方式 -->
         <view class="form-group">
           <view class="form-label">
-            <text class="label-text">联系方式</text>
+            <text class="label-text">{{ t('addressForm.phoneLabel') }}</text>
             <text class="required">*</text>
           </view>
           <view class="form-input">
             <input 
               v-model="formData.phone"
-              placeholder="请填写联系方式(11位中国手机号)"
+              :placeholder="t('addressForm.phonePlaceholder')"
               class="input-field"
               :class="{ error: (formData.phone.trim() === '' || !isPhoneValid) && hasSubmitAttempt }"
               maxlength="11"
               type="number"
             />
             <text class="field-error" v-if="formData.phone.trim() === '' && hasSubmitAttempt">
-              请填写联系方式
+              {{ t('addressForm.phoneRequired') }}
             </text>
             <text class="field-error" v-if="formData.phone.trim() !== '' && !isPhoneValid && hasSubmitAttempt">
-              请输入正确的11位手机号
+              {{ t('addressForm.phoneInvalid') }}
             </text>
           </view>
         </view>
@@ -85,25 +85,25 @@
         <!-- 韩国地址 -->
         <view class="form-group">
           <view class="form-label">
-            <text class="label-text">韩国地址</text>
+            <text class="label-text">{{ t('addressForm.koreanAddressLabel') }}</text>
             <text class="required">*</text>
           </view>
           <view class="form-input">
             <textarea 
               v-model="formData.koreanAddress"
-              placeholder="请填写详细地址(韩文地址)"
+              :placeholder="t('addressForm.koreanAddressPlaceholder')"
               class="textarea-field"
               :class="{ error: formData.koreanAddress.trim() === '' && hasSubmitAttempt }"
               maxlength="200"
               auto-height
             />
             <text class="field-error" v-if="formData.koreanAddress.trim() === '' && hasSubmitAttempt">
-              请填写韩国地址
+              {{ t('addressForm.koreanAddressRequired') }}
             </text>
             <view class="address-actions">
               <view class="address-action" @click="showAddressTips">
                 <text class="action-icon">💡</text>
-                <text class="action-text">地址格式说明</text>
+                <text class="action-text">{{ t('addressForm.addressFormatTips') }}</text>
               </view>
             </view>
           </view>
@@ -112,20 +112,20 @@
         <!-- 韩国邮编 -->
         <view class="form-group">
           <view class="form-label">
-            <text class="label-text">韩国邮编</text>
+            <text class="label-text">{{ t('addressForm.koreanPostalCodeLabel') }}</text>
             <text class="required">*</text>
           </view>
           <view class="form-input">
             <input 
               v-model="formData.koreanPostalCode"
-              placeholder="请填写邮编"
+              :placeholder="t('addressForm.koreanPostalCodePlaceholder')"
               class="input-field"
               :class="{ error: formData.koreanPostalCode.trim() === '' && hasSubmitAttempt }"
               maxlength="10"
               type="number"
             />
             <text class="field-error" v-if="formData.koreanPostalCode.trim() === '' && hasSubmitAttempt">
-              请填写韩国邮编
+              {{ t('addressForm.koreanPostalCodeRequired') }}
             </text>
           </view>
         </view>
@@ -136,7 +136,7 @@
             <view class="checkbox" :class="{ checked: formData.isDefault }">
               <text class="check-icon" v-if="formData.isDefault">✓</text>
             </view>
-            <text class="checkbox-text">设为默认收货地址</text>
+            <text class="checkbox-text">{{ t('addressForm.setDefaultAddress') }}</text>
           </view>
         </view>
       </view>
@@ -144,7 +144,7 @@
       <!-- 提交按钮 -->
       <view class="submit-section">
         <view class="submit-btn" @click="submitForm" :class="{ disabled: !isFormValid }">
-          <text class="submit-text">{{ submitLoading ? '提交中...' : '提交' }}</text>
+          <text class="submit-text">{{ submitLoading ? t('addressForm.submitting') : t('addressForm.submit') }}</text>
         </view>
       </view>
     </view>
@@ -153,27 +153,27 @@
     <view class="modal-overlay" v-if="showTipsModal" @click="hideTipsModal">
       <view class="modal-content" @click.stop>
         <view class="modal-header">
-          <text class="modal-title">韩国地址格式说明</text>
+          <text class="modal-title">{{ t('addressForm.addressFormatTitle') }}</text>
           <view class="close-btn" @click="hideTipsModal">
             <text class="close-icon">×</text>
           </view>
         </view>
         <view class="modal-body">
           <view class="tip-item">
-            <text class="tip-title">格式要求：</text>
-            <text class="tip-desc">请使用韩文填写详细地址</text>
+            <text class="tip-title">{{ t('addressForm.formatRequirement') }}</text>
+            <text class="tip-desc">{{ t('addressForm.formatRequirementDesc') }}</text>
           </view>
           <view class="tip-item">
-            <text class="tip-title">地址顺序：</text>
-            <text class="tip-desc">道/市 → 区/县 → 详细地址</text>
+            <text class="tip-title">{{ t('addressForm.addressOrder') }}</text>
+            <text class="tip-desc">{{ t('addressForm.addressOrderDesc') }}</text>
           </view>
           <view class="tip-item">
-            <text class="tip-title">示例：</text>
-            <text class="tip-desc">서울특별시 강남구 테헤란로 123</text>
+            <text class="tip-title">{{ t('addressForm.example') }}</text>
+            <text class="tip-desc">{{ t('addressForm.exampleDesc') }}</text>
           </view>
           <view class="tip-item">
-            <text class="tip-title">建议：</text>
-            <text class="tip-desc">可以使用韩国地址查询网站获取准确地址</text>
+            <text class="tip-title">{{ t('addressForm.suggestion') }}</text>
+            <text class="tip-desc">{{ t('addressForm.suggestionDesc') }}</text>
           </view>
         </view>
       </view>
@@ -185,25 +185,25 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('addressForm.navHome') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('addressForm.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('addressForm.navShipping') }}</text>
       </view>
       <view class="nav-item active" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('addressForm.navProfile') }}</text>
       </view>
     </view>
   </view>
@@ -212,11 +212,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
-import { zhLanguagePack, koLanguagePack } from '../../locales/index'
+import { languagePacks } from '../../locales/index'
 
 // 初始化多语言
-setLanguagePacks({ zh: zhLanguagePack, ko: koLanguagePack })
-initLocale()
+onMounted(() => {
+  initLocale()
+  setLanguagePacks(languagePacks)
+})
 
 interface AddressForm {
   customsCode: string
