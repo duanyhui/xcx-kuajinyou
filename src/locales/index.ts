@@ -68,7 +68,7 @@ export const zhLanguagePack: LanguagePack = {
     seaTransport: '海运（走得慢，省得多，值！）',
     airTransport: '空运（飞一般的寄件速度～）',
     logistics: '物流',
-    koreaExpress: '韩国快递',
+    koreaExpress: 'CJ大韩通运',
     postalEms: '邮政EMS',
     weight: '重量',
     weightPlaceholder: '请输入重量',
@@ -231,11 +231,55 @@ export const zhLanguagePack: LanguagePack = {
     headerTitle: '📦 发货需知',
     headerSubtitle: '新手必看，发货不踩坑！',
     importantTitle: '重要提醒',
+    // 重要提醒内容
+    important1: '🚫 禁寄物品请勿邮寄，违者后果自负',
+    important2: '📋 发货前请详细阅读以下须知',
+    important3: '💰 超重、超尺寸将产生额外费用',
+    // 包装要求
     packagingTitle: '包装要求',
+    packageMaterial: '• 包装材料',
+    packageMaterialDesc: '使用质量好的纸箱或塑料袋，避免破损',
+    innerFilling: '• 内部填充',
+    innerFillingDesc: '易碎物品需用泡沫、气泡膜等填充材料',
+    sealing: '• 密封处理',
+    sealingDesc: '用透明胶带密封，确保包裹不会散落',
+    labelPasting: '• 标签粘贴',
+    labelPastingDesc: '面单粘贴在平整面，避免折角处',
+    // 禁寄物品
     prohibitedTitle: '禁寄物品',
+    batteryCategory: '🔋 电池类',
+    batteryDesc: '锂电池、充电宝、电子烟等',
+    liquidCategory: '💊 液体类',
+    liquidDesc: '化妆品、香水、药品、食品等',
+    sharpCategory: '🔪 尖锐物',
+    sharpDesc: '刀具、剪刀、指甲刀等',
+    valuableCategory: '💎 贵重物品',
+    valuableDesc: '现金、首饰、古董等',
+    // 重量尺寸限制
     limitTitle: '重量尺寸限制',
+    singleLengthLabel: '单边长度',
+    totalSizeLabel: '长+宽+高',
+    singleWeightLabel: '单件重量',
+    singleLength: '≤ 60cm',
+    totalSize: '≤ 120cm',
+    singleWeight: '≤ 20kg',
+    // 费用说明
     feeTitle: '费用说明',
-    tipsTitle: '发货小贴士'
+    basicFee: '💵 基础运费',
+    basicFeeDesc: '按重量和体积计费，取较大值',
+    customsFee: '📋 通关费',
+    customsFeeDesc: '个人物品无需额外通关费',
+    insuranceFee: '🎁 保险费',
+    insuranceFeeDesc: '建议购买，保障物品安全',
+    // 发货小贴士
+    tipsTitle: '发货小贴士',
+    tip1: '✨ 提前1-2天预约取件，避免节假日延误',
+    tip2: '📱 保存好快递单号，方便查询物流状态',
+    tip3: '💬 有问题及时联系客服，我们随时为您服务',
+    tip4: '🎯 首次发货建议选择标准服务，熟悉流程后再选快速服务',
+    // 快捷入口
+    feeCalculator: '运费计算',
+    shippingFlow: '发货流程'
   },
   // 常见问题页面
   faq: {
@@ -413,6 +457,72 @@ export const zhLanguagePack: LanguagePack = {
     completed: '已完成',
     emptyTitle: '暂无团订单',
     emptyDesc: '您的团队成员还没有下单哦'
+  },
+  // 订单发货页面
+  shippingOrders: {
+    pageTitle: '订单发货',
+    loading: '加载中...',
+    empty: {
+      title: '暂无待发货订单',
+      description: '暂时没有需要发货的订单'
+    },
+    orderCard: {
+      orderNumber: '订单号',
+      itemName: '商品名',
+      price: '价格',
+      quantity: '数量',
+      packageCount: '包裹数',
+      packageUnit: '包'
+    },
+    status: {
+      customs: {
+        passed: '核验通过',
+        failed: '核验未通过',
+        pending: '核验中'
+      },
+      warehouse: {
+        in: '已入仓',
+        out: '已出仓',
+        pending: '待入仓'
+      }
+    },
+    actions: {
+      viewDetail: '查看详情',
+      confirmShipping: '确认发货'
+    },
+    modals: {
+      confirmShipping: {
+        title: '确认发货',
+        content: '确定要发货订单吗？',
+        cancel: '取消',
+        confirm: '确认'
+      },
+      statusDetail: {
+        customs: {
+          title: '核验状态',
+          content: '订单正在进行海关核验，请耐心等待'
+        },
+        warehouse: {
+          title: '入仓状态',
+          content: '包裹正在等待入仓，请确认发货信息'
+        },
+        confirm: '知道了'
+      }
+    },
+    messages: {
+      shipping: '发货中...',
+      shippingSuccess: '发货成功',
+      shippingFailed: '发货失败',
+      networkError: '网络异常，请重试',
+      fetchOrdersFailed: '获取订单失败',
+      funcInDevelopment: '功能开发中'
+    },
+    bottomNav: {
+      home: '首页',
+      order: '订单',
+      shipping: '发货',
+      profile: '我的'
+    }
   }
 }
 
@@ -434,7 +544,7 @@ export const koLanguagePack: LanguagePack = {
   },
   home: {
     greeting: '안녕하세요, 환영합니다',
-    mainTitle: '중한 국제택배',
+    mainTitle: '이런 속도는 못 참지! 창고 먼저 슝~',
     subTitle: '빠르고·안전하고·편리한 국제물류 서비스',
     promoText: '🎉 신규 고객 첫 주문 배송비 무료',
     sectionTitle: '서비스 기능',
@@ -450,7 +560,7 @@ export const koLanguagePack: LanguagePack = {
     pricingTitle: '배송비 기준',
     pricingSubtitle: '투명한 요금제, 안심하고 선택하세요',
     guide: '이용 가이드',
-    guideDesc: '자세한 사용 설명',
+    guideDesc: '꼭 확인하세요!',
     calculator: '배송비 계산',
     calculatorDesc: '스마트 요금 계산',
     flow: '발송 절차',
@@ -475,10 +585,10 @@ export const koLanguagePack: LanguagePack = {
   calculator: {
     title: '배송비 계산',
     transport: '운송 방식',
-    seaTransport: '선박운송(천천히 가도 많이 절약되니까 이득!)',
+    seaTransport: '해운(천천히 가도 많이 절약되니까 이득!)',
     airTransport: '항공운송(번개같은 발송 속도~)',
     logistics: '물류',
-    koreaExpress: '한국택배',
+    koreaExpress: 'CJ대한통운',
     postalEms: '우체국EMS',
     weight: '무게',
     weightPlaceholder: '무게를 입력해주세요',
@@ -499,21 +609,21 @@ export const koLanguagePack: LanguagePack = {
   },
   guide: {
     title: '이용 가이드',
-    welcomeTitle: '완전 자세한 공략 왔어요!',
-    welcomeDesc: '언니들, 국제배송도 이제 실수 없이~',
+    welcomeTitle: '완벽 사용 가이드 도착!',
+    welcomeDesc: '국제배송, 실수 없이 바로 GO!',
     stepsTitle: '발송 절차',
     step1Title: '전용 주소 받기',
-    step1Tag: '진짜 중요',
+    step1Tag: '필수 코스',
     step1Desc1: '👉 【마이페이지】→【창고 주소】들어가기',
     step1Desc2: '👉 내 전용 주소와 수취인 정보 복사하기',
     step1Desc3: '👉 이 주소로 창고에 택배 보내기',
-    step1Tip: '💡 창고 오빠한테 내 주소 알려주는 거 잊지 마요~',
+    step1Tip: '💡 창고에 내 주소 꼭 전달해주세요~',
     step2Title: '택배 예보',
     step2Tag: '꼭 해야 함',
-    step2Desc1: '📦 택배 보낸 후 바로 예보하기',
-    step2Desc2: '📱 위챗에서【중한 국제택배】팔로우',
-    step2Desc3: '🔍 【집운 서비스】→【택배 예보】클릭',
-    step2Warning: '⚠️ 하나의 택배를 여러 주문으로 나눠서 다른 수취인에게 보내는 건 안 돼요',
+    step2Desc1: '📦 택배 보낸 후, 바로 예보 진행',
+    step2Desc2: '📱  [예보] 탭에서 중국내 택배송장번호, 수취인 정보 입력',
+    step2Desc3: '',
+    step2Warning: '⚠️ 하나의 택배를 여러 주문으로 나누어 다른 수취인에게 보내는 것은 불가!',
     step3Title: '정보 입력',
     step3Tag: '꼼꼼하게',
     step3Subtitle: '📋 예보할 때 입력할 내용:',
@@ -522,9 +632,9 @@ export const koLanguagePack: LanguagePack = {
     step3Item3: '• 가격은 위안화로 (실제 가격 써주세요)',
     step4Title: '입고 확인',
     step4Tag: '자동',
-    step4Desc1: '📸 창고에서 검수하고 사진 찍어드려요',
-    step4Desc2: '📨 위챗 공식계정으로 입고 알림 발송',
-    step4Desc3: '👀 클릭해서 입고 상세내용 확인',
+    step4Desc1: '📸 창고에서 사진 찍고 검사 완료! 먼저 한 발짝~',
+    step4Desc2: '📨 입고 알림은 공식계정 에서 확인(팔로우 꼭 해두세요~)',
+    step4Desc3: '👀 사진이랑 자세한 정보? 미니앱에서 확인해봐요~  이제 ‘발송’ 누르기만 하면 끝! 합포장도 분리포장도 당신 맘대로 💌',
     step4Note: '개봉 검사 서비스를 선택하시면 상세한 개봉 사진을 제공해드려요',
     step5Title: '발송 출고',
     step5Tag: '마지막',
@@ -637,11 +747,55 @@ export const koLanguagePack: LanguagePack = {
     headerTitle: '📦 발송 안내',
     headerSubtitle: '초보자 필독, 발송 실수 없이!',
     importantTitle: '중요 알림',
+    // 重要提醒内容
+    important1: '🚫 발송 금지 물품은 보내지 마세요, 문제 발생 시 책임은 본인에게',
+    important2: '📋 발송 전에 아래 안내사항을 자세히 읽어주세요',
+    important3: '💰 초과 중량, 초과 크기 시 추가 요금 발생',
+    // 包装要求
     packagingTitle: '포장 요구사항',
+    packageMaterial: '• 포장 재료',
+    packageMaterialDesc: '좋은 품질의 박스나 비닐봉지 사용, 파손 방지',
+    innerFilling: '• 내부 완충재',
+    innerFillingDesc: '깨지기 쉬운 물건은 스펀지, 에어캡 등 완충재 사용',
+    sealing: '• 밀봉 처리',
+    sealingDesc: '투명 테이프로 밀봉, 택배가 흩어지지 않도록 보장',
+    labelPasting: '• 라벨 부착',
+    labelPastingDesc: '운송장은 평평한 면에 부착, 모서리 부분 피하기',
+    // 禁寄物品
     prohibitedTitle: '발송 금지 물품',
+    batteryCategory: '🔋 배터리류',
+    batteryDesc: '리튬배터리, 보조배터리, 전자담배 등',
+    liquidCategory: '💊 액체류',
+    liquidDesc: '화장품, 향수, 의약품, 식품 등',
+    sharpCategory: '🔪 날카로운 물건',
+    sharpDesc: '칼, 가위, 손톱깎이 등',
+    valuableCategory: '💎 귀중품',
+    valuableDesc: '현금, 보석, 골동품 등',
+    // 重量尺寸限制
     limitTitle: '무게 크기 제한',
+    singleLengthLabel: '한 변 길이',
+    totalSizeLabel: '가로+세로+높이',
+    singleWeightLabel: '개당 무게',
+    singleLength: '≤ 60cm',
+    totalSize: '≤ 120cm',
+    singleWeight: '≤ 20kg',
+    // 费用说明
     feeTitle: '요금 설명',
-    tipsTitle: '발송 꿀팁'
+    basicFee: '💵 기본 운임',
+    basicFeeDesc: '무게와 부피로 계산, 더 큰 값으로 적용',
+    customsFee: '📋 통관비',
+    customsFeeDesc: '개인 물품은 추가 통관비 없음',
+    insuranceFee: '🎁 보험료',
+    insuranceFeeDesc: '구매 권장, 물품 안전 보장',
+    // 发货小贴士
+    tipsTitle: '발송 꿀팁',
+    tip1: '✨ 1-2일 전에 픽업 예약, 연휴 지연 방지',
+    tip2: '📱 택배 운송장 번호 잘 보관, 물류 상태 조회 편리',
+    tip3: '💬 문제 있으면 즉시 고객센터 연락, 언제든 서비스 제공',
+    tip4: '🎯 첫 발송 시 표준 서비스 추천, 익숙해진 후 빠른 서비스 선택',
+    // 快捷入口
+    feeCalculator: '운임 계산',
+    shippingFlow: '발송 절차'
   },
   faq: {
     title: '자주 묻는 질문',
@@ -815,5 +969,71 @@ export const koLanguagePack: LanguagePack = {
     completed: '완료',
     emptyTitle: '팀 주문이 없어요',
     emptyDesc: '팀 멤버들이 아직 주문하지 않았어요'
+  },
+  // 주문 발송 페면
+  shippingOrders: {
+    pageTitle: '주문 발송',
+    loading: '로딩 중...',
+    empty: {
+      title: '발송 대기 주문이 없어요',
+      description: '아직 발송할 주문이 없어요'
+    },
+    orderCard: {
+      orderNumber: '주문번호',
+      itemName: '상품명',
+      price: '가격',
+      quantity: '수량',
+      packageCount: '포장 수',
+      packageUnit: '포장'
+    },
+    status: {
+      customs: {
+        passed: '검증 통과',
+        failed: '검증 실패',
+        pending: '검증 대기'
+      },
+      warehouse: {
+        in: '창고 입고',
+        out: '창고 출고',
+        pending: '입고 대기'
+      }
+    },
+    actions: {
+      viewDetail: '상세 보기',
+      confirmShipping: '발송 확인'
+    },
+    modals: {
+      confirmShipping: {
+        title: '발송 확인',
+        content: '정말로 주문을 발송하시겠어요?',
+        cancel: '취소',
+        confirm: '확인'
+      },
+      statusDetail: {
+        customs: {
+          title: '검증 상태',
+          content: '주문이 세관 검증 중이에요. 조금만 기다려주세요'
+        },
+        warehouse: {
+          title: '입고 상태',
+          content: '포장이 창고 입고 대기 중이에요. 발송 정보를 확인해주세요'
+        },
+        confirm: '알겠어요'
+      }
+    },
+    messages: {
+      shipping: '발송 중...',
+      shippingSuccess: '발송 완료',
+      shippingFailed: '발송 실패',
+      networkError: '네트워크 오류. 다시 시도해주세요',
+      fetchOrdersFailed: '주문 조회 실패',
+      funcInDevelopment: '기능 개발 중'
+    },
+    bottomNav: {
+      home: '홈',
+      order: '주문',
+      shipping: '발송',
+      profile: '내 정보'
+    }
   }
 }

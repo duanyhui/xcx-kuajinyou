@@ -27,13 +27,13 @@
         </view>
         <view class="important-content">
           <view class="important-item">
-            <text class="important-text">🚫 禁寄物品请勿邮寄，违者后果自负</text>
+            <text class="important-text">{{ t('shipping.important1') }}</text>
           </view>
           <view class="important-item">
-            <text class="important-text">📋 发货前请详细阅读以下须知</text>
+            <text class="important-text">{{ t('shipping.important2') }}</text>
           </view>
           <view class="important-item">
-            <text class="important-text">💰 超重、超尺寸将产生额外费用</text>
+            <text class="important-text">{{ t('shipping.important3') }}</text>
           </view>
         </view>
       </view>
@@ -42,24 +42,24 @@
       <view class="section-card">
         <view class="section-header">
           <text class="section-icon">📦</text>
-          <text class="section-title">包装要求</text>
+          <text class="section-title">{{ t('shipping.packagingTitle') }}</text>
         </view>
         <view class="content-list">
           <view class="content-item">
-            <text class="item-title">• 包装材料</text>
-            <text class="item-desc">使用质量好的纸箱或塑料袋，避免破损</text>
+            <text class="item-title">{{ t('shipping.packageMaterial') }}</text>
+            <text class="item-desc">{{ t('shipping.packageMaterialDesc') }}</text>
           </view>
           <view class="content-item">
-            <text class="item-title">• 内部填充</text>
-            <text class="item-desc">易碎物品需用泡沫、气泡膜等填充材料</text>
+            <text class="item-title">{{ t('shipping.innerFilling') }}</text>
+            <text class="item-desc">{{ t('shipping.innerFillingDesc') }}</text>
           </view>
           <view class="content-item">
-            <text class="item-title">• 密封处理</text>
-            <text class="item-desc">用透明胶带密封，确保包裹不会散落</text>
+            <text class="item-title">{{ t('shipping.sealing') }}</text>
+            <text class="item-desc">{{ t('shipping.sealingDesc') }}</text>
           </view>
           <view class="content-item">
-            <text class="item-title">• 标签粘贴</text>
-            <text class="item-desc">面单粘贴在平整面，避免折角处</text>
+            <text class="item-title">{{ t('shipping.labelPasting') }}</text>
+            <text class="item-desc">{{ t('shipping.labelPastingDesc') }}</text>
           </view>
         </view>
       </view>
@@ -68,24 +68,24 @@
       <view class="section-card danger-card">
         <view class="section-header">
           <text class="section-icon">🚫</text>
-          <text class="section-title">禁寄物品</text>
+          <text class="section-title">{{ t('shipping.prohibitedTitle') }}</text>
         </view>
         <view class="danger-content">
           <view class="danger-category">
-            <text class="category-title">🔋 电池类</text>
-            <text class="category-desc">锂电池、充电宝、电子烟等</text>
+            <text class="category-title">{{ t('shipping.batteryCategory') }}</text>
+            <text class="category-desc">{{ t('shipping.batteryDesc') }}</text>
           </view>
           <view class="danger-category">
-            <text class="category-title">💊 液体类</text>
-            <text class="category-desc">化妆品、香水、药品、食品等</text>
+            <text class="category-title">{{ t('shipping.liquidCategory') }}</text>
+            <text class="category-desc">{{ t('shipping.liquidDesc') }}</text>
           </view>
           <view class="danger-category">
-            <text class="category-title">🔪 尖锐物</text>
-            <text class="category-desc">刀具、剪刀、指甲刀等</text>
+            <text class="category-title">{{ t('shipping.sharpCategory') }}</text>
+            <text class="category-desc">{{ t('shipping.sharpDesc') }}</text>
           </view>
           <view class="danger-category">
-            <text class="category-title">💎 贵重物品</text>
-            <text class="category-desc">现金、首饰、古董等</text>
+            <text class="category-title">{{ t('shipping.valuableCategory') }}</text>
+            <text class="category-desc">{{ t('shipping.valuableDesc') }}</text>
           </view>
         </view>
       </view>
@@ -94,29 +94,29 @@
       <view class="section-card">
         <view class="section-header">
           <text class="section-icon">⚖️</text>
-          <text class="section-title">重量尺寸限制</text>
+          <text class="section-title">{{ t('shipping.limitTitle') }}</text>
         </view>
         <view class="limit-content">
           <view class="limit-item">
             <view class="limit-label">
               <text class="limit-icon">📏</text>
-              <text class="limit-title">单边长度</text>
+              <text class="limit-title">{{ t('shipping.singleLengthLabel') }}</text>
             </view>
-            <text class="limit-value">≤ 60cm</text>
+            <text class="limit-value">{{ t('shipping.singleLength') }}</text>
           </view>
           <view class="limit-item">
             <view class="limit-label">
               <text class="limit-icon">📐</text>
-              <text class="limit-title">长+宽+高</text>
+              <text class="limit-title">{{ t('shipping.totalSizeLabel') }}</text>
             </view>
-            <text class="limit-value">≤ 120cm</text>
+            <text class="limit-value">{{ t('shipping.totalSize') }}</text>
           </view>
           <view class="limit-item">
             <view class="limit-label">
               <text class="limit-icon">⚖️</text>
-              <text class="limit-title">单件重量</text>
+              <text class="limit-title">{{ t('shipping.singleWeightLabel') }}</text>
             </view>
-            <text class="limit-value">≤ 20kg</text>
+            <text class="limit-value">{{ t('shipping.singleWeight') }}</text>
           </view>
         </view>
       </view>
@@ -125,20 +125,20 @@
       <view class="section-card">
         <view class="section-header">
           <text class="section-icon">💰</text>
-          <text class="section-title">费用说明</text>
+          <text class="section-title">{{ t('shipping.feeTitle') }}</text>
         </view>
         <view class="fee-content">
           <view class="fee-item">
-            <text class="fee-title">💵 基础运费</text>
-            <text class="fee-desc">按重量和体积计费，取较大值</text>
+            <text class="fee-title">{{ t('shipping.basicFee') }}</text>
+            <text class="fee-desc">{{ t('shipping.basicFeeDesc') }}</text>
           </view>
           <view class="fee-item">
-            <text class="fee-title">📋 通关费</text>
-            <text class="fee-desc">个人物品无需额外通关费</text>
+            <text class="fee-title">{{ t('shipping.customsFee') }}</text>
+            <text class="fee-desc">{{ t('shipping.customsFeeDesc') }}</text>
           </view>
           <view class="fee-item">
-            <text class="fee-title">🎁 保险费</text>
-            <text class="fee-desc">建议购买，保障物品安全</text>
+            <text class="fee-title">{{ t('shipping.insuranceFee') }}</text>
+            <text class="fee-desc">{{ t('shipping.insuranceFeeDesc') }}</text>
           </view>
         </view>
       </view>
@@ -147,24 +147,24 @@
       <view class="section-card tips-card">
         <view class="section-header">
           <text class="section-icon">💡</text>
-          <text class="section-title">发货小贴士</text>
+          <text class="section-title">{{ t('shipping.tipsTitle') }}</text>
         </view>
         <view class="tips-content">
           <view class="tip-item">
             <text class="tip-emoji">✨</text>
-            <text class="tip-text">提前1-2天预约取件，避免节假日延误</text>
+            <text class="tip-text">{{ t('shipping.tip1') }}</text>
           </view>
           <view class="tip-item">
             <text class="tip-emoji">📱</text>
-            <text class="tip-text">保存好快递单号，方便查询物流状态</text>
+            <text class="tip-text">{{ t('shipping.tip2') }}</text>
           </view>
           <view class="tip-item">
             <text class="tip-emoji">💬</text>
-            <text class="tip-text">有问题及时联系客服，我们随时为您服务</text>
+            <text class="tip-text">{{ t('shipping.tip3') }}</text>
           </view>
           <view class="tip-item">
             <text class="tip-emoji">🎯</text>
-            <text class="tip-text">首次发货建议选择标准服务，熟悉流程后再选快速服务</text>
+            <text class="tip-text">{{ t('shipping.tip4') }}</text>
           </view>
         </view>
       </view>
@@ -173,11 +173,11 @@
       <view class="quick-actions">
         <view class="action-btn primary-btn" @tap="goToCalculator">
           <text class="btn-icon">🧮</text>
-          <text class="btn-text">运费计算</text>
+          <text class="btn-text">{{ t('shipping.feeCalculator') }}</text>
         </view>
         <view class="action-btn secondary-btn" @tap="goToFlow">
           <text class="btn-icon">📋</text>
-          <text class="btn-text">发货流程</text>
+          <text class="btn-text">{{ t('shipping.shippingFlow') }}</text>
         </view>
       </view>
     </view>

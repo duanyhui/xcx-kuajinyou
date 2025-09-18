@@ -232,17 +232,134 @@ export interface LanguagePack {
     // 复制成功消息
     urlCopied: string
   }
-  // 发货需知页面
+  // 运输页面
   shipping: {
-    title: string
-    headerTitle: string
-    headerSubtitle: string
-    importantTitle: string
-    packagingTitle: string
-    prohibitedTitle: string
-    limitTitle: string
-    feeTitle: string
-    tipsTitle: string
+    pageTitle: string
+    requirements: {
+      title: string
+      items: string[]
+    }
+    prohibited: {
+      title: string
+      note: string
+      categories: {
+        dangerous: {
+          title: string
+          items: string[]
+        }
+        fragile: {
+          title: string
+          items: string[]
+        }
+        documents: {
+          title: string
+          items: string[]
+        }
+        others: {
+          title: string
+          items: string[]
+        }
+      }
+    }
+    limits: {
+      title: string
+      weight: {
+        title: string
+        value: string
+        note: string
+      }
+      size: {
+        title: string
+        value: string
+        note: string
+      }
+    }
+    fees: {
+      title: string
+      calculation: {
+        title: string
+        formula: string
+        note: string
+      }
+      additional: {
+        title: string
+        overweight: string
+        oversized: string
+        dangerous: string
+      }
+    }
+    contact: {
+      title: string
+      help: string
+      wechat: string
+      phone: string
+    }
+  }
+  // 订单发货页面
+  shippingOrders: {
+    pageTitle: string
+    loading: string
+    empty: {
+      title: string
+      description: string
+    }
+    orderCard: {
+      orderNumber: string
+      itemName: string
+      price: string
+      quantity: string
+      packageCount: string
+      packageUnit: string
+    }
+    status: {
+      customs: {
+        passed: string
+        failed: string
+        pending: string
+      }
+      warehouse: {
+        in: string
+        out: string
+        pending: string
+      }
+    }
+    actions: {
+      viewDetail: string
+      confirmShipping: string
+    }
+    modals: {
+      confirmShipping: {
+        title: string
+        content: string
+        cancel: string
+        confirm: string
+      }
+      statusDetail: {
+        customs: {
+          title: string
+          content: string
+        }
+        warehouse: {
+          title: string
+          content: string
+        }
+        confirm: string
+      }
+    }
+    messages: {
+      shipping: string
+      shippingSuccess: string
+      shippingFailed: string
+      networkError: string
+      fetchOrdersFailed: string
+      funcInDevelopment: string
+    }
+    bottomNav: {
+      home: string
+      order: string
+      shipping: string
+      profile: string
+    }
   }
   // 常见问题页面
   faq: {

@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">←</text>
             </view>
-            <text class="page-title">订单发货</text>
+            <text class="page-title">{{ t('shippingOrders.pageTitle') }}</text>
             <view class="header-placeholder"></view>
           </view>
         </view>
@@ -20,14 +20,14 @@
       <!-- 加载状态 -->
       <view class="loading-container" v-if="isLoading">
         <view class="loading-spinner"></view>
-        <text class="loading-text">加载中...</text>
+        <text class="loading-text">{{ t('shippingOrders.loading') }}</text>
       </view>
 
       <!-- 空状态 -->
       <view class="empty-container" v-else-if="!isLoading && orders.length === 0">
         <view class="empty-icon">📦</view>
-        <text class="empty-title">暂无待发货订单</text>
-        <text class="empty-desc">当前没有需要发货的订单</text>
+        <text class="empty-title">{{ t('shippingOrders.empty.title') }}</text>
+        <text class="empty-desc">{{ t('shippingOrders.empty.description') }}</text>
       </view>
 
       <!-- 订单列表 -->
@@ -48,35 +48,35 @@
               </view>
             </view>
             <view class="order-count">
-              <text class="count-text">{{ order.packageCount }}件</text>
+              <text class="count-text">{{ order.packageCount }}{{ t('shippingOrders.orderCard.packageUnit') }}</text>
             </view>
           </view>
 
           <!-- 订单状态 -->
           <view class="order-status">
             <view 
-              class="status-btn passed" 
-              v-if="order.customsStatus === 'passed'"
+              v-if="order.customsStatus === 'passed'" 
+              class="status-btn passed"
               @click="showStatusDetail(order, 'customs')"
             >
-              <text class="status-text">核验未通过</text>
+              <text class="status-text">{{ t('shippingOrders.status.customs.failed') }}</text>
             </view>
             <view 
-              class="status-btn warehouse" 
-              v-if="order.warehouseStatus === 'in'"
+              v-if="order.warehouseStatus === 'in'" 
+              class="status-btn warehouse"
               @click="showStatusDetail(order, 'warehouse')"
             >
-              <text class="status-text">待入仓</text>
+              <text class="status-text">{{ t('shippingOrders.status.warehouse.pending') }}</text>
             </view>
           </view>
 
           <!-- 操作按钮 -->
           <view class="order-actions">
             <view class="action-btn secondary" @click="viewOrderDetail(order)">
-              <text class="action-text">查看详情</text>
+              <text class="action-text">{{ t('shippingOrders.actions.viewDetail') }}</text>
             </view>
             <view class="action-btn primary" @click="confirmShipping(order)">
-              <text class="action-text">确认发货</text>
+              <text class="action-text">{{ t('shippingOrders.actions.confirmShipping') }}</text>
             </view>
           </view>
         </view>
@@ -89,25 +89,25 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('shippingOrders.bottomNav.home') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('shippingOrders.bottomNav.order') }}</text>
       </view>
       <view class="nav-item active" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('shippingOrders.bottomNav.shipping') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('shippingOrders.bottomNav.profile') }}</text>
       </view>
     </view>
 
@@ -118,6 +118,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 
 // 订单信息接口
 interface ShippingOrder {
@@ -142,6 +144,16 @@ interface ApiResponse {
 
 const isLoading = ref(true)
 const orders = ref<ShippingOrder[]>([])
+
+// 初始化多语言系统
+onMounted(() => {
+  setLanguagePacks({
+    zh: zhLanguagePack,
+    ko: koLanguagePack
+  })
+  initLocale()
+  loadOrders()
+})
 
 // 获取待发货订单列表
 const fetchShippingOrders = async (): Promise<ApiResponse> => {
@@ -215,7 +227,7 @@ const loadOrders = async () => {
       orders.value = result.data
     } else {
       uni.showToast({
-        title: result.message || '获取订单失败',
+        title: result.message || t('shippingOrders.messages.fetchOrdersFailed'),
         icon: 'none'
       })
       orders.value = []
@@ -223,7 +235,7 @@ const loadOrders = async () => {
   } catch (error) {
     console.error('加载订单失败:', error)
     uni.showToast({
-      title: '网络异常，请重试',
+      title: t('shippingOrders.messages.networkError'),
       icon: 'none'
     })
     orders.value = []
@@ -236,7 +248,7 @@ const loadOrders = async () => {
 const viewOrderDetail = (order: ShippingOrder) => {
   console.log('查看订单详情:', order)
   uni.showToast({
-    title: '查看订单详情',
+    title: t('shippingOrders.actions.viewDetail'),
     icon: 'none'
   })
   // TODO: 跳转到订单详情页面
@@ -249,11 +261,11 @@ const viewOrderDetail = (order: ShippingOrder) => {
 const confirmShipping = async (order: ShippingOrder) => {
   try {
     const result = await uni.showModal({
-      title: '确认发货',
-      content: `确定要发货订单 ${order.orderNumber} 吗？`,
+      title: t('shippingOrders.modals.confirmShipping.title'),
+      content: `${t('shippingOrders.modals.confirmShipping.content')} ${order.orderNumber}？`,
       showCancel: true,
-      cancelText: '取消',
-      confirmText: '确认'
+      cancelText: t('shippingOrders.modals.confirmShipping.cancel'),
+      confirmText: t('shippingOrders.modals.confirmShipping.confirm')
     })
 
     if (!result.confirm) {
@@ -261,7 +273,7 @@ const confirmShipping = async (order: ShippingOrder) => {
     }
 
     uni.showLoading({
-      title: '发货中...'
+      title: t('shippingOrders.messages.shipping')
     })
 
     // TODO: 替换为实际的发货API调用
@@ -271,7 +283,7 @@ const confirmShipping = async (order: ShippingOrder) => {
 
     if (shipResult.success) {
       uni.showToast({
-        title: '发货成功',
+        title: t('shippingOrders.messages.shippingSuccess'),
         icon: 'success'
       })
       
@@ -279,7 +291,7 @@ const confirmShipping = async (order: ShippingOrder) => {
       await loadOrders()
     } else {
       uni.showToast({
-        title: shipResult.message || '发货失败',
+        title: shipResult.message || t('shippingOrders.messages.shippingFailed'),
         icon: 'none'
       })
     }
@@ -287,7 +299,7 @@ const confirmShipping = async (order: ShippingOrder) => {
     uni.hideLoading()
     console.error('发货失败:', error)
     uni.showToast({
-      title: '网络异常，请重试',
+      title: t('shippingOrders.messages.networkError'),
       icon: 'none'
     })
   }
@@ -335,16 +347,18 @@ const confirmOrderShipping = async (orderId: string): Promise<{ success: boolean
 
 // 显示状态详情
 const showStatusDetail = (order: ShippingOrder, type: 'customs' | 'warehouse') => {
-  const title = type === 'customs' ? '核验状态' : '入仓状态'
+  const title = type === 'customs' ? 
+    t('shippingOrders.modals.statusDetail.customs.title') : 
+    t('shippingOrders.modals.statusDetail.warehouse.title')
   const content = type === 'customs' ? 
-    '订单正在进行海关核验，请耐心等待' : 
-    '包裹正在等待入仓，请确认发货信息'
+    t('shippingOrders.modals.statusDetail.customs.content') : 
+    t('shippingOrders.modals.statusDetail.warehouse.content')
   
   uni.showModal({
     title,
     content,
     showCancel: false,
-    confirmText: '知道了'
+    confirmText: t('shippingOrders.modals.statusDetail.confirm')
   })
 }
 
@@ -375,7 +389,7 @@ const switchTab = (tab: string) => {
     })
   } else {
     uni.showToast({
-      title: `${tab}功能开发中`,
+      title: `${tab}${t('shippingOrders.messages.funcInDevelopment')}`,
       icon: 'none',
       duration: 1000
     })
@@ -386,11 +400,6 @@ const switchTab = (tab: string) => {
 const goBack = () => {
   uni.navigateBack()
 }
-
-// 页面加载时获取数据
-onMounted(() => {
-  loadOrders()
-})
 
 // 导出函数供外部调用
 defineExpose({
