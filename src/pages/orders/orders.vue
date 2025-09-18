@@ -51,8 +51,8 @@
       <!-- 空状态 -->
       <view v-else-if="filteredOrders.length === 0" class="empty-section">
         <view class="empty-icon">📦</view>
-        <text class="empty-text">暂无{{ currentStatusName }}订单</text>
-        <text class="empty-desc">您还没有{{ currentStatusName }}的订单哦</text>
+        <text class="empty-text">{{ t('orders.noOrders') }}</text>
+        <text class="empty-desc">{{ t('orders.noOrdersDesc') }}</text>
       </view>
 
       <!-- 订单列表 -->
@@ -65,7 +65,7 @@
         >
           <view class="order-header">
             <view class="order-info">
-              <text class="order-number">订单号: {{ order.orderNumber }}</text>
+              <text class="order-number">{{ t('orders.orderNumber') }}: {{ order.orderNumber }}</text>
               <view class="status-badge" :class="getStatusClass(order.status)">
                 <text class="status-text">{{ getStatusText(order.status) }}</text>
               </view>
@@ -76,28 +76,28 @@
           <view class="order-content">
             <view class="order-summary">
               <view class="summary-item">
-                <text class="summary-label">包裹数量</text>
-                <text class="summary-value">{{ order.packageCount }}个</text>
+                <text class="summary-label">{{ t('orders.packageCount') }}</text>
+                <text class="summary-value">{{ order.packageCount }}{{ t('orders.packageUnit') }}</text>
               </view>
               <view class="summary-item">
-                <text class="summary-label">总重量</text>
+                <text class="summary-label">{{ t('orders.totalWeight') }}</text>
                 <text class="summary-value">{{ order.totalWeight }}kg</text>
               </view>
               <view class="summary-item">
-                <text class="summary-label">运费</text>
+                <text class="summary-label">{{ t('orders.shippingFee') }}</text>
                 <text class="summary-value price">¥{{ order.shippingFee }}</text>
               </view>
             </view>
 
             <!-- 商品列表预览 -->
             <view class="items-preview">
-              <text class="items-label">商品:</text>
-              <text class="items-text">{{ order.items.slice(0, 3).join(', ') }}{{ order.items.length > 3 ? '等' : '' }}</text>
+              <text class="items-label">{{ t('orders.goods') }}:</text>
+              <text class="items-text">{{ order.items.slice(0, 3).join(', ') }}{{ order.items.length > 3 ? t('orders.etc') : '' }}</text>
             </view>
 
             <!-- 收货地址信息 -->
             <view class="address-info" v-if="order.address">
-              <text class="address-label">收货:</text>
+              <text class="address-label">{{ t('orders.recipient') }}:</text>
               <text class="address-text">{{ order.address.name }} {{ order.address.phone }}</text>
             </view>
           </view>
@@ -109,31 +109,31 @@
                 class="action-btn primary"
                 @click.stop="confirmShipping(order)"
               >
-                <text class="btn-text">确认货齐</text>
+                <text class="btn-text">{{ t('orders.confirmShipping') }}</text>
               </view>
               <view 
                 v-else-if="order.status === 'packing'" 
                 class="action-btn secondary"
                 @click.stop="confirmPacking(order)"
               >
-                <text class="btn-text">确认打包</text>
+                <text class="btn-text">{{ t('orders.confirmPacking') }}</text>
               </view>
               <view 
                 v-else-if="order.status === 'payment'" 
                 class="action-btn success"
                 @click.stop="makePayment(order)"
               >
-                <text class="btn-text">立即支付</text>
+                <text class="btn-text">{{ t('orders.payNow') }}</text>
               </view>
               <view 
                 v-else-if="order.status === 'delivery'" 
                 class="action-btn warning"
                 @click.stop="confirmDelivery(order)"
               >
-                <text class="btn-text">确认发货</text>
+                <text class="btn-text">{{ t('orders.confirmDelivery') }}</text>
               </view>
               <view class="action-btn outline" @click.stop="viewOrderDetail(order)">
-                <text class="btn-text">详情</text>
+                <text class="btn-text">{{ t('orders.details') }}</text>
               </view>
             </view>
           </view>
@@ -147,31 +147,34 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('orders.navHome') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('orders.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('orders.navShipping') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('orders.navProfile') }}</text>
       </view>
     </view>
   </view>
 </template>
 
 <script>
+import { ref, computed, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 // TODO: 引入API配置
 // import { getUserOrders, confirmShipping, confirmPacking, makePayment, confirmDelivery } from '@/utils/api.js'
 
@@ -182,21 +185,37 @@ export default {
       loading: true,
       currentStatus: 'all',
       orders: [],
-      statusTabs: [
-        { key: 'all', name: '全部', badge: 0 },
-        { key: 'shipping', name: '待货齐', badge: 0 },
-        { key: 'packing', name: '待打包', badge: 0 },
-        { key: 'payment', name: '待支付', badge: 0 },
-        { key: 'delivery', name: '待发货', badge: 0 }
-      ]
+      statusTabs: []
     }
+  },
+  
+  // 添加 t 方法到组件实例
+  created() {
+    // 初始化多语言系统
+    setLanguagePacks({
+      zh: zhLanguagePack,
+      ko: koLanguagePack
+    })
+    initLocale()
+    
+    // 将 t 函数绑定到组件实例
+    this.t = t
+    
+    // 初始化状态标签（使用 i18n）
+    this.statusTabs = [
+      { key: 'all', name: this.t('orders.statusAll'), badge: 0 },
+      { key: 'shipping', name: this.t('orders.statusShipping'), badge: 0 },
+      { key: 'packing', name: this.t('orders.statusPacking'), badge: 0 },
+      { key: 'payment', name: this.t('orders.statusPayment'), badge: 0 },
+      { key: 'delivery', name: this.t('orders.statusDelivery'), badge: 0 }
+    ]
   },
   
   computed: {
     // 当前状态名称
     currentStatusName() {
       const currentTab = this.statusTabs.find(tab => tab.key === this.currentStatus)
-      return currentTab ? currentTab.name : '订单管理'
+      return currentTab ? currentTab.name : this.t('orders.orderManagement')
     },
     
     // 过滤后的订单列表
@@ -241,7 +260,7 @@ export default {
       } catch (error) {
         console.error('加载订单失败:', error)
         uni.showToast({
-          title: '加载失败',
+          title: this.t('orders.loadFailed'),
           icon: 'none'
         })
       } finally {
@@ -372,24 +391,24 @@ export default {
     // 获取状态文本
     getStatusText(status) {
       const statusMap = {
-        shipping: '待货齐',
-        packing: '待打包',
-        payment: '待支付',
-        delivery: '待发货'
+        shipping: this.t('orders.statusShipping'),
+        packing: this.t('orders.statusPacking'),
+        payment: this.t('orders.statusPayment'),
+        delivery: this.t('orders.statusDelivery')
       }
-      return statusMap[status] || '未知状态'
+      return statusMap[status] || this.t('orders.unknownStatus')
     },
     
     // 确认货齐
     async confirmShipping(order) {
       try {
         const result = await uni.showModal({
-          title: '确认货齐',
-          content: '确认所有包裹已到达仓库？'
+          title: this.t('orders.confirmShipping'),
+          content: this.t('orders.confirmShippingMessage')
         })
         
         if (result.confirm) {
-          uni.showLoading({ title: '处理中...' })
+          uni.showLoading({ title: this.t('orders.processing') })
           
           // TODO: 替换为真实API调用
           // await confirmShipping({ orderId: order.id })
@@ -399,7 +418,7 @@ export default {
           
           uni.hideLoading()
           uni.showToast({
-            title: '确认成功',
+            title: this.t('orders.confirmSuccess'),
             icon: 'success'
           })
           
@@ -413,7 +432,7 @@ export default {
       } catch (error) {
         uni.hideLoading()
         uni.showToast({
-          title: '操作失败',
+          title: this.t('orders.operationFailed'),
           icon: 'none'
         })
       }
@@ -423,19 +442,19 @@ export default {
     async confirmPacking(order) {
       try {
         const result = await uni.showModal({
-          title: '确认打包',
-          content: '确认订单已完成打包？'
+          title: this.t('orders.confirmPacking'),
+          content: this.t('orders.confirmPackingMessage')
         })
         
         if (result.confirm) {
-          uni.showLoading({ title: '处理中...' })
+          uni.showLoading({ title: this.t('orders.processing') })
           
           // TODO: 替换为真实API调用
           await this.simulateApiCall()
           
           uni.hideLoading()
           uni.showToast({
-            title: '打包完成',
+            title: this.t('orders.packingComplete'),
             icon: 'success'
           })
           
@@ -449,7 +468,7 @@ export default {
       } catch (error) {
         uni.hideLoading()
         uni.showToast({
-          title: '操作失败',
+          title: this.t('orders.operationFailed'),
           icon: 'none'
         })
       }
@@ -458,14 +477,14 @@ export default {
     // 立即支付
     async makePayment(order) {
       try {
-        uni.showLoading({ title: '跳转支付...' })
+        uni.showLoading({ title: this.t('orders.redirectingPayment') })
         
         // TODO: 替换为真实支付逻辑
         await this.simulateApiCall()
         
         uni.hideLoading()
         uni.showToast({
-          title: '支付成功',
+          title: this.t('orders.paymentSuccess'),
           icon: 'success'
         })
         
@@ -478,7 +497,7 @@ export default {
       } catch (error) {
         uni.hideLoading()
         uni.showToast({
-          title: '支付失败',
+          title: this.t('orders.paymentFailed'),
           icon: 'none'
         })
       }
@@ -488,19 +507,19 @@ export default {
     async confirmDelivery(order) {
       try {
         const result = await uni.showModal({
-          title: '确认发货',
-          content: '确认订单可以发货？'
+          title: this.t('orders.confirmDelivery'),
+          content: this.t('orders.confirmDeliveryMessage')
         })
         
         if (result.confirm) {
-          uni.showLoading({ title: '处理中...' })
+          uni.showLoading({ title: this.t('orders.processing') })
           
           // TODO: 替换为真实API调用
           await this.simulateApiCall()
           
           uni.hideLoading()
           uni.showToast({
-            title: '发货成功',
+            title: this.t('orders.deliverySuccess'),
             icon: 'success'
           })
           
@@ -514,7 +533,7 @@ export default {
       } catch (error) {
         uni.hideLoading()
         uni.showToast({
-          title: '操作失败',
+          title: this.t('orders.operationFailed'),
           icon: 'none'
         })
       }

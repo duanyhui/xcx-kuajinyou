@@ -428,6 +428,52 @@ export const zhLanguagePack: LanguagePack = {
     logoutMessage: '确定要退出登录吗？',
     loggedOut: '已退出登录'
   },
+  // 订单页面
+  orders: {
+    // 状态相关
+    statusAll: '全部',
+    statusShipping: '待货齐',
+    statusPacking: '待打包',
+    statusPayment: '待支付',
+    statusDelivery: '待发货',
+    unknownStatus: '未知状态',
+    orderManagement: '订单管理',
+    // 页面内容
+    noOrders: '暂无订单',
+    noOrdersDesc: '您还没有相关订单哦',
+    orderNumber: '订单号',
+    packageCount: '包裹数量',
+    packageUnit: '个',
+    totalWeight: '总重量',
+    shippingFee: '运费',
+    goods: '商品',
+    etc: '等',
+    recipient: '收货',
+    // 操作按钮
+    confirmShipping: '确认货齐',
+    confirmPacking: '确认打包',
+    payNow: '立即支付',
+    confirmDelivery: '确认发货',
+    details: '详情',
+    // 消息和对话框
+    processing: '处理中...',
+    confirmSuccess: '确认成功',
+    packingComplete: '打包完成',
+    deliverySuccess: '发货成功',
+    operationFailed: '操作失败',
+    loadFailed: '加载失败',
+    confirmShippingMessage: '确认所有包裹已到达仓库？',
+    confirmPackingMessage: '确认订单已完成打包？',
+    confirmDeliveryMessage: '确认订单可以发货？',
+    redirectingPayment: '跳转支付...',
+    paymentSuccess: '支付成功',
+    paymentFailed: '支付失败',
+    // 底部导航
+    navHome: '首页',
+    navOrder: '预报',
+    navShipping: '发货',
+    navProfile: '我的'
+  },
   // 仓库地址页面
   warehouse: {
     title: '仓库地址',
@@ -978,6 +1024,52 @@ export const koLanguagePack: LanguagePack = {
     confirmLogout: '로그아웃 확인',
     logoutMessage: '정말 로그아웃하시겠습니까?',
     loggedOut: '로그아웃되었습니다'
+  },
+  // 주문 페이지
+  orders: {
+    // 상태 관련
+    statusAll: '전체',
+    statusShipping: '출고 대기',
+    statusPacking: '포장 대기',
+    statusPayment: '결제 대기',
+    statusDelivery: '발송 대기',
+    unknownStatus: '알 수 없는 상태',
+    orderManagement: '주문 관리',
+    // 페이지 내용
+    noOrders: '주문이 없습니다',
+    noOrdersDesc: '관련 주문이 아직 없습니다',
+    orderNumber: '주문번호',
+    packageCount: '택배 수량',
+    packageUnit: '개',
+    totalWeight: '총 중량',
+    shippingFee: '운송비',
+    goods: '상품',
+    etc: '등',
+    recipient: '수신',
+    // 작업 버튼
+    confirmShipping: '출고 확인',
+    confirmPacking: '포장 확인',
+    payNow: '즉시 결제',
+    confirmDelivery: '발송 확인',
+    details: '상세정보',
+    // 메시지 및 대화상자
+    processing: '처리 중...',
+    confirmSuccess: '확인 완료',
+    packingComplete: '포장 완료',
+    deliverySuccess: '발송 완료',
+    operationFailed: '작업 실패',
+    loadFailed: '로딩 실패',
+    confirmShippingMessage: '모든 택배가 창고에 도착했는지 확인하시겠습니까?',
+    confirmPackingMessage: '주문 포장이 완료되었는지 확인하시겠습니까?',
+    confirmDeliveryMessage: '주문을 발송할 수 있는지 확인하시겠습니까?',
+    redirectingPayment: '결제로 이동 중...',
+    paymentSuccess: '결제 성공',
+    paymentFailed: '결제 실패',
+    // 하단 네비게이션
+    navHome: '홈',
+    navOrder: '예보',
+    navShipping: '발송',
+    navProfile: '내 정보'
   },
   warehouse: {
     title: '창고 주소',

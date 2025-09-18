@@ -510,6 +510,52 @@ export interface LanguagePack {
     logoutMessage: string
     loggedOut: string
   }
+  // 订单页面
+  orders: {
+    // 状态相关
+    statusAll: string
+    statusShipping: string
+    statusPacking: string
+    statusPayment: string
+    statusDelivery: string
+    unknownStatus: string
+    orderManagement: string
+    // 页面内容
+    noOrders: string
+    noOrdersDesc: string
+    orderNumber: string
+    packageCount: string
+    packageUnit: string
+    totalWeight: string
+    shippingFee: string
+    goods: string
+    etc: string
+    recipient: string
+    // 操作按钮
+    confirmShipping: string
+    confirmPacking: string
+    payNow: string
+    confirmDelivery: string
+    details: string
+    // 消息和对话框
+    processing: string
+    confirmSuccess: string
+    packingComplete: string
+    deliverySuccess: string
+    operationFailed: string
+    loadFailed: string
+    confirmShippingMessage: string
+    confirmPackingMessage: string
+    confirmDeliveryMessage: string
+    redirectingPayment: string
+    paymentSuccess: string
+    paymentFailed: string
+    // 底部导航
+    navHome: string
+    navOrder: string
+    navShipping: string
+    navProfile: string
+  }
   // 仓库地址页面
   warehouse: {
     title: string
