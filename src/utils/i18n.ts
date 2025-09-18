@@ -556,6 +556,55 @@ export interface LanguagePack {
     navShipping: string
     navProfile: string
   }
+  // 包裹页面
+  packages: {
+    // 基础信息
+    title: string
+    // 状态标签
+    statusAll: string
+    statusPending: string
+    statusWarehouse: string
+    statusAbnormal: string
+    statusConfirm: string
+    // 状态标签文本
+    statusLabelPending: string
+    statusLabelShipped: string
+    statusLabelWarehouse: string
+    statusLabelAbnormal: string
+    statusLabelConfirm: string
+    statusLabelCompleted: string
+    statusLabelUnknown: string
+    // 包裹卡片标签
+    sender: string
+    weight: string
+    time: string
+    // 操作按钮
+    actionClaim: string
+    actionConfirmWarehouse: string
+    actionHandleAbnormal: string
+    actionConfirm: string
+    actionDetail: string
+    // 空状态提示
+    emptyStatus: string
+    emptyAll: string
+    emptyPending: string
+    emptyWarehouse: string
+    emptyAbnormal: string
+    emptyConfirm: string
+    emptyDefault: string
+    // 对话框和消息
+    confirmClaimTitle: string
+    confirmClaimContent: string
+    claimSuccess: string
+    claimFailed: string
+    warehouseInProgress: string
+    confirmInProgress: string
+    errorFetchData: string
+    // 示例包裹
+    sampleKorea: string
+    sampleSeoul: string
+    sampleBusan: string
+  }
   // 仓库地址页面
   warehouse: {
     title: string

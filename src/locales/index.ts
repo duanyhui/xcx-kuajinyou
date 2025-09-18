@@ -474,6 +474,55 @@ export const zhLanguagePack: LanguagePack = {
     navShipping: '发货',
     navProfile: '我的'
   },
+  // 包裹页面
+  packages: {
+    // 基础信息
+    title: '包裹',
+    // 状态标签
+    statusAll: '全部',
+    statusPending: '认领',
+    statusWarehouse: '待入仓',
+    statusAbnormal: '异常',
+    statusConfirm: '待确认',
+    // 状态标签文本
+    statusLabelPending: '待认领',
+    statusLabelShipped: '已发货',
+    statusLabelWarehouse: '待入仓',
+    statusLabelAbnormal: '异常',
+    statusLabelConfirm: '待确认',
+    statusLabelCompleted: '已完成',
+    statusLabelUnknown: '未知',
+    // 包裹卡片标签
+    sender: '发件人：',
+    weight: '重量：',
+    time: '时间：',
+    // 操作按钮
+    actionClaim: '认领',
+    actionConfirmWarehouse: '确认入仓',
+    actionHandleAbnormal: '处理异常',
+    actionConfirm: '确认',
+    actionDetail: '详情',
+    // 空状态提示
+    emptyStatus: '暂无{status}包裹',
+    emptyAll: '暂时没有任何包裹',
+    emptyPending: '暂无需要认领的包裹',
+    emptyWarehouse: '暂无待入仓的包裹',
+    emptyAbnormal: '暂无异常包裹',
+    emptyConfirm: '暂无待确认的包裹',
+    emptyDefault: '暂无相关包裹',
+    // 对话框和消息
+    confirmClaimTitle: '确认认领',
+    confirmClaimContent: '确定要认领包裹 {trackingNumber} 吗？',
+    claimSuccess: '认领成功',
+    claimFailed: '认领失败',
+    warehouseInProgress: '确认入仓功能开发中',
+    confirmInProgress: '确认包裹功能开发中',
+    errorFetchData: '获取包裹数据失败:',
+    // 示例包裹
+    sampleKorea: '韩国商品包裹',
+    sampleSeoul: '首尔直邮包裹',
+    sampleBusan: '釜山发货包裹'
+  },
   // 仓库地址页面
   warehouse: {
     title: '仓库地址',
@@ -1070,6 +1119,55 @@ export const koLanguagePack: LanguagePack = {
     navOrder: '예보',
     navShipping: '발송',
     navProfile: '내 정보'
+  },
+  // 택배 페이지
+  packages: {
+    // 기본 정보
+    title: '택배',
+    // 상태 탭
+    statusAll: '전체',
+    statusPending: '인수',
+    statusWarehouse: '입고 대기',
+    statusAbnormal: '이상',
+    statusConfirm: '확인 대기',
+    // 상태 라벨 텍스트
+    statusLabelPending: '인수 대기',
+    statusLabelShipped: '발송됨',
+    statusLabelWarehouse: '입고 대기',
+    statusLabelAbnormal: '이상',
+    statusLabelConfirm: '확인 대기',
+    statusLabelCompleted: '완료됨',
+    statusLabelUnknown: '알 수 없음',
+    // 택배 카드 라벨
+    sender: '발송인:',
+    weight: '중량:',
+    time: '시간:',
+    // 작업 버튼
+    actionClaim: '인수',
+    actionConfirmWarehouse: '입고 확인',
+    actionHandleAbnormal: '이상 처리',
+    actionConfirm: '확인',
+    actionDetail: '상세정보',
+    // 빈 상태 안내
+    emptyStatus: '{status} 택배가 없습니다',
+    emptyAll: '현재 택배가 없습니다',
+    emptyPending: '인수할 택배가 없습니다',
+    emptyWarehouse: '입고 대기 택배가 없습니다',
+    emptyAbnormal: '이상 택배가 없습니다',
+    emptyConfirm: '확인 대기 택배가 없습니다',
+    emptyDefault: '관련 택배가 없습니다',
+    // 대화상자 및 메시지
+    confirmClaimTitle: '인수 확인',
+    confirmClaimContent: '택배 {trackingNumber}를 인수하시겠습니까?',
+    claimSuccess: '인수 성공',
+    claimFailed: '인수 실패',
+    warehouseInProgress: '입고 확인 기능 개발 중',
+    confirmInProgress: '택배 확인 기능 개발 중',
+    errorFetchData: '택배 데이터 불러오기 실패:',
+    // 예시 택배
+    sampleKorea: '한국 상품 택배',
+    sampleSeoul: '서울 직송 택배',
+    sampleBusan: '부산 발송 택배'
   },
   warehouse: {
     title: '창고 주소',
