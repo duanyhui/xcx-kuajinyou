@@ -622,6 +622,11 @@ export interface LanguagePack {
     copySuccess: string
     copyFailed: string
     allInfoCopied: string
+    contactServiceInProgress: string
+    navHome: string
+    navOrder: string
+    navShipping: string
+    navProfile: string
   }
   // 地址表单页面
   addressForm: {

@@ -8,7 +8,7 @@
             <view class="back-btn" @click="goBack">
               <text class="back-icon">‹</text>
             </view>
-            <text class="page-title">仓库地址</text>
+            <text class="page-title">{{ t('warehouse.title') }}</text>
             <view class="placeholder"></view>
           </view>
         </view>
@@ -21,9 +21,9 @@
         <!-- 仓库名称 -->
         <view class="address-item">
           <view class="item-content">
-            <text class="item-label">威海仓</text>
+            <text class="item-label">{{ t('warehouse.warehouseName') }}</text>
             <view class="copy-btn" @click="copyToClipboard('威海仓')">
-              <text class="copy-text">复制全部</text>
+              <text class="copy-text">{{ t('warehouse.copyAll') }}</text>
             </view>
           </view>
         </view>
@@ -33,7 +33,7 @@
           <view class="item-content">
             <text class="item-text">{{ userName }}{{ userCode }}</text>
             <view class="copy-btn" @click="copyToClipboard(userName + userCode)">
-              <text class="copy-text">复制</text>
+              <text class="copy-text">{{ t('warehouse.copy') }}</text>
             </view>
           </view>
         </view>
@@ -43,7 +43,7 @@
           <view class="item-content">
             <text class="item-text">13061124980</text>
             <view class="copy-btn" @click="copyToClipboard('13061124980')">
-              <text class="copy-text">复制</text>
+              <text class="copy-text">{{ t('warehouse.copy') }}</text>
             </view>
           </view>
         </view>
@@ -53,7 +53,7 @@
           <view class="item-content">
             <text class="item-text">山东省威海市环翠区皇冠街道经区海埠路56号泛杰产业园B2-3中海川转运仓</text>
             <view class="copy-btn" @click="copyToClipboard('山东省威海市环翠区皇冠街道经区海埠路56号泛杰产业园B2-3中海川转运仓')">
-              <text class="copy-text">复制</text>
+              <text class="copy-text">{{ t('warehouse.copy') }}</text>
             </view>
           </view>
         </view>
@@ -64,14 +64,14 @@
         <view class="tips-card">
           <view class="tips-header">
             <text class="tips-icon">💡</text>
-            <text class="tips-title">使用说明</text>
+            <text class="tips-title">{{ t('warehouse.usageInstructions') }}</text>
           </view>
           <view class="tips-content">
-            <text class="tips-text">1. 请将此地址填写为您的收货地址</text>
-            <text class="tips-text">2. 收货人姓名请填写：{{ userName }}{{ userCode }}</text>
-            <text class="tips-text">3. 联系电话请填写：13061124980</text>
-            <text class="tips-text">4. 包裹到达仓库后，我们会及时为您处理</text>
-            <text class="tips-text">5. 如有疑问，请联系在线客服</text>
+            <text class="tips-text">{{ t('warehouse.instruction1') }}</text>
+            <text class="tips-text">{{ t('warehouse.instruction2') }}{{ userName }}{{ userCode }}</text>
+            <text class="tips-text">{{ t('warehouse.instruction3') }}13061124980</text>
+            <text class="tips-text">{{ t('warehouse.instruction4') }}</text>
+            <text class="tips-text">{{ t('warehouse.instruction5') }}</text>
           </view>
         </view>
       </view>
@@ -79,10 +79,10 @@
       <!-- 操作按钮 -->
       <view class="action-section">
         <view class="action-btn primary" @click="copyAllInfo">
-          <text class="btn-text">一键复制全部信息</text>
+          <text class="btn-text">{{ t('warehouse.copyAllInfo') }}</text>
         </view>
         <view class="action-btn secondary" @click="contactService">
-          <text class="btn-text">联系客服</text>
+          <text class="btn-text">{{ t('warehouse.contactService') }}</text>
         </view>
       </view>
     </view>
@@ -93,25 +93,25 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('warehouse.navHome') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('warehouse.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('warehouse.navShipping') }}</text>
       </view>
       <view class="nav-item active" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('warehouse.navProfile') }}</text>
       </view>
     </view>
   </view>
@@ -119,9 +119,27 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
+import { languagePacks } from '../../locales/index'
 
 const userCode = ref('100017')
 const userName = ref('跨境寄件吉祥物')
+
+// 页面加载时获取用户信息
+onMounted(() => {
+  initLocale()
+  setLanguagePacks(languagePacks)
+  
+  const savedUserInfo = uni.getStorageSync('userInfo')
+  if (savedUserInfo) {
+    if (savedUserInfo.userId) {
+      userCode.value = savedUserInfo.userId
+    }
+    if (savedUserInfo.nickname) {
+      userName.value = savedUserInfo.nickname
+    }
+  }
+})
 
 // 返回上一页
 const goBack = () => {
@@ -134,14 +152,14 @@ const copyToClipboard = (text: string) => {
     data: text,
     success: () => {
       uni.showToast({
-        title: '复制成功',
+        title: t('warehouse.copySuccess'),
         icon: 'success',
         duration: 1500
       })
     },
     fail: () => {
       uni.showToast({
-        title: '复制失败',
+        title: t('warehouse.copyFailed'),
         icon: 'none',
         duration: 1500
       })
@@ -159,14 +177,14 @@ const copyAllInfo = () => {
     data: allInfo,
     success: () => {
       uni.showToast({
-        title: '全部信息已复制',
+        title: t('warehouse.allInfoCopied'),
         icon: 'success',
         duration: 2000
       })
     },
     fail: () => {
       uni.showToast({
-        title: '复制失败',
+        title: t('warehouse.copyFailed'),
         icon: 'none',
         duration: 1500
       })
@@ -177,7 +195,7 @@ const copyAllInfo = () => {
 // 联系客服
 const contactService = () => {
   uni.showToast({
-    title: '联系客服功能开发中',
+    title: t('warehouse.contactServiceInProgress'),
     icon: 'none',
     duration: 1500
   })
@@ -203,19 +221,6 @@ const switchTab = (tab: string) => {
     })
   }
 }
-
-// 页面加载时获取用户信息
-onMounted(() => {
-  const savedUserInfo = uni.getStorageSync('userInfo')
-  if (savedUserInfo) {
-    if (savedUserInfo.userId) {
-      userCode.value = savedUserInfo.userId
-    }
-    if (savedUserInfo.nickname) {
-      userName.value = savedUserInfo.nickname
-    }
-  }
-})
 </script>
 
 <style scoped>

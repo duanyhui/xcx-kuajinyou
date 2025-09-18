@@ -530,16 +530,21 @@ export const zhLanguagePack: LanguagePack = {
     copyAll: '复制全部',
     copy: '复制',
     usageInstructions: '使用说明',
-    instruction1: '请将此地址填写为您的收货地址',
-    instruction2: '收货人姓名请填写：',
-    instruction3: '联系电话请填写：13061124980',
-    instruction4: '包裹到达仓库后，我们会及时为您处理',
-    instruction5: '如有疑问，请联系在线客服',
+    instruction1: '1. 请将此地址填写为您的收货地址',
+    instruction2: '2. 收货人姓名请填写：',
+    instruction3: '3. 联系电话请填写：',
+    instruction4: '4. 包裹到达仓库后，我们会及时为您处理',
+    instruction5: '5. 如有疑问，请联系在线客服',
     copyAllInfo: '一键复制全部信息',
     contactService: '联系客服',
     copySuccess: '复制成功',
     copyFailed: '复制失败',
-    allInfoCopied: '全部信息已复制'
+    allInfoCopied: '全部信息已复制',
+    contactServiceInProgress: '联系客服功能开发中',
+    navHome: '首页',
+    navOrder: '预报',
+    navShipping: '发货',
+    navProfile: '我的'
   },
   // 地址表单页面
   addressForm: {
@@ -1175,16 +1180,21 @@ export const koLanguagePack: LanguagePack = {
     copyAll: '전체 복사',
     copy: '복사',
     usageInstructions: '사용 안내',
-    instruction1: '이 주소를 수신 주소로 입력해주세요',
-    instruction2: '수신인 이름은 다음과 같이 입력해주세요：',
-    instruction3: '연락처는 다음과 같이 입력해주세요：13061124980',
-    instruction4: '택배가 창고에 도착하면 즉시 처리해드립니다',
-    instruction5: '문의사항이 있으시면 온라인 고객센터로 연락해주세요',
+    instruction1: '1. 이 주소를 수신 주소로 입력해주세요',
+    instruction2: '2. 수신인 이름은 다음과 같이 입력해주세요：',
+    instruction3: '3. 연락처는 다음과 같이 입력해주세요：',
+    instruction4: '4. 택배가 창고에 도착하면 즉시 처리해드립니다',
+    instruction5: '5. 문의사항이 있으시면 온라인 고객센터로 연락해주세요',
     copyAllInfo: '전체 정보 한번에 복사',
     contactService: '고객센터 문의',
     copySuccess: '복사 완료',
     copyFailed: '복사 실패',
-    allInfoCopied: '전체 정보가 복사되었습니다'
+    allInfoCopied: '전체 정보가 복사되었습니다',
+    contactServiceInProgress: '고객센터 기능 개발 중',
+    navHome: '홈',
+    navOrder: '예보',
+    navShipping: '발송',
+    navProfile: '내 정보'
   },
   // 주소 양식 페이지
   addressForm: {
@@ -1302,4 +1312,10 @@ export const koLanguagePack: LanguagePack = {
       profile: '내 정보'
     }
   }
+}
+
+// 导出语言包对象
+export const languagePacks = {
+  zh: zhLanguagePack,
+  ko: koLanguagePack
 }
