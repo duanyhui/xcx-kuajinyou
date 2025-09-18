@@ -23,8 +23,8 @@
             <view class="logo-shape logo-shape-4"></view>
           </view>
           <view class="company-info">
-            <text class="company-name">中海川公共海外仓</text>
-            <text class="company-subtitle">LOGISTICS INFORMATION SYSTEM</text>
+            <text class="company-name">{{ t('profile.companyName') }}</text>
+            <text class="company-subtitle">{{ t('profile.companySubtitle') }}</text>
           </view>
         </view>
 
@@ -48,8 +48,8 @@
             <text v-else class="avatar-icon">👤</text>
           </view>
           <view class="user-details">
-            <text class="user-name">{{ userInfo.nickname || '跨境寄件吉祥物' }}</text>
-            <text class="user-id">NO.{{ userInfo.userId || '100017' }}</text>
+            <text class="user-name">{{ userInfo.nickname || t('profile.defaultNickname') }}</text>
+            <text class="user-id">{{ t('profile.userIdPrefix') }}{{ userInfo.userId || '100017' }}</text>
           </view>
         </view>
 
@@ -63,25 +63,25 @@
               <view class="promotion-icon">
                 <text class="icon">📱</text>
               </view>
-              <text class="promotion-text">推广码</text>
+              <text class="promotion-text">{{ t('profile.promotionCode') }}</text>
             </view>
             <view class="promotion-item" @click="navigateToPromotion('team')">
               <view class="promotion-icon">
                 <text class="icon">👥</text>
               </view>
-              <text class="promotion-text">团成员</text>
+              <text class="promotion-text">{{ t('profile.teamMembers') }}</text>
             </view>
             <view class="promotion-item" @click="navigateToPromotion('orders')">
               <view class="promotion-icon">
                 <text class="icon">📋</text>
               </view>
-              <text class="promotion-text">团订单</text>
+              <text class="promotion-text">{{ t('profile.teamOrders') }}</text>
             </view>
             <view class="promotion-item" @click="navigateToPromotion('wallet')">
               <view class="promotion-icon">
                 <text class="icon">💰</text>
               </view>
-              <text class="promotion-text">佣金</text>
+              <text class="promotion-text">{{ t('profile.commission') }}</text>
             </view>
           </view>
         </view>
@@ -89,34 +89,34 @@
         <!-- 包裹区域 -->
         <view class="package-section">
           <view class="section-header">
-            <text class="section-title">包裹</text>
-            <text class="section-action" @click="viewAllPackages">全部</text>
+            <text class="section-title">{{ t('profile.packageTitle') }}</text>
+            <text class="section-action" @click="viewAllPackages">{{ t('profile.allPackages') }}</text>
           </view>
           <view class="package-grid">
             <view class="package-item" @click="navigateToPackage('pending')">
               <view class="package-icon">
                 <text class="icon">👁</text>
               </view>
-              <text class="package-text">认领</text>
+              <text class="package-text">{{ t('profile.packageClaim') }}</text>
             </view>
             <view class="package-item" @click="navigateToPackage('warehouse')">
               <view class="package-icon">
                 <text class="icon">⏰</text>
                 <view class="notification-badge" v-if="warehouseBadge"></view>
               </view>
-              <text class="package-text">待入仓</text>
+              <text class="package-text">{{ t('profile.packageWaiting') }}</text>
             </view>
             <view class="package-item" @click="navigateToPackage('abnormal')">
               <view class="package-icon">
                 <text class="icon">⚠️</text>
               </view>
-              <text class="package-text">异常</text>
+              <text class="package-text">{{ t('profile.packageAbnormal') }}</text>
             </view>
             <view class="package-item" @click="navigateToPackage('confirm')">
               <view class="package-icon">
                 <text class="icon">❓</text>
               </view>
-              <text class="package-text">待确认</text>
+              <text class="package-text">{{ t('profile.packageConfirm') }}</text>
             </view>
           </view>
         </view>
@@ -124,33 +124,33 @@
         <!-- 订单区域 -->
         <view class="order-section">
           <view class="section-header">
-            <text class="section-title">订单</text>
-            <text class="section-action" @click="viewAllOrders">全部</text>
+            <text class="section-title">{{ t('profile.orderTitle') }}</text>
+            <text class="section-action" @click="viewAllOrders">{{ t('profile.allOrders') }}</text>
           </view>
           <view class="order-grid">
             <view class="order-item" @click="navigateToOrder('shipping')">
               <view class="order-icon">
                 <text class="icon">🚚</text>
               </view>
-              <text class="order-text">待货齐</text>
+              <text class="order-text">{{ t('profile.orderShipping') }}</text>
             </view>
             <view class="order-item" @click="navigateToOrder('packing')">
               <view class="order-icon">
                 <text class="icon">📦</text>
               </view>
-              <text class="order-text">待打包</text>
+              <text class="order-text">{{ t('profile.orderPacking') }}</text>
             </view>
             <view class="order-item" @click="navigateToOrder('payment')">
               <view class="order-icon">
                 <text class="icon">💎</text>
               </view>
-              <text class="order-text">待支付</text>
+              <text class="order-text">{{ t('profile.orderPayment') }}</text>
             </view>
             <view class="order-item" @click="navigateToOrder('delivery')">
               <view class="order-icon">
                 <text class="icon">🔔</text>
               </view>
-              <text class="order-text">待发货</text>
+              <text class="order-text">{{ t('profile.orderDelivery') }}</text>
             </view>
           </view>
         </view>
@@ -159,19 +159,19 @@
         <view class="menu-section">
           <view class="menu-item" @click="navigateToWarehouse">
             <view class="menu-content">
-              <text class="menu-title">仓库地址</text>
+              <text class="menu-title">{{ t('profile.warehouseAddress') }}</text>
             </view>
             <text class="menu-arrow">></text>
           </view>
           <view class="menu-item" @click="navigateToMyAddress">
             <view class="menu-content">
-              <text class="menu-title">我的地址</text>
+              <text class="menu-title">{{ t('profile.myAddress') }}</text>
             </view>
             <text class="menu-arrow">></text>
           </view>
           <view class="menu-item" @click="handleLogout">
             <view class="menu-content">
-              <text class="menu-title">退出登录</text>
+              <text class="menu-title">{{ t('profile.logout') }}</text>
             </view>
             <text class="menu-arrow">></text>
           </view>
@@ -242,7 +242,7 @@ export default {
     // 微信登录
     const handleWechatLogin = () => {
       uni.showLoading({
-        title: '登录中...'
+        title: t('profile.loggingIn')
       })
       
       // 获取微信用户信息
@@ -262,7 +262,7 @@ export default {
             uni.setStorageSync('userInfo', userInfo.value)
             
             uni.showToast({
-              title: '登录成功',
+              title: t('profile.loginSuccess'),
               icon: 'success'
             })
           }, 1500)
@@ -279,7 +279,7 @@ export default {
             }
             
             uni.showToast({
-              title: '登录成功',
+              title: t('profile.loginSuccess'),
               icon: 'success'
             })
           }, 1500)
@@ -363,8 +363,8 @@ export default {
     // 退出登录
     const handleLogout = () => {
       uni.showModal({
-        title: '确认退出',
-        content: '确定要退出登录吗？',
+        title: t('profile.confirmLogout'),
+        content: t('profile.logoutMessage'),
         success: (res) => {
           if (res.confirm) {
             // 清除本地存储
@@ -377,7 +377,7 @@ export default {
               avatar: ''
             }
             uni.showToast({
-              title: '已退出登录',
+              title: t('profile.loggedOut'),
               icon: 'success'
             })
           }

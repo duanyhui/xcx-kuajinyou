@@ -243,6 +243,8 @@ export interface LanguagePack {
   // 运输页面
   shipping: {
     pageTitle: string
+    headerTitle: string
+    headerSubtitle: string
     requirements: {
       title: string
       items: string[]
@@ -475,6 +477,8 @@ export interface LanguagePack {
   // 个人中心页面
   profile: {
     loginTitle: string
+    loginSuccess: string
+    loggingIn: string
     memberCenter: string
     wechatLogin: string
     promotionTitle: string
@@ -495,6 +499,16 @@ export interface LanguagePack {
     warehouseAddress: string
     myAddress: string
     logout: string
+    // 新增字段
+    companyName: string
+    companySubtitle: string
+    defaultNickname: string
+    userIdPrefix: string
+    allPackages: string
+    allOrders: string
+    confirmLogout: string
+    logoutMessage: string
+    loggedOut: string
   }
   // 仓库地址页面
   warehouse: {

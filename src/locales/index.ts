@@ -395,6 +395,8 @@ export const zhLanguagePack: LanguagePack = {
   // 个人中心页面
   profile: {
     loginTitle: '登录',
+    loginSuccess: '登录成功',
+    loggingIn: '登录中...',
     memberCenter: '会员中心',
     wechatLogin: '微信一键登录',
     promotionTitle: '推广赚钱',
@@ -414,7 +416,17 @@ export const zhLanguagePack: LanguagePack = {
     orderDelivery: '待发货',
     warehouseAddress: '仓库地址',
     myAddress: '我的地址',
-    logout: '退出登录'
+    logout: '退出登录',
+    // 新增字段
+    companyName: '中海川公共海外仓',
+    companySubtitle: 'LOGISTICS INFORMATION SYSTEM',
+    defaultNickname: '跨境寄件吉祥物',
+    userIdPrefix: 'NO.',
+    allPackages: '全部',
+    allOrders: '全部',
+    confirmLogout: '确认退出',
+    logoutMessage: '确定要退出登录吗？',
+    loggedOut: '已退出登录'
   },
   // 仓库地址页面
   warehouse: {
@@ -934,6 +946,8 @@ export const koLanguagePack: LanguagePack = {
   },
   profile: {
     loginTitle: '로그인',
+    loginSuccess: '로그인 성공',
+    loggingIn: '로그인 중...',
     memberCenter: '회원센터',
     wechatLogin: '위챗 원클릭 로그인',
     promotionTitle: '추천해서 돈 벌기',
@@ -953,7 +967,17 @@ export const koLanguagePack: LanguagePack = {
     orderDelivery: '발송 대기',
     warehouseAddress: '창고 주소',
     myAddress: '내 주소',
-    logout: '로그아웃'
+    logout: '로그아웃',
+    // 새로운 필드들
+    companyName: '중하이촨 공용 해외창고',
+    companySubtitle: 'LOGISTICS INFORMATION SYSTEM',
+    defaultNickname: '국경 택배 마스코트',
+    userIdPrefix: 'NO.',
+    allPackages: '전체',
+    allOrders: '전체',
+    confirmLogout: '로그아웃 확인',
+    logoutMessage: '정말 로그아웃하시겠습니까?',
+    loggedOut: '로그아웃되었습니다'
   },
   warehouse: {
     title: '창고 주소',
