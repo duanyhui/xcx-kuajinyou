@@ -85,7 +85,15 @@ export const zhLanguagePack: LanguagePack = {
     calculate: '计算运费',
     result: '计算结果',
     estimatedFee: '预估运费',
-    transportTime: '运输时效'
+    transportTime: '运输时效',
+    // 运费标准
+    pricingStandard: '运费标准',
+    seaShipping: '海运',
+    seaShippingPrice: '首重25元+续重6元/kg',
+    airShipping: '空运',
+    airShippingPrice: '首重33.8元+续重9元/0.5kg',
+    postalShipping: '邮政EMS',
+    postalShippingPrice: '首重70元/50g+续重1元/50g'
   },
   // 操作指南页面
   guide: {
@@ -364,7 +372,25 @@ export const zhLanguagePack: LanguagePack = {
     submitting: '提交中...',
     submitSuccess: '提交成功',
     submitFailed: '提交失败',
-    fillComplete: '请填写完整信息'
+    fillComplete: '请填写完整信息',
+    // 新增字段
+    detailIndex: '明细',
+    deleteAction: '删除',
+    declarationName: '申报品名',
+    declarationNamePlaceholder: '请填写中文货品名',
+    declarationPrice: '申报单价',
+    declarationPricePlaceholder: '请填写价格',
+    declarationQuantity: '申报数量',
+    declarationQuantityPlaceholder: '请填写数量',
+    emptyDetails: '暂无明细信息',
+    emptyDetailsDesc: '点击"添加明细"按钮添加包裹明细',
+    submitAction: '提交',
+    bottomNav: {
+      home: '首页',
+      order: '预报',
+      shipping: '发货',
+      profile: '我的'
+    }
   },
   // 个人中心页面
   profile: {
@@ -605,7 +631,15 @@ export const koLanguagePack: LanguagePack = {
     calculate: '배송비 계산',
     result: '계산 결과',
     estimatedFee: '예상 배송비',
-    transportTime: '운송 시간'
+    transportTime: '운송 시간',
+    // 운송비 기준
+    pricingStandard: '배송비 기준',
+    seaShipping: '해운',
+    seaShippingPrice: '기본 25위안+추가 6위안/kg',
+    airShipping: '항공',
+    airShippingPrice: '기본 33.8위안+추가 9위안/0.5kg',
+    postalShipping: '우체국EMS',
+    postalShippingPrice: '기본 70위안/50g+추가 1위안/50g'
   },
   guide: {
     title: '이용 가이드',
@@ -743,7 +777,7 @@ export const koLanguagePack: LanguagePack = {
     urlCopied: '웹사이트 주소가 클립보드에 복사되었습니다'
   },
   shipping: {
-    title: '발송 안내',
+    pageTitle: '발송 안내',
     headerTitle: '📦 발송 안내',
     headerSubtitle: '초보자 필독, 발송 실수 없이!',
     importantTitle: '중요 알림',
@@ -878,7 +912,25 @@ export const koLanguagePack: LanguagePack = {
     submitting: '제출 중...',
     submitSuccess: '제출 완료',
     submitFailed: '제출 실패',
-    fillComplete: '정보를 완전히 입력해주세요'
+    fillComplete: '정보를 완전히 입력해주세요',
+    // 새로운 필드들
+    detailIndex: '상세',
+    deleteAction: '삭제',
+    declarationName: '신고 품명',
+    declarationNamePlaceholder: '중국어 상품명을 입력해주세요',
+    declarationPrice: '신고 단가',
+    declarationPricePlaceholder: '가격을 입력해주세요',
+    declarationQuantity: '신고 수량',
+    declarationQuantityPlaceholder: '수량을 입력해주세요',
+    emptyDetails: '상세 정보가 없어요',
+    emptyDetailsDesc: '"상세 추가" 버튼을 눌러서 택배 상세 정보를 추가해주세요',
+    submitAction: '제출',
+    bottomNav: {
+      home: '홈',
+      order: '예보',
+      shipping: '발송',
+      profile: '내 정보'
+    }
   },
   profile: {
     loginTitle: '로그인',

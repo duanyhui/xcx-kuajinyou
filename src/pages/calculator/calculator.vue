@@ -234,28 +234,28 @@
         <!-- 运费标准说明 -->
         <view class="pricing-info">
           <view class="info-header">
-            <text class="info-title">📋 运费标准</text>
+            <text class="info-title">📋 {{ t('calculator.pricingStandard') }}</text>
           </view>
           <view class="pricing-list">
             <view class="pricing-item">
               <view class="pricing-icon">🚢</view>
               <view class="pricing-content">
-                <text class="pricing-type">海运</text>
-                <text class="pricing-detail">首重25元+续重6元/kg</text>
+                <text class="pricing-type">{{ t('calculator.seaShipping') }}</text>
+                <text class="pricing-detail">{{ t('calculator.seaShippingPrice') }}</text>
               </view>
             </view>
             <view class="pricing-item">
               <view class="pricing-icon">✈️</view>
               <view class="pricing-content">
-                <text class="pricing-type">空运</text>
-                <text class="pricing-detail">首重33.8元+续重9元/0.5kg</text>
+                <text class="pricing-type">{{ t('calculator.airShipping') }}</text>
+                <text class="pricing-detail">{{ t('calculator.airShippingPrice') }}</text>
               </view>
             </view>
             <view class="pricing-item">
               <view class="pricing-icon">📮</view>
               <view class="pricing-content">
-                <text class="pricing-type">邮政EMS</text>
-                <text class="pricing-detail">首重70元/50g+续重1元/50g</text>
+                <text class="pricing-type">{{ t('calculator.postalShipping') }}</text>
+                <text class="pricing-detail">{{ t('calculator.postalShippingPrice') }}</text>
               </view>
             </view>
           </view>

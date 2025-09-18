@@ -93,6 +93,14 @@ export interface LanguagePack {
     result: string
     estimatedFee: string
     transportTime: string
+    // 运费标准
+    pricingStandard: string
+    seaShipping: string
+    seaShippingPrice: string
+    airShipping: string
+    airShippingPrice: string
+    postalShipping: string
+    postalShippingPrice: string
   }
   // 操作指南页面
   guide: {
@@ -445,6 +453,24 @@ export interface LanguagePack {
     submitSuccess: string
     submitFailed: string
     fillComplete: string
+    // 新增字段
+    detailIndex: string
+    deleteAction: string
+    declarationName: string
+    declarationNamePlaceholder: string
+    declarationPrice: string
+    declarationPricePlaceholder: string
+    declarationQuantity: string
+    declarationQuantityPlaceholder: string
+    emptyDetails: string
+    emptyDetailsDesc: string
+    submitAction: string
+    bottomNav: {
+      home: string
+      order: string
+      shipping: string
+      profile: string
+    }
   }
   // 个人中心页面
   profile: {

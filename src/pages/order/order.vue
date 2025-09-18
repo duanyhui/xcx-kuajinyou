@@ -75,30 +75,30 @@
             :key="detail.id"
           >
             <view class="detail-header">
-              <text class="detail-index">明细 {{ index + 1 }}</text>
+              <text class="detail-index">{{ t('order.detailIndex') }} {{ index + 1 }}</text>
               <view class="delete-btn" @click="deletePackageDetail(index)">
-                <text class="delete-text">删除</text>
+                <text class="delete-text">{{ t('order.deleteAction') }}</text>
               </view>
             </view>
             
             <view class="detail-form">
               <view class="form-item required">
-                <text class="form-label">申报品名</text>
+                <text class="form-label">{{ t('order.declarationName') }}</text>
                 <input 
                   class="form-input" 
                   v-model="detail.productName"
-                  placeholder="请填写中文货品名"
+                  :placeholder="t('order.declarationNamePlaceholder')"
                   @input="onDetailInput(index, 'productName', $event)"
                 />
               </view>
               
               <view class="form-item required">
-                <text class="form-label">申报单价</text>
+                <text class="form-label">{{ t('order.declarationPrice') }}</text>
                 <view class="price-input-wrapper">
                   <input 
                     class="form-input price-input" 
                     v-model="detail.unitPrice"
-                    placeholder="请填写价格"
+                    :placeholder="t('order.declarationPricePlaceholder')"
                     type="digit"
                     @input="onDetailInput(index, 'unitPrice', $event)"
                   />
@@ -107,11 +107,11 @@
               </view>
               
               <view class="form-item required">
-                <text class="form-label">申报数量</text>
+                <text class="form-label">{{ t('order.declarationQuantity') }}</text>
                 <input 
                   class="form-input" 
                   v-model="detail.quantity"
-                  placeholder="请填写数量"
+                  :placeholder="t('order.declarationQuantityPlaceholder')"
                   type="number"
                   @input="onDetailInput(index, 'quantity', $event)"
                 />
@@ -122,8 +122,8 @@
         
         <!-- 空状态 -->
         <view class="empty-state" v-else>
-          <text class="empty-text">暂无明细信息</text>
-          <text class="empty-desc">点击"添加明细"按钮添加包裹明细</text>
+          <text class="empty-text">{{ t('order.emptyDetails') }}</text>
+          <text class="empty-desc">{{ t('order.emptyDetailsDesc') }}</text>
         </view>
       </view>
     </view>
@@ -131,7 +131,7 @@
     <!-- 提交按钮 -->
     <view class="submit-section">
       <view class="submit-btn" @click="submitPackage" :class="{ disabled: !canSubmit }">
-        <text class="submit-text">提交</text>
+        <text class="submit-text">{{ t('order.submitAction') }}</text>
       </view>
     </view>
 
@@ -141,25 +141,25 @@
         <view class="nav-icon-wrapper">
           <text class="nav-icon">🏠</text>
         </view>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('order.bottomNav.home') }}</text>
       </view>
       <view class="nav-item active" @click="switchTab('order')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📋</text>
         </view>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('order.bottomNav.order') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('shipping')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">📦</text>
         </view>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('order.bottomNav.shipping') }}</text>
       </view>
       <view class="nav-item" @click="switchTab('profile')">
         <view class="nav-icon-wrapper">
           <text class="nav-icon">👤</text>
         </view>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('order.bottomNav.profile') }}</text>
       </view>
     </view>
 
@@ -236,8 +236,8 @@ const addPackageDetail = () => {
 // 删除包裹明细
 const deletePackageDetail = (index: number) => {
   uni.showModal({
-    title: '确认删除',
-    content: '确定要删除这条明细吗？',
+    title: t('order.deleteConfirm'),
+    content: t('order.deleteMessage'),
     success: (res) => {
       if (res.confirm) {
         packageDetails.value.splice(index, 1)
@@ -280,7 +280,7 @@ const onDetailInput = (index: number, field: keyof PackageDetail, e: any) => {
 const submitPackage = async () => {
   if (!canSubmit.value) {
     uni.showToast({
-      title: '请填写完整信息',
+      title: t('order.fillComplete'),
       icon: 'none'
     })
     return
@@ -289,7 +289,7 @@ const submitPackage = async () => {
   try {
     // 显示加载中
     uni.showLoading({
-      title: '提交中...'
+      title: t('order.submitting')
     })
 
     // 构建提交数据
@@ -313,7 +313,7 @@ const submitPackage = async () => {
     
     if (result.success) {
       uni.showToast({
-        title: '提交成功',
+        title: t('order.submitSuccess'),
         icon: 'success'
       })
       
@@ -326,7 +326,7 @@ const submitPackage = async () => {
       }, 1500)
     } else {
       uni.showToast({
-        title: result.message || '提交失败',
+        title: result.message || t('order.submitFailed'),
         icon: 'none'
       })
     }
@@ -334,7 +334,7 @@ const submitPackage = async () => {
     uni.hideLoading()
     console.error('提交失败:', error)
     uni.showToast({
-      title: '网络异常，请重试',
+      title: t('order.submitFailed'),
       icon: 'none'
     })
   }
