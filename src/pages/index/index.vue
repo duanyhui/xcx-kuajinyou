@@ -483,13 +483,17 @@ const switchTab = (tab: string) => {
 }
 
 .main-title {
-  font-size: 64rpx;
+  font-size: 48rpx;
   font-weight: 700;
   color: white;
   text-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.3);
   display: block;
   margin-bottom: 16rpx;
-  letter-spacing: 2rpx;
+  letter-spacing: 1rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .sub-title {
@@ -610,23 +614,30 @@ const switchTab = (tab: string) => {
 }
 
 .function-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20rpx;
   margin-bottom: 40rpx;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .grid-item {
-  width: calc(50% - 10rpx);
   background: white;
   border-radius: 32rpx;
-  padding: 40rpx 24rpx;
+  padding: 32rpx 20rpx;
   text-align: center;
   box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10rpx);
   box-sizing: border-box;
+  width: 100%;
+  min-height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .grid-item:active {
@@ -638,11 +649,12 @@ const switchTab = (tab: string) => {
   width: 80rpx;
   height: 80rpx;
   border-radius: 24rpx;
-  margin: 0 auto 20rpx;
+  margin: 0 auto 16rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .icon-container.guide {
@@ -680,6 +692,8 @@ const switchTab = (tab: string) => {
   color: #2c3e50;
   margin-bottom: 8rpx;
   display: block;
+  line-height: 1.3;
+  flex-shrink: 0;
 }
 
 .item-desc {
@@ -687,6 +701,7 @@ const switchTab = (tab: string) => {
   color: #7f8c8d;
   display: block;
   line-height: 1.4;
+  flex-shrink: 0;
 }
 
 /* 联系客服卡片 */

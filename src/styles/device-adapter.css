@@ -1,0 +1,216 @@
+/* 主标题响应式适配 */
+.main-title {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+}
+
+/* 小屏设备主标题适配 */
+@media (max-width: 375px) {
+  .main-title {
+    font-size: 40rpx !important;
+    letter-spacing: 0.5rpx !important;
+  }
+}
+
+/* 中等屏幕主标题适配 */
+@media (min-width: 376px) and (max-width: 414px) {
+  .main-title {
+    font-size: 44rpx !important;
+    letter-spacing: 0.8rpx !important;
+  }
+}
+
+/* 大屏设备主标题适配 */
+@media (min-width: 415px) {
+  .main-title {
+    font-size: 48rpx !important;
+    letter-spacing: 1rpx !important;
+  }
+}
+
+/* 设备适配样式 - 确保所有设备都显示2x2网格布局 */
+
+/* 通用样式 - 强制2x2网格布局 */
+.function-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20rpx !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.grid-item {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  min-height: 180rpx !important;
+  /* 移除max-height限制，让内容自然展开 */
+  /* 确保内容垂直居中 */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 32rpx 20rpx !important;
+}
+
+/* 小屏设备适配 */
+@media (max-width: 375px) {
+  .function-grid {
+    gap: 16rpx !important;
+  }
+  
+  .grid-item {
+    padding: 24rpx 16rpx !important;
+    min-height: 160rpx !important;
+  }
+  
+  .icon-container {
+    width: 64rpx !important;
+    height: 64rpx !important;
+    margin-bottom: 12rpx !important;
+  }
+  
+  .icon-container .icon {
+    font-size: 32rpx !important;
+  }
+  
+  .item-title {
+    font-size: 24rpx !important;
+    margin-bottom: 6rpx !important;
+    line-height: 1.3 !important;
+  }
+  
+  .item-desc {
+    font-size: 18rpx !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* 中等屏幕设备适配 */
+@media (min-width: 376px) and (max-width: 414px) {
+  .function-grid {
+    gap: 18rpx !important;
+  }
+  
+  .grid-item {
+    padding: 28rpx 18rpx !important;
+    min-height: 170rpx !important;
+  }
+  
+  .icon-container {
+    width: 72rpx !important;
+    height: 72rpx !important;
+    margin-bottom: 14rpx !important;
+  }
+  
+  .icon-container .icon {
+    font-size: 36rpx !important;
+  }
+  
+  .item-title {
+    font-size: 26rpx !important;
+    margin-bottom: 7rpx !important;
+    line-height: 1.3 !important;
+  }
+  
+  .item-desc {
+    font-size: 20rpx !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* 大屏设备适配 */
+@media (min-width: 415px) {
+  .function-grid {
+    gap: 24rpx !important;
+    max-width: 750rpx !important;
+    margin: 0 auto 40rpx !important;
+  }
+  
+  .grid-item {
+    padding: 32rpx 20rpx !important;
+    min-height: 180rpx !important;
+  }
+  
+  .icon-container {
+    width: 80rpx !important;
+    height: 80rpx !important;
+    margin-bottom: 16rpx !important;
+  }
+  
+  .icon-container .icon {
+    font-size: 40rpx !important;
+  }
+  
+  .item-title {
+    font-size: 28rpx !important;
+    margin-bottom: 8rpx !important;
+    line-height: 1.3 !important;
+  }
+  
+  .item-desc {
+    font-size: 22rpx !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* 防止flex布局覆盖 */
+.function-section .function-grid {
+  display: grid !important;
+  flex-wrap: nowrap !important;
+  justify-content: unset !important;
+  align-items: unset !important;
+}
+
+/* 确保图标容器居中 */
+.grid-item .icon-container {
+  margin: 0 auto 16rpx !important;
+  flex-shrink: 0 !important;
+}
+
+/* 确保文本内容垂直居中且不换行过多 */
+.grid-item .item-title,
+.grid-item .item-desc {
+  text-align: center !important;
+  word-break: keep-all !important;
+  overflow-wrap: break-word !important;
+  flex-shrink: 0 !important;
+}
+
+.grid-item .item-title {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 100% !important;
+  margin-bottom: 8rpx !important;
+}
+
+.grid-item .item-desc {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  max-width: 100% !important;
+}
+
+/* 针对微信小程序的特殊适配 */
+@media screen and (max-width: 750px) {
+  .function-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-auto-rows: minmax(160rpx, auto) !important;
+  }
+}
+
+/* 强制覆盖任何可能的样式冲突 */
+.page .function-section .function-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+}
+
+.page .function-section .function-grid .grid-item {
+  width: 100% !important;
+}
