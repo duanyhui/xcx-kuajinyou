@@ -176,12 +176,12 @@
             <text class="price-type">{{ t('home.airShipping') }}</text>
             <text class="price-detail">{{ t('home.airShippingPrice') }}</text>
           </view>
-          
-          <view class="price-item">
-            <view class="price-icon">📮</view>
-            <text class="price-type">{{ t('home.postShipping') }}</text>
-            <text class="price-detail">{{ t('home.postShippingPrice') }}</text>
-          </view>
+        </view>
+        
+        <!-- 包裹尺寸限制说明 -->
+        <view class="package-notice">
+          <view class="notice-icon">⚠️</view>
+          <text class="notice-text">{{ t('home.packageSizeNotice') }}</text>
         </view>
       </view>
     </view>
@@ -934,6 +934,31 @@ const switchTab = (tab: string) => {
   flex: 1;
   min-width: 0;
   word-wrap: break-word;
+}
+
+/* 包裹尺寸限制说明 */
+.package-notice {
+  display: flex;
+  align-items: flex-start;
+  padding: 24rpx;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 16rpx;
+  border-left: 6rpx solid #ffc107;
+  margin-top: 24rpx;
+}
+
+.notice-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+  margin-top: 4rpx;
+  flex-shrink: 0;
+}
+
+.notice-text {
+  font-size: 24rpx;
+  color: #856404;
+  line-height: 1.5;
+  flex: 1;
 }
 
 /* 底部导航 */

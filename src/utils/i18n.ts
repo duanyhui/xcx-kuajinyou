@@ -58,8 +58,7 @@ export interface LanguagePack {
     seaShippingPrice: string
     airShipping: string
     airShippingPrice: string
-    postShipping: string
-    postShippingPrice: string
+    packageSizeNotice: string
     // 底部导航
     navHome: string
     navOrder: string
