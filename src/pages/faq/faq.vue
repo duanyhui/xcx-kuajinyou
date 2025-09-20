@@ -156,27 +156,6 @@
         </view>
       </view>
 
-      <!-- 联系我们 -->
-      <view class="section-card contact-card">
-        <view class="section-header">
-          <text class="section-icon">💬</text>
-          <text class="section-title">{{ t('faq.contactSection') }}</text>
-        </view>
-        <view class="contact-content">
-          <text class="contact-text">{{ t('faq.contactDesc') }}</text>
-          <view class="contact-actions">
-            <view class="contact-btn" @tap="contactService">
-              <text class="contact-icon">💬</text>
-              <text class="contact-label">{{ t('faq.onlineService') }}</text>
-            </view>
-            <view class="contact-btn" @tap="callService">
-              <text class="contact-icon">📞</text>
-              <text class="contact-label">{{ t('faq.phoneConsult') }}</text>
-            </view>
-          </view>
-        </view>
-      </view>
-
       <!-- 快捷入口 -->
       <view class="quick-actions">
         <view class="action-btn primary-btn" @tap="goToShipping">
@@ -357,19 +336,6 @@ export default {
       uni.pageScrollTo({
         selector: `#${id}`,
         duration: 300
-      });
-    },
-    contactService() {
-      // 联系在线客服
-      uni.showToast({
-        title: this.t('faq.contactConnecting'),
-        icon: 'loading'
-      });
-    },
-    callService() {
-      // 拨打客服电话
-      uni.makePhoneCall({
-        phoneNumber: '0631-5230850'
       });
     },
     goToShipping() {

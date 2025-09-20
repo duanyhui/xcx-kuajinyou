@@ -169,21 +169,6 @@
         </view>
       </view>
 
-      <!-- 联系帮助 -->
-      <view class="help-section">
-        <view class="help-header">
-          <text class="help-title">{{ t('customs.helpTitle') }}</text>
-        </view>
-        <view class="help-content">
-          <text class="help-text">{{ t('customs.helpText') }}</text>
-          <view class="help-actions">
-            <view class="help-btn" @click="contactService">
-              <text class="help-btn-text">{{ t('customs.helpButton') }}</text>
-            </view>
-          </view>
-        </view>
-      </view>
-
       <!-- 底部安全距离 -->
       <view class="bottom-safe"></view>
     </scroll-view>
@@ -217,12 +202,6 @@ const openWebsite = () => {
         icon: 'success'
       })
     }
-  })
-}
-
-const contactService = () => {
-  uni.makePhoneCall({
-    phoneNumber: '0631-5230850'
   })
 }
 </script>

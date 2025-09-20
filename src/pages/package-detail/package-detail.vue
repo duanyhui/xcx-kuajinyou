@@ -115,18 +115,13 @@
         
         <!-- 待入仓状态 -->
         <view v-else-if="packageInfo.status === 'warehousing'" class="action-buttons">
-          <view class="action-btn secondary" @click="contactService">
-            <text class="btn-text">联系客服</text>
-          </view>
+          <!-- 无操作 -->
         </view>
         
         <!-- 异常状态 -->
         <view v-else-if="packageInfo.status === 'abnormal'" class="action-buttons">
           <view class="action-btn primary" @click="handleAbnormal">
             <text class="btn-text">处理异常</text>
-          </view>
-          <view class="action-btn secondary" @click="contactService">
-            <text class="btn-text">联系客服</text>
           </view>
         </view>
         
@@ -468,15 +463,6 @@ export default {
           icon: 'none'
         })
       }
-    },
-    
-    // 联系客服
-    contactService() {
-      uni.showModal({
-        title: '联系客服',
-        content: '客服电话：400-888-8888\n微信客服：service_zhc',
-        showCancel: false
-      })
     },
     
     // 再次预报

@@ -81,9 +81,6 @@
         <view class="action-btn primary" @click="copyAllInfo">
           <text class="btn-text">{{ t('warehouse.copyAllInfo') }}</text>
         </view>
-        <view class="action-btn secondary" @click="contactService">
-          <text class="btn-text">{{ t('warehouse.contactService') }}</text>
-        </view>
       </view>
     </view>
 
@@ -189,15 +186,6 @@ const copyAllInfo = () => {
         duration: 1500
       })
     }
-  })
-}
-
-// 联系客服
-const contactService = () => {
-  uni.showToast({
-    title: t('warehouse.contactServiceInProgress'),
-    icon: 'none',
-    duration: 1500
   })
 }
 

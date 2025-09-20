@@ -53,7 +53,6 @@
           <view class="step-content">
             <text class="step-desc">{{ t('guide.step2Desc1') }}</text>
             <text class="step-desc">{{ t('guide.step2Desc2') }}</text>
-            <text class="step-desc">{{ t('guide.step2Desc3') }}</text>
             <view class="step-warning">
               <text class="warning-icon">⚠️</text>
               <text class="warning-text">{{ t('guide.step2Warning') }}</text>
@@ -182,11 +181,6 @@
             <view class="action-icon faq">❓</view>
             <text class="action-text">{{ t('guide.actionFAQ') }}</text>
           </view>
-
-          <view class="action-item" @click="contactService">
-            <view class="action-icon service">💬</view>
-            <text class="action-text">{{ t('guide.actionService') }}</text>
-          </view>
         </view>
       </view>
 
@@ -232,12 +226,6 @@ const checkProhibited = () => {
 const calculatePrice = () => {
   uni.navigateTo({
     url: '/pages/calculator/calculator'
-  })
-}
-
-const contactService = () => {
-  uni.makePhoneCall({
-    phoneNumber: '0631-5230850'
   })
 }
 

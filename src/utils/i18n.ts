@@ -21,8 +21,6 @@ export interface LanguagePack {
     error: string
     all: string
     contactService: string
-    phoneConsult: string
-    onlineService: string
   }
   // 首页相关
   home: {
@@ -118,7 +116,6 @@ export interface LanguagePack {
     step2Tag: string
     step2Desc1: string
     step2Desc2: string
-    step2Desc3: string
     step2Warning: string
     step3Title: string
     step3Tag: string
@@ -131,6 +128,7 @@ export interface LanguagePack {
     step4Desc1: string
     step4Desc2: string
     step4Desc3: string
+    step4Desc4: string
     step4Note: string
     step5Title: string
     step5Tag: string
@@ -153,7 +151,6 @@ export interface LanguagePack {
     actionCustoms: string
     actionShipping: string
     actionFAQ: string
-    actionService: string
   }
   // 发货流程页面
   flow: {
@@ -236,74 +233,57 @@ export interface LanguagePack {
     // 联系帮助
     helpTitle: string
     helpText: string
-    helpButton: string
     // 复制成功消息
     urlCopied: string
   }
   // 运输页面
   shipping: {
-    pageTitle: string
+    title: string
     headerTitle: string
     headerSubtitle: string
-    requirements: {
-      title: string
-      items: string[]
-    }
-    prohibited: {
-      title: string
-      note: string
-      categories: {
-        dangerous: {
-          title: string
-          items: string[]
-        }
-        fragile: {
-          title: string
-          items: string[]
-        }
-        documents: {
-          title: string
-          items: string[]
-        }
-        others: {
-          title: string
-          items: string[]
-        }
-      }
-    }
-    limits: {
-      title: string
-      weight: {
-        title: string
-        value: string
-        note: string
-      }
-      size: {
-        title: string
-        value: string
-        note: string
-      }
-    }
-    fees: {
-      title: string
-      calculation: {
-        title: string
-        formula: string
-        note: string
-      }
-      additional: {
-        title: string
-        overweight: string
-        oversized: string
-        dangerous: string
-      }
-    }
-    contact: {
-      title: string
-      help: string
-      wechat: string
-      phone: string
-    }
+    importantTitle: string
+    important1: string
+    important2: string
+    important3: string
+    packagingTitle: string
+    packageMaterial: string
+    packageMaterialDesc: string
+    innerFilling: string
+    innerFillingDesc: string
+    sealing: string
+    sealingDesc: string
+    labelPasting: string
+    labelPastingDesc: string
+    prohibitedTitle: string
+    batteryCategory: string
+    batteryDesc: string
+    liquidCategory: string
+    liquidDesc: string
+    sharpCategory: string
+    sharpDesc: string
+    valuableCategory: string
+    valuableDesc: string
+    limitTitle: string
+    singleLengthLabel: string
+    totalSizeLabel: string
+    singleWeightLabel: string
+    singleLength: string
+    totalSize: string
+    singleWeight: string
+    feeTitle: string
+    basicFee: string
+    basicFeeDesc: string
+    customsFee: string
+    customsFeeDesc: string
+    insuranceFee: string
+    insuranceFeeDesc: string
+    tipsTitle: string
+    tip1: string
+    tip2: string
+    tip3: string
+    tip4: string
+    feeCalculator: string
+    shippingFlow: string
   }
   // 订单发货页面
   shippingOrders: {
@@ -390,12 +370,6 @@ export interface LanguagePack {
     feeSection: string
     prohibitedSection: string
     customsSection: string
-    contactSection: string
-    contactDesc: string
-    // 联系方式
-    onlineService: string
-    phoneConsult: string
-    contactConnecting: string
     // 快捷入口
     shippingGuide: string
     operationGuide: string
