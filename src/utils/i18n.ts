@@ -123,6 +123,7 @@ export interface LanguagePack {
     step3Item1: string
     step3Item2: string
     step3Item3: string
+    step3Warning: string
     step4Title: string
     step4Tag: string
     step4Desc1: string

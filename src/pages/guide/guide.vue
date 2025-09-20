@@ -68,21 +68,11 @@
             <view class="step-tag">{{ t('guide.step3Tag') }}</view>
           </view>
           <view class="step-content">
-            <text class="step-subtitle">{{ t('guide.step3Subtitle') }}</text>
-            <view class="info-list">
-              <view class="info-item">
-                <text class="info-dot">•</text>
-                <text class="info-text">{{ t('guide.step3Item1') }}</text>
-              </view>
-              <view class="info-item">
-                <text class="info-dot">•</text>
-                <text class="info-text">{{ t('guide.step3Item2') }}</text>
-              </view>
-              <view class="info-item">
-                <text class="info-dot">•</text>
-                <text class="info-text">{{ t('guide.step3Item3') }}</text>
-              </view>
-            </view>
+            <text class="step-desc">{{ t('guide.step3Subtitle') }}</text>
+            <text class="step-desc">{{ t('guide.step3Item1') }}</text>
+            <text class="step-desc">{{ t('guide.step3Item2') }}</text>
+            <text class="step-desc">{{ t('guide.step3Item3') }}</text>
+
           </view>
         </view>
 
@@ -456,6 +446,7 @@ const viewFAQ = () => {
   border-radius: 16rpx;
   padding: 20rpx;
   margin: 16rpx 0;
+  box-shadow: none;
 }
 
 .info-item {
