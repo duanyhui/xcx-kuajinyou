@@ -61,19 +61,6 @@
             </view>
           </view>
 
-          <!-- 连接线 -->
-          <view class="connection-area">
-            <view class="connection-line line-1"></view>
-            <view class="connection-label label-1">
-              <text class="label-text">{{ t('flow.connectionLabel1') }}</text>
-            </view>
-            
-            <view class="connection-line line-2"></view>
-            <view class="connection-label label-2">
-              <text class="label-text">{{ t('flow.connectionLabel2') }}</text>
-            </view>
-          </view>
-
           <!-- 仓库操作区域 -->
           <view class="flow-section warehouse-section">
             <view class="section-header">
@@ -398,57 +385,6 @@ const goBack = () => {
   border-left: 12rpx solid transparent;
   border-right: 12rpx solid transparent;
   border-top: 20rpx solid #95a5a6;
-}
-
-/* 连接区域 */
-.connection-area {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60rpx;
-  height: 100%;
-  z-index: 1;
-}
-
-.connection-line {
-  height: 2rpx;
-  background: #bdc3c7;
-  position: absolute;
-  width: 100rpx;
-  left: -20rpx;
-}
-
-.line-1 {
-  top: 20%;
-}
-
-.line-2 {
-  top: 60%;
-}
-
-.connection-label {
-  position: absolute;
-  background: white;
-  padding: 8rpx 12rpx;
-  border-radius: 12rpx;
-  border: 1rpx solid #e9ecef;
-  left: -80rpx;
-  width: 160rpx;
-  text-align: center;
-}
-
-.label-1 {
-  top: 15%;
-}
-
-.label-2 {
-  top: 55%;
-}
-
-.label-text {
-  font-size: 18rpx;
-  color: #6c757d;
 }
 
 /* 流程详解 */

@@ -171,8 +171,6 @@ export interface LanguagePack {
     userCard: string
     warehouseCard: string
     tipsTitle: string
-    connectionLabel1: string
-    connectionLabel2: string
     userDetail1: string
     userDetail1Desc: string
     userDetail2: string
