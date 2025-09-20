@@ -703,6 +703,28 @@ export interface LanguagePack {
     sharePromotion: string
     refreshQR: string
     copyCode: string
+    defaultNickname: string
+    promoterIdPrefix: string
+    promoCodeBtn: string
+    teamMembersBtn: string
+    teamOrdersBtn: string
+    commissionBtn: string
+    packageSection: string
+    viewAll: string
+    claimedStatus: string
+    waitingStatus: string
+    abnormalStatus: string
+    pendingStatus: string
+    qrLoading: string
+    codeLabel: string
+    infoTitle: string
+    infoStep1: string
+    infoStep2: string
+    infoStep3: string
+    navHome: string
+    navOrder: string
+    navShipping: string
+    navProfile: string
   }
   // 团成员页面
   teamMembers: {
@@ -713,6 +735,30 @@ export interface LanguagePack {
     newMembers: string
     emptyTitle: string
     emptyDesc: string
+    sharePromoBtn: string
+    memberListTitle: string
+    filterBtn: string
+    joinedText: string
+    totalSpent: string
+    orderCount: string
+    levelVip: string
+    levelGold: string
+    levelSilver: string
+    levelBronze: string
+    levelNormal: string
+    memberDetailDeveloping: string
+    sendMessage: string
+    viewDetail: string
+    messageDeveloping: string
+    filterAll: string
+    filterActive: string
+    filterVip: string
+    filterNewThisMonth: string
+    filterDeveloping: string
+    navHome: string
+    navOrder: string
+    navShipping: string
+    navProfile: string
   }
   // 团订单页面
   teamOrders: {

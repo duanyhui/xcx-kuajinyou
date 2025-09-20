@@ -37,8 +37,8 @@
             <text v-else class="avatar-icon">👤</text>
           </view>
           <view class="user-info">
-            <text class="user-name">{{ userInfo.nickname || '跨境寄件吉祥物' + userInfo.randomSuffix }}</text>
-            <text class="user-id">推广员ID: {{ userInfo.userId || '100017' }}</text>
+            <text class="user-name">{{ userInfo.nickname || t('promotionCode.defaultNickname') + userInfo.randomSuffix }}</text>
+            <text class="user-id">{{ t('promotionCode.promoterIdPrefix') }} {{ userInfo.userId || '100017' }}</text>
           </view>
         </view>
 
@@ -47,19 +47,19 @@
           <view class="function-grid">
             <view class="function-item" @click="navigateToPromotion">
               <view class="function-icon">📱</view>
-              <text class="function-text">推广码</text>
+              <text class="function-text">{{ t('promotionCode.promoCodeBtn') }}</text>
             </view>
             <view class="function-item" @click="navigateToTeamMembers">
               <view class="function-icon">👥</view>
-              <text class="function-text">团成员</text>
+              <text class="function-text">{{ t('promotionCode.teamMembersBtn') }}</text>
             </view>
             <view class="function-item" @click="navigateToTeamOrders">
               <view class="function-icon">📋</view>
-              <text class="function-text">团订单</text>
+              <text class="function-text">{{ t('promotionCode.teamOrdersBtn') }}</text>
             </view>
             <view class="function-item" @click="navigateToCommission">
               <view class="function-icon">💰</view>
-              <text class="function-text">佣金</text>
+              <text class="function-text">{{ t('promotionCode.commissionBtn') }}</text>
             </view>
           </view>
         </view>
@@ -67,35 +67,35 @@
         <!-- 包裹状态区域 -->
         <view class="package-section">
           <view class="section-header">
-            <text class="section-title">包裹</text>
-            <text class="section-more" @click="viewAllPackages">全部</text>
+            <text class="section-title">{{ t('promotionCode.packageSection') }}</text>
+            <text class="section-more" @click="viewAllPackages">{{ t('promotionCode.viewAll') }}</text>
           </view>
           
           <view class="package-status-grid">
             <view class="package-status-item" @click="navigateToPackages('claimed')">
               <view class="status-icon">👁️</view>
-              <text class="status-text">认领</text>
+              <text class="status-text">{{ t('promotionCode.claimedStatus') }}</text>
               <view class="status-badge" v-if="packageCounts.claimed > 0">
                 <text class="badge-text">{{ packageCounts.claimed }}</text>
               </view>
             </view>
             <view class="package-status-item" @click="navigateToPackages('waiting')">
               <view class="status-icon">⏰</view>
-              <text class="status-text">待入仓</text>
+              <text class="status-text">{{ t('promotionCode.waitingStatus') }}</text>
               <view class="status-badge red" v-if="packageCounts.waiting > 0">
                 <text class="badge-text">{{ packageCounts.waiting }}</text>
               </view>
             </view>
             <view class="package-status-item" @click="navigateToPackages('abnormal')">
               <view class="status-icon">⚠️</view>
-              <text class="status-text">异常</text>
+              <text class="status-text">{{ t('promotionCode.abnormalStatus') }}</text>
               <view class="status-badge" v-if="packageCounts.abnormal > 0">
                 <text class="badge-text">{{ packageCounts.abnormal }}</text>
               </view>
             </view>
             <view class="package-status-item" @click="navigateToPackages('pending')">
               <view class="status-icon">❓</view>
-              <text class="status-text">待确认</text>
+              <text class="status-text">{{ t('promotionCode.pendingStatus') }}</text>
               <view class="status-badge" v-if="packageCounts.pending > 0">
                 <text class="badge-text">{{ packageCounts.pending }}</text>
               </view>
@@ -141,15 +141,15 @@
             <image v-if="qrCodeUrl" class="qr-image" :src="qrCodeUrl" mode="aspectFit"></image>
             <view v-else class="qr-placeholder">
               <text class="qr-icon">📱</text>
-              <text class="qr-text">二维码加载中...</text>
+              <text class="qr-text">{{ t('promotionCode.qrLoading') }}</text>
             </view>
           </view>
 
           <view class="qr-code-text">
-            <text class="code-label">推广码:</text>
+            <text class="code-label">{{ t('promotionCode.codeLabel') }}</text>
             <text class="code-value">{{ promotionCode }}</text>
             <view class="copy-btn" @click="copyCode">
-              <text class="copy-text">复制</text>
+              <text class="copy-text">{{ t('promotionCode.copyCode') }}</text>
             </view>
           </view>
         </view>
@@ -183,21 +183,21 @@
         <!-- 推广说明 -->
         <view class="info-card">
           <view class="info-header">
-            <text class="info-title">推广说明</text>
+            <text class="info-title">{{ t('promotionCode.infoTitle') }}</text>
           </view>
           
           <view class="info-content">
             <view class="info-item">
               <text class="info-number">1</text>
-              <text class="info-text">分享推广码给好友，好友扫码注册即可成为您的团成员</text>
+              <text class="info-text">{{ t('promotionCode.infoStep1') }}</text>
             </view>
             <view class="info-item">
               <text class="info-number">2</text>
-              <text class="info-text">团成员下单产生的订单，您将获得相应的推广佣金</text>
+              <text class="info-text">{{ t('promotionCode.infoStep2') }}</text>
             </view>
             <view class="info-item">
               <text class="info-number">3</text>
-              <text class="info-text">佣金将在订单完成后自动结算到您的账户</text>
+              <text class="info-text">{{ t('promotionCode.infoStep3') }}</text>
             </view>
           </view>
         </view>
@@ -218,19 +218,19 @@
     <view class="bottom-nav">
       <view class="nav-item" @click="navigateTo('index')">
         <text class="nav-icon">🏠</text>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('promotionCode.navHome') }}</text>
       </view>
       <view class="nav-item" @click="navigateTo('calculator')">
         <text class="nav-icon">📋</text>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('promotionCode.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="navigateTo('shipping')">
         <text class="nav-icon">📦</text>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('promotionCode.navShipping') }}</text>
       </view>
       <view class="nav-item" @click="navigateTo('profile')">
         <text class="nav-icon">👤</text>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('promotionCode.navProfile') }}</text>
       </view>
     </view>
   </view>

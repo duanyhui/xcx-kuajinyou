@@ -56,16 +56,16 @@
         <text class="empty-text">{{ t('teamMembers.emptyTitle') }}</text>
         <text class="empty-desc">{{ t('teamMembers.emptyDesc') }}</text>
         <view class="empty-btn" @click="goToPromotionCode">
-          <text class="btn-text">分享推广码</text>
+          <text class="btn-text">{{ t('teamMembers.sharePromoBtn') }}</text>
         </view>
       </view>
 
       <!-- 成员列表 -->
       <view v-else class="members-list">
         <view class="list-header">
-          <text class="list-title">团队成员 ({{ members.length }})</text>
+          <text class="list-title">{{ t('teamMembers.memberListTitle').replace('{count}', members.length) }}</text>
           <view class="filter-btn" @click="showFilterOptions">
-            <text class="filter-text">筛选</text>
+            <text class="filter-text">{{ t('teamMembers.filterBtn') }}</text>
             <text class="filter-icon">⋮</text>
           </view>
         </view>
@@ -89,11 +89,11 @@
               </view>
             </view>
             
-            <text class="member-join-time">{{ member.joinTime }} 加入</text>
+            <text class="member-join-time">{{ member.joinTime }} {{ t('teamMembers.joinedText') }}</text>
             
             <view class="member-stats">
-              <text class="stats-text">累计消费: ¥{{ member.totalAmount }}</text>
-              <text class="stats-text">订单数: {{ member.orderCount }}</text>
+              <text class="stats-text">{{ t('teamMembers.totalSpent') }}: ¥{{ member.totalAmount }}</text>
+              <text class="stats-text">{{ t('teamMembers.orderCount') }}: {{ member.orderCount }}</text>
             </view>
           </view>
           
@@ -110,19 +110,19 @@
     <view class="bottom-nav">
       <view class="nav-item" @click="navigateTo('index')">
         <text class="nav-icon">🏠</text>
-        <text class="nav-text">首页</text>
+        <text class="nav-text">{{ t('teamMembers.navHome') }}</text>
       </view>
       <view class="nav-item" @click="navigateTo('calculator')">
         <text class="nav-icon">📋</text>
-        <text class="nav-text">预报</text>
+        <text class="nav-text">{{ t('teamMembers.navOrder') }}</text>
       </view>
       <view class="nav-item" @click="navigateTo('shipping')">
         <text class="nav-icon">📦</text>
-        <text class="nav-text">发货</text>
+        <text class="nav-text">{{ t('teamMembers.navShipping') }}</text>
       </view>
       <view class="nav-item" @click="navigateTo('profile')">
         <text class="nav-icon">👤</text>
-        <text class="nav-text">我的</text>
+        <text class="nav-text">{{ t('teamMembers.navProfile') }}</text>
       </view>
     </view>
   </view>
@@ -265,19 +265,19 @@ export default {
     // 获取等级文本
     getLevelText(level) {
       const levelMap = {
-        'vip': 'VIP',
-        'gold': '金牌',
-        'silver': '银牌',
-        'bronze': '铜牌'
+        'vip': t('teamMembers.levelVip'),
+        'gold': t('teamMembers.levelGold'),
+        'silver': t('teamMembers.levelSilver'),
+        'bronze': t('teamMembers.levelBronze')
       }
-      return levelMap[level] || '普通'
+      return levelMap[level] || t('teamMembers.levelNormal')
     },
     
     // 查看成员详情
     viewMemberDetail(member) {
       // TODO: 跳转到成员详情页面
       uni.showToast({
-        title: '成员详情功能开发中',
+        title: t('teamMembers.memberDetailDeveloping'),
         icon: 'none'
       })
     },
@@ -285,11 +285,11 @@ export default {
     // 联系成员
     contactMember(member) {
       uni.showActionSheet({
-        itemList: ['发送消息', '查看详情'],
+        itemList: [t('teamMembers.sendMessage'), t('teamMembers.viewDetail')],
         success: (res) => {
           if (res.tapIndex === 0) {
             uni.showToast({
-              title: '消息功能开发中',
+              title: t('teamMembers.messageDeveloping'),
               icon: 'none'
             })
           } else if (res.tapIndex === 1) {
@@ -302,11 +302,16 @@ export default {
     // 显示筛选选项
     showFilterOptions() {
       uni.showActionSheet({
-        itemList: ['全部成员', '活跃成员', 'VIP成员', '本月新增'],
+        itemList: [
+          t('teamMembers.filterAll'),
+          t('teamMembers.filterActive'),
+          t('teamMembers.filterVip'),
+          t('teamMembers.filterNewThisMonth')
+        ],
         success: (res) => {
           // TODO: 实现筛选逻辑
           uni.showToast({
-            title: '筛选功能开发中',
+            title: t('teamMembers.filterDeveloping'),
             icon: 'none'
           })
         }
