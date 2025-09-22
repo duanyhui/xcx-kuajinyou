@@ -200,36 +200,36 @@
         <view v-if="result" class="result-section">
           <view class="result-card">
             <view class="result-header">
-              <text class="result-title">💰 运费计算结果</text>
+              <text class="result-title">💰 {{ t('calculator.resultTitle') }}</text>
             </view>
             <view class="result-content">
               <view class="result-item">
-                <text class="result-label">运输方式：</text>
+                <text class="result-label">{{ t('calculator.transportMethod') }}：</text>
                 <text class="result-value">{{ getTransportLabel(formData.transport) }}</text>
               </view>
               <view class="result-item">
-                <text class="result-label">物流方式：</text>
+                <text class="result-label">{{ t('calculator.logisticsMethod') }}：</text>
                 <text class="result-value">{{ getLogisticsLabel(formData.logistics) }}</text>
               </view>
               <view class="result-item">
-                <text class="result-label">实际重量：</text>
+                <text class="result-label">{{ t('calculator.actualWeight') }}：</text>
                 <text class="result-value">{{ formData.weight }}kg</text>
               </view>
               <view class="result-item">
-                <text class="result-label">体积重量：</text>
+                <text class="result-label">{{ t('calculator.volumeWeight') }}：</text>
                 <text class="result-value">{{ result.volumeWeight }}kg</text>
               </view>
               <view class="result-item">
-                <text class="result-label">计费重量：</text>
+                <text class="result-label">{{ t('calculator.chargingWeight') }}：</text>
                 <text class="result-value">{{ result.chargingWeight }}kg</text>
               </view>
               <view class="result-item">
-                <text class="result-label">件数：</text>
-                <text class="result-value">{{ formData.quantity }}件</text>
+                <text class="result-label">{{ t('calculator.packageCount') }}：</text>
+                <text class="result-value">{{ formData.quantity }}{{ t('calculator.packageUnit') }}</text>
               </view>
               <view class="result-divider"></view>
               <view class="result-total">
-                <text class="total-label">总运费：</text>
+                <text class="total-label">{{ t('calculator.totalShippingFee') }}：</text>
                 <text class="total-amount">¥{{ result.totalAmount }}</text>
               </view>
             </view>

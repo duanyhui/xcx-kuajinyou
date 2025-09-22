@@ -92,6 +92,16 @@ export interface LanguagePack {
     result: string
     estimatedFee: string
     transportTime: string
+    // 结果显示相关
+    resultTitle: string
+    transportMethod: string
+    logisticsMethod: string
+    actualWeight: string
+    volumeWeight: string
+    chargingWeight: string
+    packageCount: string
+    packageUnit: string
+    totalShippingFee: string
     // 运费标准
     pricingStandard: string
     seaShipping: string
