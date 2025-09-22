@@ -224,9 +224,6 @@
                 <text class="total-label">总运费：</text>
                 <text class="total-amount">¥{{ result.totalAmount }}</text>
               </view>
-              <view class="result-formula">
-                <text class="formula-text">{{ result.formula }}</text>
-              </view>
             </view>
           </view>
         </view>
