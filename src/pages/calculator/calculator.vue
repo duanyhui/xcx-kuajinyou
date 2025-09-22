@@ -23,7 +23,7 @@
           <view class="radio-group">
             <view 
               class="radio-item" 
-              :class="{ active: formData.transport === 'sea' }"
+              :class="{ active: formData.transport === 'sea', disabled: formData.logistics === 'postal_ems' }"
               @click="selectTransport('sea')"
             >
               <view class="radio-check">
@@ -115,7 +115,7 @@
                 @blur="validateLength"
                 @input="clearError('length')"
               />
-              <text class="input-unit">mm</text>
+              <text class="input-unit">cm</text>
             </view>
             <text v-if="errors.length" class="error-text">{{ errors.length }}</text>
           </view>
@@ -136,7 +136,7 @@
                 @blur="validateWidth"
                 @input="clearError('width')"
               />
-              <text class="input-unit">mm</text>
+              <text class="input-unit">cm</text>
             </view>
             <text v-if="errors.width" class="error-text">{{ errors.width }}</text>
           </view>
@@ -157,7 +157,7 @@
                 @blur="validateHeight"
                 @input="clearError('height')"
               />
-              <text class="input-unit">mm</text>
+              <text class="input-unit">cm</text>
             </view>
             <text v-if="errors.height" class="error-text">{{ errors.height }}</text>
           </view>
@@ -212,8 +212,16 @@
                 <text class="result-value">{{ getLogisticsLabel(formData.logistics) }}</text>
               </view>
               <view class="result-item">
-                <text class="result-label">重量：</text>
+                <text class="result-label">实际重量：</text>
                 <text class="result-value">{{ formData.weight }}kg</text>
+              </view>
+              <view class="result-item">
+                <text class="result-label">体积重量：</text>
+                <text class="result-value">{{ result.volumeWeight }}kg</text>
+              </view>
+              <view class="result-item">
+                <text class="result-label">计费重量：</text>
+                <text class="result-value">{{ result.chargingWeight }}kg</text>
               </view>
               <view class="result-item">
                 <text class="result-label">件数：</text>
@@ -303,6 +311,8 @@ interface Errors {
 interface CalculationResult {
   totalAmount: string
   formula: string
+  volumeWeight: string
+  chargingWeight: string
   breakdown: {
     basePrice: number
     additionalPrice: number
@@ -343,6 +353,14 @@ const goBack = () => {
 
 // 选择运输方式
 const selectTransport = (type: string) => {
+  // 如果选择了邮政EMS，不能选择海运
+  if (formData.logistics === 'postal_ems' && type === 'sea') {
+    uni.showToast({
+      title: '邮政EMS不支持海运',
+      icon: 'none'
+    })
+    return
+  }
   formData.transport = type
   clearError('transport')
 }
@@ -351,6 +369,15 @@ const selectTransport = (type: string) => {
 const selectLogistics = (type: string) => {
   formData.logistics = type
   clearError('logistics')
+  
+  // 如果选择了邮政EMS，且当前选择了海运，则切换到空运
+  if (type === 'postal_ems' && formData.transport === 'sea') {
+    formData.transport = 'air'
+    uni.showToast({
+      title: '邮政EMS只支持空运',
+      icon: 'none'
+    })
+  }
 }
 
 // 清除错误信息
@@ -472,38 +499,64 @@ const getLogisticsLabel = (logistics: string) => {
   return logistics === 'korea_express' ? t('calculator.koreaExpress') : t('calculator.postalEms')
 }
 
+// 计算体积重量
+const calculateVolumeWeight = (length: number, width: number, height: number): number => {
+  return (length * width * height) / 6000
+}
+
 // 计算运费接口（预留）
 const calculateShippingAPI = async (data: FormData): Promise<CalculationResult> => {
   // 这里是预留的计算接口，实际项目中需要调用后端API
   return new Promise((resolve) => {
     setTimeout(() => {
-      // 模拟计算逻辑
+      const actualWeight = parseFloat(data.weight)
+      const length = parseFloat(data.length)
+      const width = parseFloat(data.width)
+      const height = parseFloat(data.height)
+      const quantity = parseInt(data.quantity)
+      
+      // 计算体积重量
+      const volumeWeight = calculateVolumeWeight(length, width, height)
+      
+      // 取实际重量和体积重量的较大值作为计费重量
+      const chargingWeight = Math.max(actualWeight, volumeWeight)
+      
       let basePrice = 0
       let additionalPrice = 0
       let formula = ''
       
-      const weight = parseFloat(data.weight)
-      const quantity = parseInt(data.quantity)
-      
-      if (data.transport === 'sea') {
-        // 海运：首重25元+续重6元/kg
-        basePrice = 25
-        if (weight > 1) {
-          additionalPrice = (weight - 1) * 6
+      if (data.logistics === 'postal_ems') {
+        // 邮政EMS：首重70元+续重1元/50g
+        basePrice = 70
+        if (chargingWeight > 0.05) { // 50g = 0.05kg
+          const additionalWeight = Math.ceil((chargingWeight - 0.05) / 0.05) // 按50g进位
+          additionalPrice = additionalWeight * 1
         }
-        formula = weight > 1 
-          ? `25 + (${weight} - 1) × 6 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
-          : `25 × ${quantity} = ${basePrice * quantity}`
-      } else if (data.transport === 'air') {
-        // 空运：首重33.8元+续重9元/0.5kg
-        basePrice = 33.8
-        if (weight > 0.5) {
-          const additionalWeight = Math.ceil((weight - 0.5) / 0.5)
-          additionalPrice = additionalWeight * 9
+        formula = chargingWeight > 0.05 
+          ? `70 + ${Math.ceil((chargingWeight - 0.05) / 0.05)} × 1 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+          : `70 × ${quantity} = ${basePrice * quantity}`
+      } else {
+        // CJ大韩通运
+        if (data.transport === 'sea') {
+          // 海运：首重25元+续重6元/kg
+          basePrice = 25
+          if (chargingWeight > 1) {
+            additionalPrice = (chargingWeight - 1) * 6
+          }
+          formula = chargingWeight > 1 
+            ? `25 + (${chargingWeight.toFixed(2)} - 1) × 6 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+            : `25 × ${quantity} = ${basePrice * quantity}`
+        } else if (data.transport === 'air') {
+          // 空运：首重33.8元+续重9元/0.5kg
+          basePrice = 33.8
+          if (chargingWeight > 0.5) {
+            const additionalWeight = Math.ceil((chargingWeight - 0.5) / 0.5)
+            additionalPrice = additionalWeight * 9
+          }
+          formula = chargingWeight > 0.5 
+            ? `33.8 + ${Math.ceil((chargingWeight - 0.5) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+            : `33.8 × ${quantity} = ${basePrice * quantity}`
         }
-        formula = weight > 0.5 
-          ? `33.8 + ${Math.ceil((weight - 0.5) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
-          : `33.8 × ${quantity} = ${basePrice * quantity}`
       }
       
       const totalAmount = ((basePrice + additionalPrice) * quantity).toFixed(2)
@@ -511,6 +564,8 @@ const calculateShippingAPI = async (data: FormData): Promise<CalculationResult> 
       resolve({
         totalAmount,
         formula,
+        volumeWeight: volumeWeight.toFixed(2),
+        chargingWeight: chargingWeight.toFixed(2),
         breakdown: {
           basePrice,
           additionalPrice,
@@ -705,6 +760,21 @@ const calculateShipping = async () => {
 .radio-item.active .radio-label {
   color: #667eea;
   font-weight: 600;
+}
+
+.radio-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f1f3f4;
+}
+
+.radio-item.disabled .radio-check {
+  border-color: #ced4da;
+  background: #f1f3f4;
+}
+
+.radio-item.disabled .radio-label {
+  color: #adb5bd;
 }
 
 /* 输入框组 */
