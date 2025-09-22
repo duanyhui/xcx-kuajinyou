@@ -176,7 +176,15 @@
             <text class="price-type">{{ t('home.airShipping') }}</text>
             <text class="price-detail">{{ t('home.airShippingPrice') }}</text>
           </view>
+
+          <view class="price-item">
+            <view class="price-icon">📮</view>
+            <text class="price-type">{{ t('home.postShipping') }}</text>
+            <text class="price-detail">{{ t('home.postShippingPrice') }}</text>
+          </view>
+
         </view>
+
         
         <!-- 包裹尺寸限制说明 -->
         <view class="package-notice">

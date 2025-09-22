@@ -51,6 +51,8 @@ export const zhLanguagePack: LanguagePack = {
     seaShippingPrice: '首重25元+续重6元/kg',
     airShipping: '空运',
     airShippingPrice: '首重33.8元+续重9元/0.5kg',
+    postShipping:'邮政',
+    postShippingPrice: ' 首重70元/50g+续重1元/50g ',
     packageSizeNotice: '包裹身材大"伟岸"？如果包裹长宽高总和超过160cm，或者重量超过20kg，我们会自动安排京东快递转派～我们仓库实在搬不动啦！',
     // 底部导航
     navHome: '首页',
@@ -795,6 +797,8 @@ export const koLanguagePack: LanguagePack = {
     seaShippingPrice: '기본요금 25위안+추가 6위안/kg',
     airShipping: '항공',
     airShippingPrice: '기본요금 33.8위안+추가 9위안/0.5kg',
+    postShipping: '우체국EMS',
+    postShippingPrice: '기본요금 70위안/50g+추가 1위안/50g',
     packageSizeNotice: '📦 포장 부피가 꽤나 우람한가요? 📏 길이+너비+높이 합이 160cm 초과 또는 무게 20kg 초과 시 자동으로 징둥택배로 전환 발송됩니다! 창고 친구들 더는 못 들겠대요… 😅',
     navHome: '홈',
     navOrder: '예보',
