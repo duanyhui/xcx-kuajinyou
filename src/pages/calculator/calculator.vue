@@ -23,7 +23,7 @@
           <view class="radio-group">
             <view 
               class="radio-item" 
-              :class="{ active: formData.transport === 'sea', disabled: formData.logistics === 'postal_ems' }"
+              :class="{ active: formData.transport === 'sea' }"
               @click="selectTransport('sea')"
             >
               <view class="radio-check">
@@ -61,16 +61,6 @@
                 <text v-if="formData.logistics === 'korea_express'" class="check-icon">✓</text>
               </view>
               <text class="radio-label">{{ t('calculator.koreaExpress') }}</text>
-            </view>
-            <view 
-              class="radio-item" 
-              :class="{ active: formData.logistics === 'postal_ems' }"
-              @click="selectLogistics('postal_ems')"
-            >
-              <view class="radio-check">
-                <text v-if="formData.logistics === 'postal_ems'" class="check-icon">✓</text>
-              </view>
-              <text class="radio-label">{{ t('calculator.postalEms') }}</text>
             </view>
           </view>
           <text v-if="errors.logistics" class="error-text">{{ errors.logistics }}</text>
@@ -256,13 +246,6 @@
                 <text class="pricing-detail">{{ t('calculator.airShippingPrice') }}</text>
               </view>
             </view>
-            <view class="pricing-item">
-              <view class="pricing-icon">📮</view>
-              <view class="pricing-content">
-                <text class="pricing-type">{{ t('calculator.postalShipping') }}</text>
-                <text class="pricing-detail">{{ t('calculator.postalShippingPrice') }}</text>
-              </view>
-            </view>
           </view>
         </view>
       </view>
@@ -323,7 +306,7 @@ interface CalculationResult {
 // 表单数据
 const formData = reactive<FormData>({
   transport: '', // 运输方式: sea/air
-  logistics: '', // 物流方式: korea_express/postal_ems
+  logistics: 'korea_express', // 物流方式: korea_express (默认选择CJ大韩通运)
   weight: '',
   length: '',
   width: '',
@@ -353,14 +336,6 @@ const goBack = () => {
 
 // 选择运输方式
 const selectTransport = (type: string) => {
-  // 如果选择了邮政EMS，不能选择海运
-  if (formData.logistics === 'postal_ems' && type === 'sea') {
-    uni.showToast({
-      title: t('calculator.postalSeaNotSupported'),
-      icon: 'none'
-    })
-    return
-  }
   formData.transport = type
   clearError('transport')
 }
@@ -369,15 +344,6 @@ const selectTransport = (type: string) => {
 const selectLogistics = (type: string) => {
   formData.logistics = type
   clearError('logistics')
-  
-  // 如果选择了邮政EMS，且当前选择了海运，则切换到空运
-  if (type === 'postal_ems' && formData.transport === 'sea') {
-    formData.transport = 'air'
-    uni.showToast({
-      title: t('calculator.postalAirOnlySupported'),
-      icon: 'none'
-    })
-  }
 }
 
 // 清除错误信息
@@ -525,38 +491,26 @@ const calculateShippingAPI = async (data: FormData): Promise<CalculationResult> 
       let additionalPrice = 0
       let formula = ''
       
-      if (data.logistics === 'postal_ems') {
-        // 邮政EMS：首重70元+续重1元/50g
-        basePrice = 70
-        if (chargingWeight > 0.05) { // 50g = 0.05kg
-          const additionalWeight = Math.ceil((chargingWeight - 0.05) / 0.05) // 按50g进位
-          additionalPrice = additionalWeight * 1
+      // CJ大韩通运
+      if (data.transport === 'sea') {
+        // 海运：首重25元+续重6元/kg
+        basePrice = 25
+        if (chargingWeight > 1) {
+          additionalPrice = (chargingWeight - 1) * 6
         }
-        formula = chargingWeight > 0.05 
-          ? `70 + ${Math.ceil((chargingWeight - 0.05) / 0.05)} × 1 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
-          : `70 × ${quantity} = ${basePrice * quantity}`
-      } else {
-        // CJ大韩通运
-        if (data.transport === 'sea') {
-          // 海运：首重25元+续重6元/kg
-          basePrice = 25
-          if (chargingWeight > 1) {
-            additionalPrice = (chargingWeight - 1) * 6
-          }
-          formula = chargingWeight > 1 
-            ? `25 + (${chargingWeight.toFixed(2)} - 1) × 6 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
-            : `25 × ${quantity} = ${basePrice * quantity}`
-        } else if (data.transport === 'air') {
-          // 空运：首重33.8元+续重9元/0.5kg
-          basePrice = 33.8
-          if (chargingWeight > 0.5) {
-            const additionalWeight = Math.ceil((chargingWeight - 0.5) / 0.5)
-            additionalPrice = additionalWeight * 9
-          }
-          formula = chargingWeight > 0.5 
-            ? `33.8 + ${Math.ceil((chargingWeight - 0.5) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
-            : `33.8 × ${quantity} = ${basePrice * quantity}`
+        formula = chargingWeight > 1 
+          ? `25 + (${chargingWeight.toFixed(2)} - 1) × 6 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+          : `25 × ${quantity} = ${basePrice * quantity}`
+      } else if (data.transport === 'air') {
+        // 空运：首重33.8元+续重9元/0.5kg
+        basePrice = 33.8
+        if (chargingWeight > 0.5) {
+          const additionalWeight = Math.ceil((chargingWeight - 0.5) / 0.5)
+          additionalPrice = additionalWeight * 9
         }
+        formula = chargingWeight > 0.5 
+          ? `33.8 + ${Math.ceil((chargingWeight - 0.5) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+          : `33.8 × ${quantity} = ${basePrice * quantity}`
       }
       
       const totalAmount = ((basePrice + additionalPrice) * quantity).toFixed(2)
