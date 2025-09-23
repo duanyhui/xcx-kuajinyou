@@ -5,10 +5,7 @@
       <view class="header-bg">
         <view class="header-content">
           <view class="header-top">
-          const currentStatusName = computed(() => {
-      const tab = statusTabs.value.find(tab => tab.key === currentStatus.value)
-      return tab ? tab.name : t('packages.title')
-    })  <view class="back-btn" @click="goBack">
+            <view class="back-btn" @click="goBack">
               <text class="back-icon">←</text>
             </view>
             <text class="page-title">{{ currentStatusName }}</text>
@@ -54,7 +51,7 @@
       <!-- 空状态 -->
       <view v-else-if="!loading && filteredPackages.length === 0" class="empty-section">
         <view class="empty-icon">📦</view>
-        <text class="empty-title">{{ t('packages.emptyStatus', { status: currentStatusName }) }}</text>
+        <text class="empty-title">暂无{{ currentStatusName }}包裹</text>
         <text class="empty-desc">{{ getEmptyDesc() }}</text>
         <view class="empty-action" @click="refreshData">
           <text class="action-text">刷新试试</text>
@@ -82,15 +79,15 @@
           <view class="package-content">
             <view class="package-details">
               <view class="detail-row">
-                <text class="detail-label">{{ t('packages.sender') }}</text>
+                <text class="detail-label">发件人：</text>
                 <text class="detail-value">{{ pkg.sender }}</text>
               </view>
               <view class="detail-row">
-                <text class="detail-label">{{ t('packages.weight') }}</text>
+                <text class="detail-label">重量：</text>
                 <text class="detail-value">{{ pkg.weight }}kg</text>
               </view>
               <view class="detail-row">
-                <text class="detail-label">{{ t('packages.time') }}</text>
+                <text class="detail-label">时间：</text>
                 <text class="detail-value">{{ formatDate(pkg.createTime) }}</text>
               </view>
             </view>
@@ -101,31 +98,31 @@
                 class="action-btn primary"
                 @click.stop="claimPackage(pkg)"
               >
-                <text class="btn-text">{{ t('packages.actionClaim') }}</text>
+                <text class="btn-text">认领</text>
               </view>
               <view 
                 v-else-if="pkg.status === 'warehouse'" 
                 class="action-btn secondary"
                 @click.stop="confirmWarehouse(pkg)"
               >
-                <text class="btn-text">{{ t('packages.actionConfirmWarehouse') }}</text>
+                <text class="btn-text">确认入仓</text>
               </view>
               <view 
                 v-else-if="pkg.status === 'abnormal'" 
                 class="action-btn warning"
                 @click.stop="handleAbnormal(pkg)"
               >
-                <text class="btn-text">{{ t('packages.actionHandleAbnormal') }}</text>
+                <text class="btn-text">处理异常</text>
               </view>
               <view 
                 v-else-if="pkg.status === 'confirm'" 
                 class="action-btn success"
                 @click.stop="confirmPackage(pkg)"
               >
-                <text class="btn-text">{{ t('packages.actionConfirm') }}</text>
+                <text class="btn-text">确认</text>
               </view>
               <view class="action-btn outline" @click.stop="viewPackageDetail(pkg)">
-                <text class="btn-text">{{ t('packages.actionDetail') }}</text>
+                <text class="btn-text">详情</text>
               </view>
             </view>
           </view>
@@ -165,21 +162,11 @@
 
 <script>
 import { ref, computed, onMounted } from 'vue'
-import { locale, t, initLocale, setLanguagePacks } from '../../utils/i18n'
-import { zhLanguagePack, koLanguagePack } from '../../locales/index'
 // TODO: 引入API配置
 // import { API, MOCK_DATA } from '@/utils/api'
 
 export default {
   setup() {
-    // 初始化多语言系统
-    onMounted(() => {
-      setLanguagePacks({
-        zh: zhLanguagePack,
-        ko: koLanguagePack
-      })
-      initLocale()
-    })
 
     const loading = ref(false)
     const currentStatus = ref('all')
@@ -187,11 +174,11 @@ export default {
 
     // 状态标签配置
     const statusTabs = ref([
-      { key: 'all', name: t('packages.statusAll'), badge: 0 },
-      { key: 'pending', name: t('packages.statusPending'), badge: 0 },
-      { key: 'warehouse', name: t('packages.statusWarehouse'), badge: 1 },
-      { key: 'abnormal', name: t('packages.statusAbnormal'), badge: 0 },
-      { key: 'confirm', name: t('packages.statusConfirm'), badge: 0 }
+      { key: 'all', name: '全部', badge: 0 },
+      { key: 'pending', name: '认领', badge: 0 },
+      { key: 'warehouse', name: '待入仓', badge: 1 },
+      { key: 'abnormal', name: '异常', badge: 0 },
+      { key: 'confirm', name: '待确认', badge: 0 }
     ])
 
     // 当前状态名称
@@ -233,7 +220,7 @@ export default {
           const mockData = [
             {
               id: '1',
-              title: t('packages.sampleKorea'),
+              title: '韩国商品包裹',
               trackingNumber: 'KR2024010101',
               sender: '金先生',
               weight: 2.5,
@@ -243,7 +230,7 @@ export default {
             },
             {
               id: '2',
-              title: t('packages.sampleSeoul'),
+              title: '首尔直邮包裹',
               trackingNumber: 'KR2024010102',
               sender: '李女士',
               weight: 1.8,
@@ -253,7 +240,7 @@ export default {
             },
             {
               id: '3',
-              title: t('packages.sampleBusan'),
+              title: '釜山发货包裹',
               trackingNumber: 'KR2024010103',
               sender: '朴先生',
               weight: 3.2,
@@ -284,7 +271,7 @@ export default {
           title: '加载失败',
           icon: 'none'
         })
-        console.error(t('packages.errorFetchData'), error)
+        console.error('获取包裹数据失败:', error)
       }
     }
 
@@ -307,13 +294,13 @@ export default {
     // 获取状态文本
     const getStatusText = (status) => {
       const statusMap = {
-        pending: t('packages.statusLabelPending'),
-        warehouse: t('packages.statusLabelWarehouse'),
-        abnormal: t('packages.statusLabelAbnormal'),
-        confirm: t('packages.statusLabelConfirm'),
-        completed: t('packages.statusLabelCompleted')
+        pending: '待认领',
+        warehouse: '待入仓',
+        abnormal: '异常',
+        confirm: '待确认',
+        completed: '已完成'
       }
-      return statusMap[status] || t('packages.statusLabelUnknown')
+      return statusMap[status] || '未知'
     }
 
     // 格式化日期
@@ -335,16 +322,16 @@ export default {
     }
 
     // 获取空状态描述
-        const emptyDescription = computed(() => {
+    const getEmptyDesc = () => {
       const descMap = {
-        all: t('packages.emptyAll'),
-        pending: t('packages.emptyPending'),
-        warehouse: t('packages.emptyWarehouse'),
-        abnormal: t('packages.emptyAbnormal'),
-        confirm: t('packages.emptyConfirm')
+        all: '暂时没有任何包裹',
+        pending: '暂无需要认领的包裹',
+        warehouse: '暂无待入仓的包裹',
+        abnormal: '暂无异常包裹',
+        confirm: '暂无待确认的包裹'
       }
-      return descMap[currentStatus.value] || t('packages.emptyDefault')
-    })
+      return descMap[currentStatus.value] || '暂无相关包裹'
+    }
 
     // 刷新数据
     const refreshData = () => {
@@ -354,8 +341,8 @@ export default {
     // 认领包裹
     const claimPackage = (pkg) => {
       uni.showModal({
-        title: t('packages.confirmClaimTitle'),
-        content: t('packages.confirmClaimContent', { trackingNumber: pkg.trackingNumber }),
+        title: '确认认领',
+        content: `确定要认领包裹 ${pkg.trackingNumber} 吗？`,
         success: async (res) => {
           if (res.confirm) {
             try {
@@ -367,7 +354,7 @@ export default {
               
               // 临时模拟成功
               uni.showToast({
-                title: t('packages.claimSuccess'),
+                title: '认领成功',
                 icon: 'success'
               })
               // 更新包裹状态
@@ -375,7 +362,7 @@ export default {
               updateBadges()
             } catch (error) {
               uni.showToast({
-                title: t('packages.claimFailed'),
+                title: '认领失败',
                 icon: 'none'
               })
             }
@@ -387,7 +374,7 @@ export default {
     // 确认入仓
     const confirmWarehouse = (pkg) => {
       uni.showToast({
-        title: t('packages.warehouseInProgress'),
+        title: '确认入仓功能开发中',
         icon: 'none'
       })
     }
@@ -403,7 +390,7 @@ export default {
     // 确认包裹
     const confirmPackage = (pkg) => {
       uni.showToast({
-        title: t('packages.confirmInProgress'),
+        title: '确认包裹功能开发中',
         icon: 'none'
       })
     }
