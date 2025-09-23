@@ -502,14 +502,15 @@ const calculateShippingAPI = async (data: FormData): Promise<CalculationResult> 
           ? `25 + (${chargingWeight.toFixed(2)} - 1) × 6 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
           : `25 × ${quantity} = ${basePrice * quantity}`
       } else if (data.transport === 'air') {
-        // 空运：首重33.8元+续重9元/0.5kg
+        // 空运：首重33.8元(1kg)+续重9元/0.5kg
+        // 首重1kg，超过1kg的部分按0.5kg进位计算
         basePrice = 33.8
-        if (chargingWeight > 0.5) {
-          const additionalWeight = Math.ceil((chargingWeight - 0.5) / 0.5)
+        if (chargingWeight > 1) {
+          const additionalWeight = Math.ceil((chargingWeight - 1) / 0.5)
           additionalPrice = additionalWeight * 9
         }
-        formula = chargingWeight > 0.5 
-          ? `33.8 + ${Math.ceil((chargingWeight - 0.5) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+        formula = chargingWeight > 1 
+          ? `33.8 + ${Math.ceil((chargingWeight - 1) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
           : `33.8 × ${quantity} = ${basePrice * quantity}`
       }
       
