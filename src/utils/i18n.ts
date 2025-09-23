@@ -102,6 +102,9 @@ export interface LanguagePack {
     packageCount: string
     packageUnit: string
     totalShippingFee: string
+    // 提醒消息
+    postalSeaNotSupported: string
+    postalAirOnlySupported: string
     // 运费标准
     pricingStandard: string
     seaShipping: string

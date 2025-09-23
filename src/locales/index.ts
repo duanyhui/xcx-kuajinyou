@@ -95,6 +95,9 @@ export const zhLanguagePack: LanguagePack = {
     packageCount: '件数',
     packageUnit: '件',
     totalShippingFee: '总运费',
+    // 提醒消息
+    postalSeaNotSupported: 'EMS不坐船~ 海运就不安排啦!',
+    postalAirOnlySupported: 'EMS专走天空路线，别选海运咯!',
     // 运费标准
     pricingStandard: '运费标准',
     seaShipping: '海运',
@@ -848,6 +851,9 @@ export const koLanguagePack: LanguagePack = {
     packageCount: '개수',
     packageUnit: '개',
     totalShippingFee: '총운비',
+    // 제안 메시지
+    postalSeaNotSupported: 'EMS는 배 안 타요~ 해운은 패스!',
+    postalAirOnlySupported: 'EMS는 하늘길만 달려요!',
     // 운송비 기준
     pricingStandard: '배송비 기준',
     seaShipping: '해운',

@@ -356,7 +356,7 @@ const selectTransport = (type: string) => {
   // 如果选择了邮政EMS，不能选择海运
   if (formData.logistics === 'postal_ems' && type === 'sea') {
     uni.showToast({
-      title: '邮政EMS不支持海运',
+      title: t('calculator.postalSeaNotSupported'),
       icon: 'none'
     })
     return
@@ -374,7 +374,7 @@ const selectLogistics = (type: string) => {
   if (type === 'postal_ems' && formData.transport === 'sea') {
     formData.transport = 'air'
     uni.showToast({
-      title: '邮政EMS只支持空运',
+      title: t('calculator.postalAirOnlySupported'),
       icon: 'none'
     })
   }
