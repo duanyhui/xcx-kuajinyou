@@ -233,16 +233,20 @@
           </view>
           <view class="pricing-list">
             <view class="pricing-item">
-              <view class="pricing-icon">🚢</view>
               <view class="pricing-content">
-                <text class="pricing-type">{{ t('calculator.seaShipping') }}</text>
+                <view class="pricing-title-row">
+                  <view class="pricing-icon">🚢</view>
+                  <text class="pricing-type">{{ t('calculator.seaShipping') }}</text>
+                </view>
                 <text class="pricing-detail">{{ t('calculator.seaShippingPrice') }}</text>
               </view>
             </view>
             <view class="pricing-item">
-              <view class="pricing-icon">✈️</view>
               <view class="pricing-content">
-                <text class="pricing-type">{{ t('calculator.airShipping') }}</text>
+                <view class="pricing-title-row">
+                  <view class="pricing-icon">✈️</view>
+                  <text class="pricing-type">{{ t('calculator.airShipping') }}</text>
+                </view>
                 <text class="pricing-detail">{{ t('calculator.airShippingPrice') }}</text>
               </view>
             </view>
@@ -925,25 +929,39 @@ const calculateShipping = async () => {
   margin-bottom: 16rpx;
 }
 
-.pricing-icon {
-  font-size: 32rpx;
-  margin-right: 20rpx;
-}
-
 .pricing-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pricing-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rpx;
+}
+
+.pricing-icon {
+  font-size: 32rpx;
+  margin-right: 12rpx;
 }
 
 .pricing-type {
   font-size: 24rpx;
   font-weight: 600;
   color: #2c3e50;
-  margin-right: 20rpx;
+  text-align: center;
 }
 
 .pricing-detail {
   font-size: 22rpx;
   color: #6c757d;
+  text-align: center;
+  width: 100%;
+  line-height: 1.5;
 }
 
 .bottom-safe {
