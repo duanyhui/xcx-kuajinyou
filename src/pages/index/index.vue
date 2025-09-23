@@ -164,25 +164,26 @@
           <text class="pricing-subtitle">{{ t('home.pricingSubtitle') }}</text>
         </view>
         
-        <view class="pricing-grid">
-          <view class="price-item">
-            <view class="price-icon">🚢</view>
-            <text class="price-type">{{ t('home.seaShipping') }}</text>
-            <text class="price-detail">{{ t('home.seaShippingPrice') }}</text>
+        <view class="pricing-list">
+          <view class="pricing-item">
+            <view class="pricing-content">
+              <view class="pricing-title-row">
+                <view class="pricing-icon">🚢</view>
+                <text class="pricing-type">{{ t('home.seaShipping') }}</text>
+              </view>
+              <text class="pricing-detail">{{ t('home.seaShippingPrice') }}</text>
+            </view>
           </view>
           
-          <view class="price-item">
-            <view class="price-icon">✈️</view>
-            <text class="price-type">{{ t('home.airShipping') }}</text>
-            <text class="price-detail">{{ t('home.airShippingPrice') }}</text>
+          <view class="pricing-item">
+            <view class="pricing-content">
+              <view class="pricing-title-row">
+                <view class="pricing-icon">✈️</view>
+                <text class="pricing-type">{{ t('home.airShipping') }}</text>
+              </view>
+              <text class="pricing-detail">{{ t('home.airShippingPrice') }}</text>
+            </view>
           </view>
-
-          <!-- <view class="price-item">
-            <view class="price-icon">📮</view>
-            <text class="price-type">{{ t('home.postShipping') }}</text>
-            <text class="price-detail">{{ t('home.postShippingPrice') }}</text>
-          </view> -->
-
         </view>
 
         
@@ -903,45 +904,57 @@ const switchTab = (tab: string) => {
   display: block;
 }
 
-.pricing-grid {
+.pricing-list {
   display: flex;
   flex-direction: column;
-  gap: 24rpx;
+  gap: 16rpx;
   width: 100%;
   max-width: 100%;
 }
 
-.price-item {
+.pricing-item {
   display: flex;
   align-items: center;
-  padding: 24rpx;
+  padding: 20rpx;
   background: rgba(102, 126, 234, 0.05);
-  border-radius: 20rpx;
-  border-left: 6rpx solid #667eea;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
 }
 
-.price-icon {
+.pricing-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pricing-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rpx;
+}
+
+.pricing-icon {
   font-size: 32rpx;
-  margin-right: 20rpx;
+  margin-right: 12rpx;
 }
 
-.price-type {
-  font-size: 28rpx;
+.pricing-type {
+  font-size: 24rpx;
   font-weight: 600;
   color: #2c3e50;
-  margin-right: 20rpx;
-  min-width: 80rpx;
+  text-align: center;
 }
 
-.price-detail {
-  font-size: 24rpx;
-  color: #7f8c8d;
-  flex: 1;
-  min-width: 0;
-  word-wrap: break-word;
+.pricing-detail {
+  font-size: 22rpx;
+  color: #6c757d;
+  text-align: center;
+  width: 100%;
+  line-height: 1.5;
+  white-space: pre-line;
 }
 
 /* 包裹尺寸限制说明 */
@@ -1091,8 +1104,7 @@ const switchTab = (tab: string) => {
 /* 文本不换行处理 */
 .contact-btn .btn-text,
 .item-title,
-.item-desc,
-.price-detail {
+.item-desc {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
