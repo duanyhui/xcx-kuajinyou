@@ -177,11 +177,11 @@
             <text class="price-detail">{{ t('home.airShippingPrice') }}</text>
           </view>
 
-          <view class="price-item">
+          <!-- <view class="price-item">
             <view class="price-icon">📮</view>
             <text class="price-type">{{ t('home.postShipping') }}</text>
             <text class="price-detail">{{ t('home.postShippingPrice') }}</text>
-          </view>
+          </view> -->
 
         </view>
 

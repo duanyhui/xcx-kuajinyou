@@ -48,11 +48,11 @@ export const zhLanguagePack: LanguagePack = {
     faqDesc: '快速问题解答',
     // 运费标准
     seaShipping: '海运',
-    seaShippingPrice: '首重25元+续重6元/kg',
+    seaShippingPrice: 'CJ海运首重25元+续重6元/kg\nEMS海运首重86元+续重14元/kg',
     airShipping: '空运',
-    airShippingPrice: '首重33.8元+续重9元/0.5kg',
-    postShipping:'空运邮政EMS',
-    postShippingPrice: ' 首重70元+续重1元/50g ',
+    airShippingPrice: 'CJ空运首重33.8元+续重9元/0.5kg\nEMS空运首重(0.5kg)160元+续重14元/0.5kg',
+    // postShipping:'邮政EMS',
+    // postShippingPrice: ' 海运首重(1kg)86+续重14元/kg \n 空运首重(0.5kg)160+续重14元/0.5kg ',
     packageSizeNotice: '包裹身材大"伟岸"？如果包裹长宽高总和超过160cm，或者重量超过20kg，我们会自动安排京东快递转派～我们仓库实在搬不动啦！',
     // 底部导航
     navHome: '首页',
@@ -101,10 +101,10 @@ export const zhLanguagePack: LanguagePack = {
     // 运费标准
     pricingStandard: '运费标准',
     seaShipping: '海运',
-    seaShippingPrice: '首重25元+续重6元/kg',
+    seaShippingPrice: 'CJ海运首重25元+续重6元/kg\nEMS海运首重86元+续重14元/kg',
     airShipping: '空运',
-    airShippingPrice: '首重33.8元+续重9元/0.5kg',
-    postalShipping: '空运邮政EMS',
+    airShippingPrice: 'CJ空运首重33.8元+续重9元/0.5kg\nEMS空运首重(0.5kg)160元+续重14元/0.5kg',
+    postalShipping: '邮政EMS',
     postalShippingPrice: '首重70元+续重1元/50g'
   },
   // 操作指南页面
@@ -806,9 +806,9 @@ export const koLanguagePack: LanguagePack = {
     faq: '자주 묻는 질문',
     faqDesc: '빠른 문제 해결',
     seaShipping: '해운',
-    seaShippingPrice: '기본요금 25위안+추가 6위안/kg',
+    seaShippingPrice: 'CJ 해운 기본요금 25위안+추가6위안/kg\nEMS 해운 기본요금 86 위안+추가14위안/kg',
     airShipping: '항공',
-    airShippingPrice: '기본요금 33.8위안+추가 9위안/0.5kg',
+    airShippingPrice: 'CJ 공항 기본요금 33.8위안+추가9위안/0.5kg\nEMS 공항 기본요금(0.5kg) 160위안+추가14위안/0.5kg',
     postShipping: '공항우체국EMS',
     postShippingPrice: '기본요금 70위안+추가 1위안/50g',
     packageSizeNotice: '📦 포장 부피가 꽤나 우람한가요? 📏 길이+너비+높이 합이 160cm 초과 또는 무게 20kg 초과 시 자동으로 징둥택배로 전환 발송됩니다! 창고 친구들 더는 못 들겠대요… 😅',
@@ -857,9 +857,9 @@ export const koLanguagePack: LanguagePack = {
     // 운송비 기준
     pricingStandard: '배송비 기준',
     seaShipping: '해운',
-    seaShippingPrice: '기본 25위안+추가 6위안/kg',
+    seaShippingPrice: 'CJ 해운 기본요금 25위안+추가6위안/kg\nEMS 해운 기본요금 86 위안+추가14위안/kg',
     airShipping: '항공',
-    airShippingPrice: '기본 33.8위안+추가 9위안/0.5kg',
+    airShippingPrice: 'CJ 공항 기본요금 33.8위안+추가9위안/0.5kg\nEMS 공항 기본요금(0.5kg) 160위안+추가14위안/0.5kg',
     postalShipping: '공항우체국EMS',
     postalShippingPrice: '기본 70위안+추가 1위안/50g'
   },
