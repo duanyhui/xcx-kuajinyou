@@ -62,6 +62,16 @@
               </view>
               <text class="radio-label">{{ t('calculator.koreaExpress') }}</text>
             </view>
+            <view 
+              class="radio-item" 
+              :class="{ active: formData.logistics === 'postal_ems' }"
+              @click="selectLogistics('postal_ems')"
+            >
+              <view class="radio-check">
+                <text v-if="formData.logistics === 'postal_ems'" class="check-icon">✓</text>
+              </view>
+              <text class="radio-label">{{ t('calculator.postalEms') }}</text>
+            </view>
           </view>
           <text v-if="errors.logistics" class="error-text">{{ errors.logistics }}</text>
         </view>
@@ -485,7 +495,7 @@ const calculateShippingAPI = async (data: FormData): Promise<CalculationResult> 
       const height = parseFloat(data.height)
       const quantity = parseInt(data.quantity)
       
-      // 计算体积重量
+      // 计算体积重量：长cm×宽cm×高cm÷6000
       const volumeWeight = calculateVolumeWeight(length, width, height)
       
       // 取实际重量和体积重量的较大值作为计费重量
@@ -495,27 +505,53 @@ const calculateShippingAPI = async (data: FormData): Promise<CalculationResult> 
       let additionalPrice = 0
       let formula = ''
       
-      // CJ大韩通运
-      if (data.transport === 'sea') {
-        // 海运：首重25元+续重6元/kg
-        basePrice = 25
-        if (chargingWeight > 1) {
-          additionalPrice = (chargingWeight - 1) * 6
+      // 根据物流方式和运输方式计算
+      if (data.logistics === 'korea_express') {
+        // CJ大韩通运
+        if (data.transport === 'sea') {
+          // CJ海运：首重25元+续重6元/kg
+          basePrice = 25
+          if (chargingWeight > 1) {
+            additionalPrice = (chargingWeight - 1) * 6
+          }
+          formula = chargingWeight > 1 
+            ? `25 + (${chargingWeight.toFixed(2)} - 1) × 6 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+            : `25 × ${quantity} = ${basePrice * quantity}`
+        } else if (data.transport === 'air') {
+          // CJ空运：首重33.8元+续重9元/0.5kg
+          // 首重1kg，超过1kg的部分按0.5kg进位计算
+          basePrice = 33.8
+          if (chargingWeight > 1) {
+            const additionalWeight = Math.ceil((chargingWeight - 1) / 0.5)
+            additionalPrice = additionalWeight * 9
+          }
+          formula = chargingWeight > 1 
+            ? `33.8 + ${Math.ceil((chargingWeight - 1) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+            : `33.8 × ${quantity} = ${basePrice * quantity}`
         }
-        formula = chargingWeight > 1 
-          ? `25 + (${chargingWeight.toFixed(2)} - 1) × 6 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
-          : `25 × ${quantity} = ${basePrice * quantity}`
-      } else if (data.transport === 'air') {
-        // 空运：首重33.8元(1kg)+续重9元/0.5kg
-        // 首重1kg，超过1kg的部分按0.5kg进位计算
-        basePrice = 33.8
-        if (chargingWeight > 1) {
-          const additionalWeight = Math.ceil((chargingWeight - 1) / 0.5)
-          additionalPrice = additionalWeight * 9
+      } else if (data.logistics === 'postal_ems') {
+        // 邮政EMS
+        if (data.transport === 'sea') {
+          // EMS海运：首重86元+续重14元/kg
+          basePrice = 86
+          if (chargingWeight > 1) {
+            additionalPrice = (chargingWeight - 1) * 14
+          }
+          formula = chargingWeight > 1 
+            ? `86 + (${chargingWeight.toFixed(2)} - 1) × 14 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+            : `86 × ${quantity} = ${basePrice * quantity}`
+        } else if (data.transport === 'air') {
+          // EMS空运：首重(0.5kg)160元+续重14元/0.5kg
+          // 首重0.5kg，超过0.5kg的部分按0.5kg进位计算
+          basePrice = 160
+          if (chargingWeight > 0.5) {
+            const additionalWeight = Math.ceil((chargingWeight - 0.5) / 0.5)
+            additionalPrice = additionalWeight * 14
+          }
+          formula = chargingWeight > 0.5 
+            ? `160 + ${Math.ceil((chargingWeight - 0.5) / 0.5)} × 14 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
+            : `160 × ${quantity} = ${basePrice * quantity}`
         }
-        formula = chargingWeight > 1 
-          ? `33.8 + ${Math.ceil((chargingWeight - 1) / 0.5)} × 9 × ${quantity} = ${(basePrice + additionalPrice) * quantity}`
-          : `33.8 × ${quantity} = ${basePrice * quantity}`
       }
       
       const totalAmount = ((basePrice + additionalPrice) * quantity).toFixed(2)
